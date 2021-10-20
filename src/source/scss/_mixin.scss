@@ -1,0 +1,4 @@
+@mixin txsh($color: #3585fe, $width: 2px) {
+  text-shadow: 0 $width $width $color, $width 0 $width $color,
+    ($width * -1) 0 $width $color, 0 ($width * -1) $width $color;
+}
