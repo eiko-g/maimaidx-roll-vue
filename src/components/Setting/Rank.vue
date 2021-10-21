@@ -15,57 +15,27 @@
       </label>
 
       <label class="rank-label B" for="rank-B">
-        <input
-          type="checkbox"
-          name="rank"
-          value="B"
-          id="rank-B"
-          class="rank B"
-        />
+        <input type="checkbox" name="rank" value="B" id="rank-B" class="rank B" />
         <div class="inner">B</div>
       </label>
 
       <label class="rank-label A" for="rank-A">
-        <input
-          type="checkbox"
-          name="rank"
-          value="A"
-          id="rank-A"
-          class="rank A"
-        />
+        <input type="checkbox" name="rank" value="A" id="rank-A" class="rank A" />
         <div class="inner">A</div>
       </label>
 
       <label class="rank-label E" for="rank-E">
-        <input
-          type="checkbox"
-          name="rank"
-          value="E"
-          id="rank-E"
-          class="rank E"
-        />
+        <input type="checkbox" name="rank" value="E" id="rank-E" class="rank E" />
         <div class="inner">E</div>
       </label>
 
       <label class="rank-label M" for="rank-M">
-        <input
-          type="checkbox"
-          name="rank"
-          value="M"
-          id="rank-M"
-          class="rank M"
-        />
+        <input type="checkbox" name="rank" value="M" id="rank-M" class="rank M" />
         <div class="inner">M</div>
       </label>
 
       <label class="rank-label R" for="rank-R">
-        <input
-          type="checkbox"
-          name="rank"
-          value="R"
-          id="rank-R"
-          class="rank R"
-        />
+        <input type="checkbox" name="rank" value="R" id="rank-R" class="rank R" />
         <div class="inner">R</div>
       </label>
     </div>
@@ -166,7 +136,10 @@ export default {
     user-select: none;
     width: calc(1 / 6 * 100%);
     text-align: center;
-    margin: 5px;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+    margin-bottom: 10px;
     &:hover {
       cursor: pointer;
     }

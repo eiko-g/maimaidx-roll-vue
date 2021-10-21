@@ -2,3 +2,8 @@
   text-shadow: 0 $width $width $color, $width 0 $width $color,
     ($width * -1) 0 $width $color, 0 ($width * -1) $width $color;
 }
+@mixin bxsh($color: #319df8, $bgc: #cff1eb, $backShadow: #1c6fb0) {
+  background-color: $bgc;
+  box-shadow: 0 0 0 3px $color, 0 0 0 6px #fff, 0 0 0 9px rgba(#fff, 0.4),
+    0 0 5px 5px $backShadow;
+}

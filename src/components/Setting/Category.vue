@@ -34,43 +34,19 @@
         <div class="inner">nico &amp; V家</div>
       </label>
       <label for="cat-toho" class="cat-label toho">
-        <input
-          type="checkbox"
-          class="cat toho"
-          id="cat-toho"
-          name="category"
-          value="toho"
-        />
+        <input type="checkbox" class="cat toho" id="cat-toho" name="category" value="toho" />
         <div class="inner">东方 Project</div>
       </label>
       <label for="cat-variety" class="cat-label variety">
-        <input
-          type="checkbox"
-          class="cat variety"
-          id="cat-variety"
-          name="category"
-          value="variety"
-        />
+        <input type="checkbox" class="cat variety" id="cat-variety" name="category" value="variety" />
         <div class="inner">其他游戏</div>
       </label>
       <label for="cat-maimai" class="cat-label maimai">
-        <input
-          type="checkbox"
-          class="cat maimai"
-          id="cat-maimai"
-          name="category"
-          value="maimai"
-        />
+        <input type="checkbox" class="cat maimai" id="cat-maimai" name="category" value="maimai" />
         <div class="inner">maimai</div>
       </label>
       <label for="cat-gekichu" class="cat-label gekichu">
-        <input
-          type="checkbox"
-          class="cat gekichu"
-          id="cat-gekichu"
-          name="category"
-          value="gekichu"
-        />
+        <input type="checkbox" class="cat gekichu" id="cat-gekichu" name="category" value="gekichu" />
         <div class="inner">音击 &amp; 中二</div>
       </label>
     </div>
@@ -172,7 +148,10 @@ export default {
   flex-wrap: wrap;
   .cat-label {
     user-select: none;
-    margin: 5px;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+    margin-bottom: 10px;
     &:hover {
       cursor: pointer;
     }

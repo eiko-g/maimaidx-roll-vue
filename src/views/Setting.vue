@@ -55,9 +55,7 @@ export default {
   font-weight: bold;
   border-radius: 99em;
   cursor: pointer;
-  background-color: #cff1eb;
-  box-shadow: 0 0 0 3px #319df8, 0 0 0 6px #fff, 0 0 0 9px rgba(#fff, 0.4),
-    0 0 5px 5px #1c6fb0;
+  @include bxsh();
   @include txsh(#319df8);
 }
 </style>
