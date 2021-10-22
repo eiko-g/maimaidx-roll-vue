@@ -2,15 +2,17 @@
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
     <div class="cover-area">
-      <img :src="src" alt="Cover" class="cover" />
+      <img :src="getCover" alt="Cover" class="cover" />
       <div class="song-type">
-        <span class="text" lang="ja-jp">{{ type }}</span>
+        <span class="text">{{ getType }}</span>
       </div>
     </div>
 
-    <h3 class="title">{{ title }}</h3>
+    <h3 class="title" lang="ja-jp">{{ getTitle }}</h3>
     <p class="info">
-      <span class="cat">{{ category }}</span>
+      <span class="cat">{{ getCat }}</span>
+      /
+      <span class="version">{{ getVer }}</span>
     </p>
 
     <table class="table-lv">
@@ -25,11 +27,36 @@
       </thead>
       <tbody>
         <tr>
-          <td id="table-lv-num-B" class="table-lv-num">{{ levels.B }}</td>
-          <td id="table-lv-num-A" class="table-lv-num">{{ levels.A }}</td>
-          <td id="table-lv-num-E" class="table-lv-num">{{ levels.E }}</td>
-          <td id="table-lv-num-M" class="table-lv-num">{{ levels.M }}</td>
-          <td id="table-lv-num-R" class="table-lv-num">{{ levels.R }}</td>
+          <td
+            id="table-lv-num-B"
+            :class="['table-lv-num', { current: currentRank('B') }]"
+          >
+            {{ getLv.B }}
+          </td>
+          <td
+            id="table-lv-num-A"
+            :class="['table-lv-num', { current: currentRank('A') }]"
+          >
+            {{ getLv.A }}
+          </td>
+          <td
+            id="table-lv-num-E"
+            :class="['table-lv-num', { current: currentRank('E') }]"
+          >
+            {{ getLv.E }}
+          </td>
+          <td
+            id="table-lv-num-M"
+            :class="['table-lv-num', { current: currentRank('M') }]"
+          >
+            {{ getLv.M }}
+          </td>
+          <td
+            id="table-lv-num-R"
+            :class="['table-lv-num', { current: currentRank('R') }]"
+          >
+            {{ getLv.R }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -39,7 +66,7 @@
 <script>
 export default {
   name: "Result",
-  props: [],
+  props: ["currentSong"],
   data() {
     return {
       src: "./assets/img/nocover.png",
@@ -54,6 +81,48 @@ export default {
         R: "X",
       },
     };
+  },
+  methods: {
+    currentRank(input) {
+      return input == this.$store.getters.getCurrentDiffculty;
+    },
+  },
+  computed: {
+    getCover() {
+      if (this.currentSong.封面) {
+        return `./assets/img/cover/${this.currentSong.封面}.jpg`;
+      } else {
+        return "./assets/img/nocover.png";
+      }
+    },
+    getTitle() {
+      return this.currentSong.曲名;
+    },
+    getCat() {
+      if (this.currentSong.分类) {
+        let text = {
+          pops_anime: "动画 & 流行",
+          niconico: "nico & V家",
+          toho: "东方 Project",
+          variety: "其他游戏", // 这个其实写联动比较好？
+          maimai: "maimai",
+          gekichu: "音击 & 中二",
+        };
+
+        return text[this.currentSong.分类];
+      } else {
+        return "分类";
+      }
+    },
+    getVer() {
+      return this.currentSong.版本;
+    },
+    getType() {
+      return this.currentSong.类型;
+    },
+    getLv() {
+      return this.currentSong.等级;
+    },
   },
 };
 </script>

@@ -39,7 +39,6 @@
         <div class="inner">R</div>
       </label>
     </div>
-    <p class="tips">点击选择需要抽选的难度，可以多选。</p>
   </div>
 </template>
 

@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    //非首次运行
+    notFirstRun: false,
     // 难度
     rank: ['all'],
     // 分类
@@ -18,10 +20,26 @@ export default createStore({
     lvMaxPlus: false,
     // 版本
     version: ['all'],
-    // 歌单（目前没用）
-    songList: '',
+    // 原始歌单列表
+    originalSongList: {},
+    // 筛选过的歌单列表
+    songList: {},
     // 当前抽到的歌
-    currentSong: {}
+    currentSong: {
+      "分类": undefined,
+      "曲名": "油婶么呢？",
+      "等级": {
+        "B": "m",
+        "A": "a",
+        "E": "i",
+        "M": "D",
+        "R": "X"
+      },
+      "类型": "谱面类型",
+      "版本": "版本",
+      "封面": undefined,
+    },
+    currentDiffculty: ''
   },
   mutations: {
     saveRank(state, rank) {
@@ -48,6 +66,21 @@ export default createStore({
     saveLvMaxPlus(state, plus) {
       state.lvMaxPlus = plus;
     },
+    setFirstRun(state) {
+      state.notFirstRun = true;
+    },
+    saveOriginalSongList(state, list) {
+      state.originalSongList = list;
+    },
+    saveSongList(state, list) {
+      state.songList = list;
+    },
+    saveCurrentSong(state, song) {
+      state.currentSong = song;
+    },
+    saveCurrentDiffculty(state, d) {
+      state.currentDiffculty = d;
+    },
   },
   actions: {
   },
@@ -72,6 +105,30 @@ export default createStore({
     },
     getLvMul(state) {
       return state.lvMultiple;
+    },
+    getSetting(state, getters) {
+      return {
+        rank: state.rank,
+        category: state.category,
+        lvMultiple: state.lvMultiple,
+        lv: getters.getLv,
+        version: state.version
+      }
+    },
+    getFirstRun(state) {
+      return state.notFirstRun;
+    },
+    getOriginalSongList(state) {
+      return state.originalSongList;
+    },
+    getSongList(state) {
+      return state.songList;
+    },
+    getCurrentSong(state) {
+      return state.currentSong;
+    },
+    getCurrentDiffculty(state) {
+      return state.currentDiffculty;
     }
   },
   modules: {

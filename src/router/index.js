@@ -1,13 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Roll from '../views/Roll.vue'
+import Loading from '../views/Loading.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Index',
     redirect: {
-      name: 'Roll'
+      name: 'Loading'
     }
+  },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: Loading
   },
   {
     path: '/roll',
@@ -24,11 +30,11 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue')
   },
-  // {
-  //   path: '*',
-  //   name: 'Error',
-  //   component: () => import('../views/Error.vue')
-  // }
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Error',
+    component: () => import('../views/Error.vue')
+  }
 ]
 
 const router = createRouter({

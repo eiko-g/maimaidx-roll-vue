@@ -44,7 +44,7 @@
 
     <div v-show="!lvMultiple">
       <div class="level-number single">
-        <div class="level-number-block number">
+        <div class="level-number-block number min">
           <label for="level-number">抽选等级：</label>
           <input
             type="number"
@@ -56,7 +56,7 @@
           />
         </div>
         <p>抽选等级带加号？</p>
-        <div class="level-number-block radio">
+        <div class="level-number-block radio min">
           <label class="level-radio-label" for="level-number-plus-no">
             <input
               :checked="!this.level.lvMinPlus"
@@ -90,8 +90,8 @@
     </div>
 
     <div v-show="lvMultiple">
-      <div class="level-number min">
-        <div class="level-number-block number">
+      <div class="level-number lv-min">
+        <div class="level-number-block number min">
           <label for="level-min">最低抽选等级：</label>
           <input
             type="number"
@@ -103,7 +103,7 @@
           />
         </div>
         <p>最低等级带加号？</p>
-        <div class="level-number-block radio">
+        <div class="level-number-block radio min">
           <label class="level-radio-label" for="level-min-plus-no">
             <input
               :checked="!this.level.lvMinPlus"
@@ -133,7 +133,7 @@
             <div class="inner">带 + 号</div>
           </label>
         </div>
-        <div class="level-number-block number">
+        <div class="level-number-block number max">
           <label for="level-max">最高抽选等级：</label>
           <input
             type="number"
@@ -145,7 +145,7 @@
           />
         </div>
         <p>最高等级带加号？</p>
-        <div class="level-number-block radio">
+        <div class="level-number-block radio max">
           <label class="level-radio-label" for="level-max-plus-no">
             <input
               :checked="!this.level.lvMaxPlus"
@@ -222,6 +222,7 @@ export default {
       console.log("Get Lv", this.level);
     },
     getLvMul() {
+      console.log("get LvM", this.$store.getters.getLvMul);
       this.lvMultiple = this.$store.getters.getLvMul;
       console.log("Get LvMul", this.lvMultiple);
     },
@@ -246,11 +247,9 @@ export default {
       console.log("Save LvMaxPlus", this.level.lvMaxPlus);
     },
     saveLvMul() {
-      let element = document.querySelector(
-        'input[name="level-select"]:checked'
-      );
-      this.$store.commit("saveLvMultiple", element.value);
-      console.log("Save LvMul");
+      // 就尼玛离谱，如果直接获取 input.value 的话会传成字符串而不是布尔值
+      this.$store.commit("saveLvMultiple", this.lvMultiple);
+      console.log("Save LvMul", this.lvMultiple);
     },
   },
   created() {
@@ -261,9 +260,11 @@ export default {
     // 如果没有设置就随便给个等级
     if (!this.level.lvMin) {
       this.level.lvMin = this.randomLevel();
+      this.saveLvMin(this.level.lvMin);
     }
     if (!this.level.lvMax) {
       this.level.lvMax = Number(this.level.lvMin) + 1;
+      this.saveLvMax(this.level.lvMax);
     }
 
     // 绑定切换范围的事件
@@ -327,10 +328,9 @@ export default {
         max-width: 150px;
         padding: 5px;
         margin: 10px 0;
-        border: 3px solid #319df8;
+        border: 3px solid #ccc;
         text-align: center;
         &:focus {
-          border-color: #2b2ea3;
           outline: 0;
         }
       }
@@ -359,6 +359,30 @@ export default {
           color: #fb6099;
           border-color: #fb6099;
         }
+      }
+    }
+    &.min {
+      input[type="number"] {
+        border-color: var(--color-A-dark);
+        &:focus {
+          box-shadow: 0 0 3px var(--color-A-dark);
+        }
+      }
+      input[type="radio"]:checked ~ .inner {
+        color: #000;
+        border-color: var(--color-A-dark);
+      }
+    }
+    &.max {
+      input[type="number"] {
+        border-color: var(--color-M-dark);
+        &:focus {
+          box-shadow: 0 0 3px var(--color-M-dark);
+        }
+      }
+      input[type="radio"]:checked ~ .inner {
+        color: #000;
+        border-color: var(--color-M-dark);
       }
     }
   }

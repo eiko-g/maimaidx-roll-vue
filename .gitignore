@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 # 歌曲封面文件夹
 public/assets/img/cover/*.png
+public/assets/img/cover/*.jpg
+public/assets/img/cover.new

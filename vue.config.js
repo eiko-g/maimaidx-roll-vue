@@ -7,5 +7,5 @@ module.exports = {
         return args;
       })
   },
-  publicPath: '/maimai-vue'
+  publicPath: '/maimaidx'
 }
