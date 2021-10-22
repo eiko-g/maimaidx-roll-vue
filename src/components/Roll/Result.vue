@@ -3,7 +3,7 @@
     <p class="tip">※ 封面切换时载入稍慢</p>
     <div class="cover-area">
       <img :src="getCover" alt="Cover" class="cover" />
-      <div class="song-type">
+      <div :class="['song-type', getType]">
         <span class="text">{{ getType }}</span>
       </div>
     </div>
