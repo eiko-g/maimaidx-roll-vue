@@ -8,6 +8,9 @@
 </template>
 
 <script>
+import shuffleArray from "../mixins/shuffleArray";
+import wife from "../mixins/wife";
+
 export default {
   name: "Loading",
   data() {
@@ -25,18 +28,10 @@ export default {
       }
     },
     randomImg() {
-      let wife = {
-        Chiffon: "sd_chiffon.png",
-        Milk: "sd_milk.png",
-        Otohime: "sd_otohime.png",
-        Ras: "sd_ras.png",
-        Salt: "sd_salt.png",
-        syama: "sd_shama.png",
-      };
-      let arr = ["Chiffon", "Milk", "Otohime", "Ras", "Salt", "syama"];
-      this.shuffleArray(arr);
+      let arr = ["Chiffon", "Milk", "Otohime", "Ras", "Salt", "shama"];
+      shuffleArray(arr);
       this.wife = arr[0];
-      this.imgScr = `./assets/img/char/${wife[arr[0]]}`;
+      this.imgScr = wife[arr[0]];
     },
     async fetchSongList() {
       let response = await fetch("./data/maimaidxCN.json?ver=2021091801"),

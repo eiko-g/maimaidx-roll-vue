@@ -5,7 +5,7 @@
     <Buttons @rollClicked="roll" :rollDisabled="rollDisabled" />
 
     <div class="footer">
-      <p>ver 0.40BETA-20211023.01</p>
+      <p>ver 0.40BETA-20211026.01</p>
     </div>
     <!-- .footer -->
   </div>
@@ -15,6 +15,8 @@
 import Result from "../components/Roll/Result.vue";
 import SettingInfo from "../components/Roll/SettingInfo.vue";
 import Buttons from "../components/Roll/Buttons.vue";
+import shuffleArray from "../mixins/shuffleArray";
+
 export default {
   name: "Roll",
   data() {
@@ -32,21 +34,14 @@ export default {
     Buttons,
   },
   methods: {
-    // 打乱数组，来自：https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    // 逼乎相关讨论：https://www.zhihu.com/question/68330851
-    shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    },
+
     roll() {
       console.log("Roll!");
       // 防误触
       this.rollDisabled = true;
       let songList = this.$store.getters.getSongList;
       console.log("歌单", songList);
-      this.shuffleArray(songList);
+      shuffleArray(songList);
       this.currentSong = songList[0];
       console.log("抽到的歌", this.currentSong);
       this.$store.commit("saveCurrentSong", this.currentSong);
@@ -77,7 +72,7 @@ export default {
         }
       });
       console.log("临时数组：", tempArr);
-      this.shuffleArray(tempArr);
+      shuffleArray(tempArr);
       要展示的难度 = tempArr[0];
       console.log("要展示的难度", 要展示的难度);
       this.currentDiffculty = 要展示的难度;
