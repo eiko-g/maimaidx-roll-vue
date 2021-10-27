@@ -7,3 +7,21 @@
   box-shadow: 0 0 0 3px $bdc, 0 0 0 6px #fff, 0 0 0 9px rgba(#fff, 0.4),
     0 0 5px 5px $backShadow;
 }
+
+@mixin max-screen($res) {
+  @media only screen and (max-width: $res) {
+    @content;
+  }
+}
+
+@mixin min-screen($res) {
+  @media only screen and (min-width: $res) {
+    @content;
+  }
+}
+
+@mixin min-max-screen($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}

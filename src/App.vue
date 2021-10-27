@@ -12,21 +12,21 @@
             href="https://github.com/eiko-g/maimaidx-roll-vue"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            GayHub
-          </a>
+          >GayHub</a>
         </p>
       </div>
     </div>
-    <div class="background">
-      <div class="corner">
-        <div class="left-top"></div>
-        <div class="bottom-right"></div>
-      </div>
-    </div>
+    <BackgroundVue></BackgroundVue>
   </div>
 </template>
-
+<script>
+import BackgroundVue from "./components/Background.vue"
+export default {
+  components: {
+    BackgroundVue
+  }
+}
+</script>
 <style lang="scss">
 :root {
   --color-B: #ccffcc;
@@ -58,7 +58,7 @@ a {
 .main-body {
   position: relative;
   z-index: 100;
-  width: 90%;
+  width: 80%;
   max-width: 600px;
   min-height: 90vh;
   margin: 50px auto;
@@ -85,36 +85,6 @@ a {
     width: 100%;
     max-width: 1000px;
     margin: auto;
-  }
-}
-.background {
-  z-index: 1;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  pointer-events: none;
-  top: 0;
-  .corner {
-    .left-top,
-    .bottom-right {
-      background-repeat: no-repeat;
-      position: fixed;
-    }
-    .left-top {
-      left: 0;
-      top: 0;
-      width: 530px;
-      height: 530px;
-      background-image: url("./assets/img/background/corner_left.png");
-    }
-    .bottom-right {
-      bottom: 0;
-      right: 0;
-      width: 560px;
-      height: 580px;
-      background-image: url("./assets/img/background/corner_right.png");
-    }
   }
 }
 </style>
