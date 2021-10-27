@@ -1,5 +1,5 @@
-export default function mess(inputLevel) {
-    let setting = this.$store.getters.getSetting;
+export default function mess(inputLevel, inputSetting) {
+    let setting = inputSetting;
     // console.log("InputLevel", inputLevel);
     // 直接抄以前的部分了，还是用中文写变量方便
     // 高低一致指的是在多选难度时，最低和最高的设置完全一致

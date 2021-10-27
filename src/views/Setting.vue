@@ -15,6 +15,8 @@ import Category from "../components/Setting/Category.vue";
 import Level from "../components/Setting/Level.vue";
 import Rank from "../components/Setting/Rank.vue";
 import Version from "../components/Setting/Version.vue";
+import mess from "../mixins/mess";
+
 export default {
   components: { Rank, Category, Version, Level },
   name: "Setting",
@@ -130,7 +132,7 @@ export default {
         // 判定这首歌对应难度的等级符不符合要求
         fullRank.forEach((难度) => {
           // 只要有一个难度的等级符合了要求就给过
-          if (this.mess(当前歌曲.等级[难度])) {
+          if (mess(当前歌曲.等级[难度], setting)) {
             结果 = true;
           }
         });
