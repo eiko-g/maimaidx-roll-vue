@@ -21,9 +21,9 @@ export default createStore({
     // 版本
     version: ['all'],
     // 原始歌单列表
-    originalSongList: {},
+    originalSongList: [],
     // 筛选过的歌单列表
-    songList: {},
+    songList: [],
     // 当前抽到的歌
     currentSong: {
       "分类": undefined,

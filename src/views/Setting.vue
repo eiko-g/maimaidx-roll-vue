@@ -15,7 +15,7 @@ import Category from "../components/Setting/Category.vue";
 import Level from "../components/Setting/Level.vue";
 import Rank from "../components/Setting/Rank.vue";
 import Version from "../components/Setting/Version.vue";
-import mess from "../mixins/mess";
+import songFilter from "../mixins/songFilter";
 
 export default {
   components: { Rank, Category, Version, Level },
@@ -33,43 +33,8 @@ export default {
       console.log("设置", setting);
       let 原始歌单 = this.$store.getters.getOriginalSongList.曲目列表;
       console.log("原始歌单", 原始歌单);
-      let 新歌单 = [];
-      let fullRank = [];
-      if (setting.rank.includes("all")) {
-        fullRank = ["B", "A", "E", "M", "R"];
-      } else {
-        fullRank = setting.rank;
-      }
-      原始歌单.map((当前歌曲) => {
-        // 前面已经已经预设了当 设置.难度 == 'all' 时则把全部难度塞了进去
-        // 所以这边就懒得搞那么多了
-        // 先设置结果
-        let 结果 = false;
-        // 判定这首歌对应难度的等级符不符合要求
-        fullRank.forEach((难度) => {
-          // 只要有一个难度的等级符合了要求就给过
-          if (mess(当前歌曲.等级[难度], setting)) {
-            结果 = true;
-          }
-        });
-        if (结果) {
-          新歌单.push(当前歌曲);
-        }
-      });
 
-      // 筛一遍分类
-      if (setting.category != "all") {
-        新歌单 = 新歌单.filter((被选中的歌) => {
-          return setting.category.includes(被选中的歌.分类);
-        });
-      }
-
-      // 筛一遍版本
-      if (setting.version != "all") {
-        新歌单 = 新歌单.filter((被选中的歌) => {
-          return setting.version.includes(被选中的歌.版本);
-        });
-      }
+      let 新歌单 = songFilter(原始歌单, setting);
 
       console.log("新歌单", 新歌单);
       if (新歌单.length > 0) {
