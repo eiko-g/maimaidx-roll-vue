@@ -23,6 +23,10 @@ pnpm-debug.log*
 *.sw?
 
 # 歌曲封面文件夹
-public/assets/img/cover/*.png
+public/assets/img/cover.png/*.png
 public/assets/img/cover/*.jpg
 public/assets/img/cover.new
+public/assets/img/cover.old
+
+# 处理歌单的东西
+aaa

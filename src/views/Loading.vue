@@ -8,6 +8,9 @@
 </template>
 
 <script>
+import shuffleArray from "../mixins/shuffleArray";
+import wife from "../mixins/wife";
+
 export default {
   name: "Loading",
   data() {
@@ -25,27 +28,27 @@ export default {
       }
     },
     randomImg() {
-      let wife = {
-        Chiffon: "sd_chiffon.png",
-        Milk: "sd_milk.png",
-        Otohime: "sd_otohime.png",
-        Ras: "sd_ras.png",
-        Salt: "sd_salt.png",
-        syama: "sd_shama.png",
-      };
-      let arr = ["Chiffon", "Milk", "Otohime", "Ras", "Salt", "syama"];
-      this.shuffleArray(arr);
+      let arr = ["Chiffon", "Milk", "Otohime", "Ras", "Salt", "shama"];
+      shuffleArray(arr);
       this.wife = arr[0];
-      this.imgScr = `./assets/img/char/${wife[arr[0]]}`;
+      this.imgScr = wife[arr[0]];
     },
     async fetchSongList() {
-      let response = await fetch("./data/maimaidxCN.json?ver=2021091801"),
+      let response = await fetch("./data/maimaidxCN.json?ver=2021111301"),
         json = {};
       if (response.ok) {
         json = await response.json();
       } else {
         alert("HTTP-Error: " + response.status);
       }
+      //#region 给每首歌加个 id
+      // 在这里做是因为我没拿到那些 bot 都有的 ID，所以就自己加个
+      let id = 0;
+      json.曲目列表.map(item=>{
+        id++;
+        item.id = id;
+      });
+      //#endregion
       console.log(json);
       this.$store.commit("saveOriginalSongList", json);
       this.info = "载入完成，正在跳转~";
