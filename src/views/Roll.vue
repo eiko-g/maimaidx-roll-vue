@@ -5,16 +5,13 @@
     <Buttons @rollClicked="roll" :rollDisabled="rollDisabled" />
 
     <div class="footer">
-      <p>ver 0.42-20220213.01</p>
+      <p>ver 0.43dev-20220216.01</p>
     </div>
     <!-- .footer -->
   </div>
 </template>
 
 <script>
-import Result from "../components/Roll/Result.vue";
-import SettingInfo from "../components/Roll/SettingInfo.vue";
-import Buttons from "../components/Roll/Buttons.vue";
 import shuffleArray from "../mixins/shuffleArray";
 
 export default {
@@ -25,14 +22,9 @@ export default {
       rollDisabled: true,
       setting: {},
       currentSong: {},
-      currentDiffculty: "",
+      currentDifficulty: "",
       originalSongList: [],
     };
-  },
-  components: {
-    Result,
-    SettingInfo,
-    Buttons,
   },
   methods: {
     roll() {
@@ -57,9 +49,9 @@ export default {
       })[0];
       console.log("天选之歌", 天选之歌);
       this.currentSong = 天选之歌;
-      this.currentDiffculty = 点指兵兵.rank;
+      this.currentDifficulty = 点指兵兵.rank;
       this.$store.commit("saveCurrentSong", this.currentSong);
-      this.$store.commit("saveCurrentDiffculty", this.currentDiffculty);
+      this.$store.commit("saveCurrentDifficulty", this.currentDifficulty);
 
       setTimeout(() => {
         this.rollDisabled = false;
@@ -87,6 +79,13 @@ export default {
   },
 };
 </script>
+
+<script setup>
+import Result from "../components/Roll/Result.vue";
+import SettingInfo from "../components/Roll/SettingInfo.vue";
+import Buttons from "../components/Roll/Buttons.vue";
+</script>
+
 
 <style lang="scss" scoped>
 .setting-info {

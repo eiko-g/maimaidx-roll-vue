@@ -30,23 +30,33 @@
           <td
             id="table-lv-num-B"
             :class="['table-lv-num', { current: currentRank('B') }]"
-          >{{ getLv.B }}</td>
+          >
+            {{ getLv.B }}
+          </td>
           <td
             id="table-lv-num-A"
             :class="['table-lv-num', { current: currentRank('A') }]"
-          >{{ getLv.A }}</td>
+          >
+            {{ getLv.A }}
+          </td>
           <td
             id="table-lv-num-E"
             :class="['table-lv-num', { current: currentRank('E') }]"
-          >{{ getLv.E }}</td>
+          >
+            {{ getLv.E }}
+          </td>
           <td
             id="table-lv-num-M"
             :class="['table-lv-num', { current: currentRank('M') }]"
-          >{{ getLv.M }}</td>
+          >
+            {{ getLv.M }}
+          </td>
           <td
             id="table-lv-num-R"
             :class="['table-lv-num', { current: currentRank('R') }]"
-          >{{ getLv.R }}</td>
+          >
+            {{ getLv.R }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -74,7 +84,7 @@ export default {
   },
   methods: {
     currentRank(input) {
-      return input == this.$store.getters.getCurrentDiffculty;
+      return input == this.$store.getters.getCurrentDifficulty;
     },
   },
   computed: {

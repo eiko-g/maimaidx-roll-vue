@@ -39,7 +39,7 @@ export default createStore({
       "版本": "版本",
       "封面": undefined,
     },
-    currentDiffculty: ''
+    currentDifficulty: ''
   },
   mutations: {
     saveRank(state, rank) {
@@ -78,8 +78,8 @@ export default createStore({
     saveCurrentSong(state, song) {
       state.currentSong = song;
     },
-    saveCurrentDiffculty(state, d) {
-      state.currentDiffculty = d;
+    saveCurrentDifficulty(state, d) {
+      state.currentDifficulty = d;
     },
   },
   actions: {
@@ -95,13 +95,12 @@ export default createStore({
       return state.version;
     },
     getLv(state) {
-      let obj = {
+      return {
         lvMin: state.lvMin,
         lvMinPlus: state.lvMinPlus,
         lvMax: state.lvMax,
         lvMaxPlus: state.lvMaxPlus
-      }
-      return obj;
+      };
     },
     getLvMul(state) {
       return state.lvMultiple;
@@ -127,8 +126,8 @@ export default createStore({
     getCurrentSong(state) {
       return state.currentSong;
     },
-    getCurrentDiffculty(state) {
-      return state.currentDiffculty;
+    getCurrentDifficulty(state) {
+      return state.currentDifficulty;
     }
   },
   modules: {
