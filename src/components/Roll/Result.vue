@@ -1,6 +1,7 @@
 <template>
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
+    <p>{{ randomTest }}</p>
     <div class="cover-area">
       <img :src="getCover" alt="Cover" class="cover" />
       <div :class="['song-type', getType]">
@@ -30,33 +31,23 @@
           <td
             id="table-lv-num-B"
             :class="['table-lv-num', { current: currentRank('B') }]"
-          >
-            {{ getLv.B }}
-          </td>
+          >{{ getLv.B }}</td>
           <td
             id="table-lv-num-A"
             :class="['table-lv-num', { current: currentRank('A') }]"
-          >
-            {{ getLv.A }}
-          </td>
+          >{{ getLv.A }}</td>
           <td
             id="table-lv-num-E"
             :class="['table-lv-num', { current: currentRank('E') }]"
-          >
-            {{ getLv.E }}
-          </td>
+          >{{ getLv.E }}</td>
           <td
             id="table-lv-num-M"
             :class="['table-lv-num', { current: currentRank('M') }]"
-          >
-            {{ getLv.M }}
-          </td>
+          >{{ getLv.M }}</td>
           <td
             id="table-lv-num-R"
             :class="['table-lv-num', { current: currentRank('R') }]"
-          >
-            {{ getLv.R }}
-          </td>
+          >{{ getLv.R }}</td>
         </tr>
       </tbody>
     </table>
@@ -66,7 +57,7 @@
 <script>
 export default {
   name: "Result",
-  props: ["currentSong"],
+  props: ["currentSong", 'randomTest'],
   data() {
     return {
       src: "./assets/img/nocover.png",
@@ -86,6 +77,13 @@ export default {
     currentRank(input) {
       return input == this.$store.getters.getCurrentDifficulty;
     },
+  },
+  mounted() {
+    console.log('currentSong in Result.vue', this.currentSong)
+  },
+  updated() {
+    console.log('Result updated')
+    console.log('currentSong after update', this.currentSong)
   },
   computed: {
     getCover() {
@@ -125,6 +123,13 @@ export default {
     },
   },
 };
+</script>
+
+<script setup>
+
+// const props = defineProps(['currentSong']);
+// let currentSong = props.currentSong;
+
 </script>
 
 <style lang="scss" scoped>

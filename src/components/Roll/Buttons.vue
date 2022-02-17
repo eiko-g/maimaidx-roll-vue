@@ -1,8 +1,6 @@
 <template>
   <div class="buttons">
-    <button @click="rollSong()" :disabled="rollDisabled" class="button roll">
-      按条件 Roll
-    </button>
+    <button @click="rollSong()" :disabled="rollDisabled" class="button roll">按条件 Roll</button>
     <button @click="gotoSetting" class="button setting">设置</button>
     <!-- <button class="button random">随便来一首</button> -->
   </div>
@@ -11,18 +9,29 @@
 <script>
 export default {
   name: "Buttons",
-  props: ["rollDisabled"],
-  methods: {
-    gotoSetting() {
-      this.$router.push({ name: "Setting" });
-    },
-
-    rollSong() {
-      console.log("Roll emit.");
-      this.$emit("rollClicked");
-    },
-  },
 };
+</script>
+
+<script setup>
+import { toRefs, defineProps, defineEmits } from 'vue';
+import { useRouter } from 'vue-router';
+
+const props = defineProps({
+  rollDisabled: Boolean
+});
+const emit = defineEmits(['rollClicked']);
+const router = useRouter();
+
+let { rollDisabled } = toRefs(props);
+
+function gotoSetting() {
+  router.push({ name: "Setting" });
+}
+
+function rollSong() {
+  emit('rollClicked');
+}
+
 </script>
 
 <style lang="scss" scoped>
