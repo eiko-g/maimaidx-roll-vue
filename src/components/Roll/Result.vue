@@ -1,19 +1,18 @@
 <template>
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
-    <p>{{ randomTest }}</p>
     <div class="cover-area">
       <img :src="getCover" alt="Cover" class="cover" />
-      <div :class="['song-type', getType]">
-        <span class="text">{{ getType }}</span>
+      <div :class="['song-type', currentSong.类型]">
+        <span class="text">{{ currentSong.类型 }}</span>
       </div>
     </div>
 
-    <h3 class="title" lang="ja-jp">{{ getTitle }}</h3>
+    <h3 class="title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
     <p class="info">
       <span class="cat">{{ getCat }}</span>
       /
-      <span class="version">{{ getVer }}</span>
+      <span class="version">{{ currentSong.版本 }}</span>
     </p>
 
     <table class="table-lv">
@@ -31,23 +30,23 @@
           <td
             id="table-lv-num-B"
             :class="['table-lv-num', { current: currentRank('B') }]"
-          >{{ getLv.B }}</td>
+          >{{ currentSong.等级.B }}</td>
           <td
             id="table-lv-num-A"
             :class="['table-lv-num', { current: currentRank('A') }]"
-          >{{ getLv.A }}</td>
+          >{{ currentSong.等级.A }}</td>
           <td
             id="table-lv-num-E"
             :class="['table-lv-num', { current: currentRank('E') }]"
-          >{{ getLv.E }}</td>
+          >{{ currentSong.等级.E }}</td>
           <td
             id="table-lv-num-M"
             :class="['table-lv-num', { current: currentRank('M') }]"
-          >{{ getLv.M }}</td>
+          >{{ currentSong.等级.M }}</td>
           <td
             id="table-lv-num-R"
             :class="['table-lv-num', { current: currentRank('R') }]"
-          >{{ getLv.R }}</td>
+          >{{ currentSong.等级.R }}</td>
         </tr>
       </tbody>
     </table>
@@ -57,78 +56,48 @@
 <script>
 export default {
   name: "Result",
-  props: ["currentSong", 'randomTest'],
-  data() {
-    return {
-      src: "./assets/img/nocover.png",
-      type: "谱面类型",
-      title: "油婶么呢？",
-      category: "分类",
-      levels: {
-        B: "m",
-        A: "a",
-        E: "i",
-        M: "D",
-        R: "X",
-      },
-    };
-  },
-  methods: {
-    currentRank(input) {
-      return input == this.$store.getters.getCurrentDifficulty;
-    },
-  },
-  mounted() {
-    console.log('currentSong in Result.vue', this.currentSong)
-  },
-  updated() {
-    console.log('Result updated')
-    console.log('currentSong after update', this.currentSong)
-  },
-  computed: {
-    getCover() {
-      if (this.currentSong.封面) {
-        return `./assets/img/cover.png/${this.currentSong.封面}`;
-      } else {
-        return "./assets/img/nocover.png";
-      }
-    },
-    getTitle() {
-      return this.currentSong.曲名;
-    },
-    getCat() {
-      if (this.currentSong.分类) {
-        let text = {
-          pops_anime: "动画 & 流行",
-          niconico: "nico & V家",
-          toho: "东方 Project",
-          variety: "其他游戏", // 这个其实写联动比较好？
-          maimai: "maimai",
-          gekichu: "音击 & 中二",
-        };
-
-        return text[this.currentSong.分类];
-      } else {
-        return "分类";
-      }
-    },
-    getVer() {
-      return this.currentSong.版本;
-    },
-    getType() {
-      return this.currentSong.类型;
-    },
-    getLv() {
-      return this.currentSong.等级;
-    },
-  },
 };
 </script>
 
 <script setup>
+import {computed, defineProps, toRefs} from 'vue';
+import { useStore } from 'vuex';
 
-// const props = defineProps(['currentSong']);
-// let currentSong = props.currentSong;
+const store = useStore();
+const props = defineProps({
+  currentSong: Object
+});
+
+let { currentSong } = toRefs(props);
+
+function currentRank(input) {
+  return input === store.getters.getCurrentDifficulty;
+}
+
+let getCover = computed(()=>{
+  if (currentSong.value.封面) {
+    return `./assets/img/cover.png/${currentSong.value.封面}`;
+  } else {
+    return "./assets/img/nocover.png";
+  }
+});
+
+let getCat = computed(()=>{
+  if (currentSong.value.分类) {
+    let text = {
+      pops_anime: "动画 & 流行",
+      niconico: "nico & V家",
+      toho: "东方 Project",
+      variety: "其他游戏", // 这个其实写联动比较好？
+      maimai: "maimai",
+      gekichu: "音击 & 中二",
+    };
+    return text[currentSong.value.分类];
+  } else {
+    return "分类";
+  }
+})
+
 
 </script>
 

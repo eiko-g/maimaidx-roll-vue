@@ -288,6 +288,11 @@ export default {
 };
 </script>
 
+<script setup>
+
+</script>
+
+
 <style lang="scss" scoped>
 .level-select {
   display: flex;
