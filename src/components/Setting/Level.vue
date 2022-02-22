@@ -18,13 +18,13 @@
       >
         <input
           :checked="!lvMultiple"
-          @click="swtichMultiple(false)"
+          @click="switchMultiple(false)"
           id="level-select-single"
           type="radio"
           name="level-select"
           value="false"
         />
-        <div class="inner">单一难度</div>
+        <span class="inner">单一难度</span>
       </label>
       <label
         for="level-select-multiple"
@@ -32,13 +32,13 @@
       >
         <input
           :checked="lvMultiple"
-          @click="swtichMultiple(true)"
+          @click="switchMultiple(true)"
           id="level-select-multiple"
           type="radio"
           name="level-select"
           value="true"
         />
-        <div class="inner">范围难度</div>
+        <span class="inner">范围难度</span>
       </label>
     </div>
 
@@ -69,7 +69,7 @@
               id="level-number-plus-no"
               value="false"
             />
-            <div class="inner">不带 + 号</div>
+            <span class="inner">不带 + 号</span>
           </label>
           <label class="level-radio-label" for="level-number-plus-yes">
             <input
@@ -83,7 +83,7 @@
               id="level-number-plus-yes"
               value="true"
             />
-            <div class="inner">带 + 号</div>
+            <span class="inner">带 + 号</span>
           </label>
         </div>
       </div>
@@ -116,7 +116,7 @@
               id="level-min-plus-no"
               value="false"
             />
-            <div class="inner">不带 + 号</div>
+            <span class="inner">不带 + 号</span>
           </label>
           <label class="level-radio-label" for="level-min-plus-yes">
             <input
@@ -130,7 +130,7 @@
               id="level-min-plus-yes"
               value="true"
             />
-            <div class="inner">带 + 号</div>
+            <span class="inner">带 + 号</span>
           </label>
         </div>
         <div class="level-number-block number max">
@@ -158,7 +158,7 @@
               id="level-max-plus-no"
               value="false"
             />
-            <div class="inner">不带 + 号</div>
+            <span class="inner">不带 + 号</span>
           </label>
           <label class="level-radio-label" for="level-max-plus-yes">
             <input
@@ -172,7 +172,7 @@
               id="level-max-plus-yes"
               value="true"
             />
-            <div class="inner">带 + 号</div>
+            <span class="inner">带 + 号</span>
           </label>
         </div>
       </div>
@@ -183,18 +183,10 @@
 <script>
 export default {
   name: "Level",
-  data() {
-    return {
-      lvMultiple: false,
-      level: {},
-    };
-  },
+  /*
   methods: {
-    /**
-     * 一些辅助类的
-     */
     // 切换是否多选等级
-    swtichMultiple(state) {
+    switchMultiple(state) {
       this.lvMultiple = state;
     },
     // 随机填个等级
@@ -204,9 +196,6 @@ export default {
       }
     },
 
-    /**
-     * 设置类的
-     */
     // 最低等级带加号
     setLvMinPlus(state) {
       this.level.lvMinPlus = state;
@@ -227,9 +216,6 @@ export default {
       console.log("Get LvMul", this.lvMultiple);
     },
 
-    /**
-     * 保存等级设置
-     */
     saveLvMin(lv) {
       this.$store.commit("saveLvMin", lv);
       console.log("Save LvMin", this.level.lvMin);
@@ -251,10 +237,6 @@ export default {
       this.$store.commit("saveLvMultiple", this.lvMultiple);
       console.log("Save LvMul", this.lvMultiple);
     },
-  },
-  created() {
-    this.getLv();
-    this.getLvMul();
   },
   mounted() {
     // 如果没有设置就随便给个等级
@@ -285,11 +267,93 @@ export default {
       });
     });
   },
+*/
 };
 </script>
 
 <script setup>
+import {useStore} from "vuex";
+import {ref, reactive, onMounted} from "vue";
+const store = useStore();
 
+let lvMultiple = ref(store.getters.getLvMul);
+let level = reactive(store.getters.getLv);
+
+console.log(lvMultiple, level);
+
+// 随便给个等级
+function randomLevel() {
+  if (level.lvMin === 0) {
+    return Math.floor(Math.random() * 14) + 1;
+  }
+}
+
+// 切换是否多选等级
+function switchMultiple(state) {
+  lvMultiple.value = state;
+}
+
+// 最低等级带加号
+function setLvMinPlus(state) {
+  level.lvMinPlus = state;
+}
+// 最高等级带加号
+function setLvMaxPlus(state) {
+  level.lvMaxPlus = state;
+}
+
+function saveLvMin(lv) {
+  store.commit("saveLvMin", lv);
+  console.log("Save LvMin", level.lvMin);
+}
+function saveLvMinPlus(state) {
+  store.commit("saveLvMinPlus", state);
+  console.log("Save LvMinPlus", level.lvMinPlus);
+}
+function saveLvMax(lv) {
+  store.commit("saveLvMax", lv);
+  console.log("Save LvMax", level.lvMax);
+}
+function saveLvMaxPlus(state) {
+  store.commit("saveLvMaxPlus", state);
+  console.log("Save LvMaxPlus", level.lvMaxPlus);
+}
+function saveLvMul() {
+  // 就尼玛离谱，如果直接获取 input.value 的话会传成字符串而不是布尔值
+  store.commit("saveLvMultiple", lvMultiple.value);
+  console.log("Save LvMul", lvMultiple.value);
+}
+
+// 初始化时如果没有设置等级就随便来个
+if (level.lvMin <= 0) {
+  level.lvMin = randomLevel();
+  saveLvMin(level.lvMin);
+}
+if (level.lvMax <= 0) {
+  level.lvMax = Number(level.lvMin) + 1;
+  saveLvMax(level.lvMax);
+}
+
+// setup 时 dom 还没渲染出来，要等 Mounted 之后才能绑定事件
+onMounted(()=>{
+  // 绑定切换范围的事件
+  document.querySelectorAll('input[name="level-select"]').forEach((item) => {
+    item.addEventListener("click", () => {
+      saveLvMul();
+    });
+  });
+// 绑定保存等级的事件
+  document.querySelectorAll("#level-number, #level-min").forEach((item) => {
+    item.addEventListener("change", () => {
+      saveLvMin(item.value);
+    });
+  });
+  document.querySelectorAll("#level-max").forEach((item) => {
+    item.addEventListener("change", () => {
+      saveLvMax(item.value);
+    });
+  });
+});
 </script>
 
 
