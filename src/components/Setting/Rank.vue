@@ -11,32 +11,32 @@
           id="rank-all"
           class="rank all"
         />
-        <div class="inner">All</div>
+        <span class="inner">All</span>
       </label>
 
       <label class="rank-label B" for="rank-B">
         <input type="checkbox" name="rank" value="B" id="rank-B" class="rank B" />
-        <div class="inner">B</div>
+        <span class="inner">B</span>
       </label>
 
       <label class="rank-label A" for="rank-A">
         <input type="checkbox" name="rank" value="A" id="rank-A" class="rank A" />
-        <div class="inner">A</div>
+        <span class="inner">A</span>
       </label>
 
       <label class="rank-label E" for="rank-E">
         <input type="checkbox" name="rank" value="E" id="rank-E" class="rank E" />
-        <div class="inner">E</div>
+        <span class="inner">E</span>
       </label>
 
       <label class="rank-label M" for="rank-M">
         <input type="checkbox" name="rank" value="M" id="rank-M" class="rank M" />
-        <div class="inner">M</div>
+        <span class="inner">M</span>
       </label>
 
       <label class="rank-label R" for="rank-R">
         <input type="checkbox" name="rank" value="R" id="rank-R" class="rank R" />
-        <div class="inner">R</div>
+        <span class="inner">R</span>
       </label>
     </div>
   </div>
@@ -45,87 +45,65 @@
 <script>
 export default {
   name: "Rank",
-  data() {
-    return {
-      rank: [],
-    };
-  },
-  methods: {
-    // 点击全选则取消其他选项
-    rankClickAll() {
-      let elements = document.querySelectorAll("input.rank:not(.all)");
-      elements.forEach((item) => (item.checked = false));
-      document.querySelector("input.rank.all").checked = true;
-    },
-    // 点其他的取消勾选 All，全取消了就选上 All
-    rankClickOther() {
-      document.querySelector("input.rank.all").checked = false;
-      let other = document.querySelectorAll("input.rank:not(.all):checked");
-      if (other.length === 0) {
-        document.querySelector("input.rank.all").checked = true;
-      }
-    },
-
-    /**
-     * 载入后获取数据系列
-     */
-    // 获取难度
-    getRank() {
-      this.rank = this.$store.getters.getRank;
-      console.log("Get Rank", this.rank);
-    },
-
-    /**
-     * 检查各种设置
-     */
-    // 检查难度
-    checkRank(rank) {
-      if (this.rank.length == 0) {
-        if (rank === "all") {
-          return true;
-        }
-      } else {
-        return this.rank.includes(rank);
-      }
-    },
-
-    /**
-     * 保存动作
-     */
-    // 保存难度设置
-    saveRank() {
-      let elements = document.querySelectorAll("input.rank:checked"),
-        rank = [];
-      elements.forEach((item) => {
-        console.log(item.value);
-        rank.push(item.value);
-      });
-      this.$store.commit("saveRank", rank);
-      this.rank = rank;
-    },
-  },
-  created() {
-    this.getRank();
-  },
-  mounted() {
-    // 给非 All 难度注册事件
-    document.querySelectorAll("input.rank:not(.all)").forEach((item) => {
-      item.addEventListener("click", () => {
-        this.rankClickOther();
-      });
-    });
-    // 给所有难度注册事件
-    document.querySelectorAll("input.rank").forEach((item) => {
-      // 点击就保存
-      item.addEventListener("change", () => {
-        this.saveRank();
-        console.log("Save Rank", this.rank);
-      });
-      // 打开页面时检查已勾选的难度
-      item.checked = this.checkRank(item.value);
-    });
-  },
 };
+</script>
+
+<script setup>
+import {useStore} from "vuex";
+import {onMounted} from "vue";
+const store = useStore();
+let rank = store.getters.getRank;
+console.log("Get Rank", rank);
+
+// 点击全选则取消其他选项
+function rankClickAll() {
+  let elements = document.querySelectorAll("input.rank:not(.all)");
+  elements.forEach((item) => (item.checked = false));
+  document.querySelector("input.rank.all").checked = true;
+}
+// 点其他的取消勾选 All，全取消了就选上 All
+function rankClickOther() {
+  document.querySelector("input.rank.all").checked = false;
+  let other = document.querySelectorAll("input.rank:not(.all):checked");
+  if (other.length === 0) {
+    document.querySelector("input.rank.all").checked = true;
+  }
+}
+
+// 检查难度
+function checkRank(inputRank) {
+    return rank.includes(inputRank);
+}
+// 保存难度设置
+function saveRank() {
+  let elements = document.querySelectorAll("input.rank:checked"),
+      tempRank = [];
+  elements.forEach((item) => {
+    console.log(item.value);
+    tempRank.push(item.value);
+  });
+  store.commit("saveRank", tempRank);
+  rank = tempRank;
+}
+
+onMounted(()=>{
+  // 给非 All 难度注册事件
+  document.querySelectorAll("input.rank:not(.all)").forEach((item) => {
+    item.addEventListener("click", () => {
+      rankClickOther();
+    });
+  });
+  // 给所有难度注册事件
+  document.querySelectorAll("input.rank").forEach((item) => {
+    // 点击就保存
+    item.addEventListener("change", () => {
+      saveRank();
+      console.log("Save Rank", rank);
+    });
+    // 打开页面时检查已勾选的难度
+    item.checked = checkRank(item.value);
+  });
+});
 </script>
 
 <style lang="scss" scoped>

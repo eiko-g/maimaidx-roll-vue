@@ -185,87 +185,67 @@
 <script>
 export default {
   name: "Version",
-  data() {
-    return {
-      version: [],
-    };
-  },
-  methods: {
-    // 点击全选则取消其他选项
-    verClickAll() {
-      let elements = document.querySelectorAll("input.version:not(.all)");
-      elements.forEach((item) => (item.checked = false));
-      document.querySelector("input.version.all").checked = true;
-    },
-    // 点其他的取消勾选 All，全取消了就选上 All
-    verClickOther() {
-      document.querySelector("input.version.all").checked = false;
-      let other = document.querySelectorAll("input.version:not(.all):checked");
-      if (other.length === 0) {
-        document.querySelector("input.version.all").checked = true;
-      }
-    },
-
-    /**
-     * 载入后获取数据系列
-     */
-    // 获取分类
-    getVer() {
-      this.version = this.$store.getters.getVer;
-      console.log("Get Version", this.version);
-    },
-
-    /**
-     * 检查各种设置
-     */
-    // 检查难度
-    checkVer(ver) {
-      if (this.version.length == 0) {
-        if (ver === "all") {
-          return true;
-        }
-      } else {
-        return this.version.includes(ver);
-      }
-    },
-
-    /**
-     * 保存动作
-     */
-    // 保存难度设置
-    saveVer() {
-      let elements = document.querySelectorAll("input.version:checked"),
-        ver = [];
-      elements.forEach((item) => {
-        console.log(item.value);
-        ver.push(item.value);
-      });
-      this.$store.commit("saveVer", ver);
-      this.version = ver;
-    },
-  },
-  created() {
-    this.getVer();
-  },
-  mounted() {
-    // 给非 All 版本注册事件
-    document.querySelectorAll("input.version:not(.all)").forEach((item) => {
-      item.addEventListener("click", () => {
-        this.verClickOther();
-      });
-    });
-    // 给所有版本注册事件
-    document.querySelectorAll("input.version").forEach((item) => {
-      // 点击就保存
-      item.addEventListener("change", () => {
-        this.saveVer();
-        console.log("Save ver", this.version);
-      });
-      // 打开页面时检查已勾选的难度
-      item.checked = this.checkVer(item.value);
-    });
-  },
 };
+</script>
+
+<script setup>
+import {useStore} from "vuex";
+import {onMounted} from "vue";
+const store = useStore();
+
+let version = store.getters.getVer;
+console.log("Get Version", version);
+
+// 点击全选则取消其他选项
+function verClickAll() {
+  let elements = document.querySelectorAll("input.version:not(.all)");
+  elements.forEach((item) => (item.checked = false));
+  document.querySelector("input.version.all").checked = true;
+}
+// 点其他的取消勾选 All，全取消了就选上 All
+function verClickOther() {
+  document.querySelector("input.version.all").checked = false;
+  let other = document.querySelectorAll("input.version:not(.all):checked");
+  if (other.length === 0) {
+    document.querySelector("input.version.all").checked = true;
+  }
+}
+
+// 保存难度设置
+function saveVer() {
+  let elements = document.querySelectorAll("input.version:checked"),
+      ver = [];
+  elements.forEach((item) => {
+    console.log(item.value);
+    ver.push(item.value);
+  });
+  store.commit("saveVer", ver);
+  version = ver;
+}
+
+// 勾选难度
+function checkVer(ver) {
+  return version.includes(ver);
+}
+
+onMounted(()=>{
+  // 给非 All 版本注册事件
+  document.querySelectorAll("input.version:not(.all)").forEach((item) => {
+    item.addEventListener("click", () => {
+      verClickOther();
+    });
+  });
+  // 给所有版本注册事件
+  document.querySelectorAll("input.version").forEach((item) => {
+    // 点击就保存
+    item.addEventListener("change", () => {
+      saveVer();
+      console.log("Save ver", version);
+    });
+    // 打开页面时检查已勾选的难度
+    item.checked = checkVer(item.value);
+  });
+});
 </script>
 
 <style lang="scss" scoped>
