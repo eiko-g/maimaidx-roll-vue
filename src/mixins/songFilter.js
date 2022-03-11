@@ -5,12 +5,14 @@
  * @param {Object} inputSetting 
  * @returns {Array}
  */
+
 export default function songFilter(songlist, inputSetting) {
     console.time('筛歌');
-    if (!inputSetting || inputSetting.length == 0) {
+    if (!inputSetting || inputSetting.length === 0) {
         console.error('筛歌函数没有加载到设置，代码写炸了');
         return {};
     }
+    console.log('输入进来的设置：', inputSetting);
     let
         setting = inputSetting,
         tempSongList = songlist,
@@ -18,15 +20,19 @@ export default function songFilter(songlist, inputSetting) {
     if (setting.rank.includes('all')) {
         setting.rank = ['B', 'A', 'E', 'M', 'R'];
     }
-    console.log('筛歌时获得的设置', setting);
+    console.log('筛歌时的设置', setting);
+
+    window.fff = setting
+
     // 先筛分类
-    if (setting.category != "all") {
+    if (setting.category[0] !== "all") {
         tempSongList = songlist.filter(item => {
             return setting.category.includes(item.分类);
         });
     }
+
     // 再筛版本
-    if (setting.version != "all") {
+    if (setting.version[0] !== "all") {
         tempSongList = tempSongList.filter(item => {
             return setting.version.includes(item.版本);
         });
@@ -34,17 +40,20 @@ export default function songFilter(songlist, inputSetting) {
     // 看看筛完之后的
     console.log('筛了分类跟版本之后的歌单', tempSongList);
     //#region 筛歌过程
+    // 为了保证筛歌过程都是字符串，呕
+    setting.lv.lvMin = setting.lv.lvMin.toString();
+    setting.lv.lvMax = setting.lv.lvMax.toString();
     // 高低一致指的是在多选难度时，最低和最高的设置完全一致
     // 这时候就跟单难度的判断方法一样了
     let 高低一致 =
-        setting.lvMultiple == true &&
-        setting.lv.lvMin == setting.lv.lvMax &&
-        setting.lv.lvMinPlus == setting.lv.lvMaxPlus;
+        setting.lvMultiple === true &&
+        setting.lv.lvMin === setting.lv.lvMax &&
+        setting.lv.lvMinPlus === setting.lv.lvMaxPlus;
     console.log('高低一致', 高低一致)
     function 筛歌过程(等级) {
         // console.log('筛歌过程输入的等级', 等级);
         // 如果 非多等级筛选 或 最高等级跟最低等级设置一致
-        if (setting.lvMultiple == false || 高低一致 == true) {
+        if (setting.lvMultiple === false || 高低一致 === true) {
             let 抽歌等级 = setting.lv.lvMin;
             // 如果要带加号就加上
             if (setting.lv.lvMinPlus) {
@@ -52,16 +61,16 @@ export default function songFilter(songlist, inputSetting) {
             }
             // console.log("抽歌等级", 抽歌等级);
             // 直接判断一不一样就是了
-            return 等级 == 抽歌等级;
-        } else if (setting.lvMultiple == true && 高低一致 == false) {
+            return 等级 === 抽歌等级;
+        } else if (setting.lvMultiple === true && 高低一致 === false) {
             // 如果 等级多选 且 高低设置不一致
             // 先判定上下限
             // 如果高低整数等级一样的话，比如 12 跟 12+
-            if (setting.lv.lvMin == setting.lv.lvMax) {
+            if (setting.lv.lvMin === setting.lv.lvMax) {
                 // 这个好处理，直接返回结果就好
                 // 举例：取整('12+') == 12，返回 true
                 // 取整('13+') == 12，返回 false
-                return Number.parseInt(等级) == setting.lv.lvMin;
+                return Number.parseInt(等级) === setting.lv.lvMin;
             } else {
                 // 多等级的话，比如 11+ ~ 13
                 // 先预设判定结果
@@ -81,11 +90,11 @@ export default function songFilter(songlist, inputSetting) {
                 // 如果是抽 11 ~ 13 就不用这个判断了
                 if (
                     // what if 11/11+
-                    Number.parseInt(等级) == setting.lv.lvMin &&
+                    Number.parseInt(等级) === setting.lv.lvMin &&
                     // what if 要求结尾是+
-                    setting.lv.lvMinPlus == true &&
+                    setting.lv.lvMinPlus === true &&
                     // what if 结尾没有+
-                    等级[等级.length - 1] != "+"
+                    等级[等级.length - 1] !== "+"
                 ) {
                     // 就不在抽歌范围了
                     判定结果 = false;
@@ -97,9 +106,9 @@ export default function songFilter(songlist, inputSetting) {
                 // 判断最高等级的就是反过来的，我也不知道为什么这么写，但是感觉就该这样，脑子不太行。
                 if (
                     // what if 13/13+
-                    Number.parseInt(等级) == setting.lv.lvMax &&
+                    Number.parseInt(等级) === setting.lv.lvMax &&
                     // what if 要求结尾不是+
-                    setting.lv.lvMaxPlus != true &&
+                    setting.lv.lvMaxPlus !== true &&
                     // what if 结尾有+
                     等级[等级.length - 1] == "+"
                 ) {
@@ -122,7 +131,7 @@ export default function songFilter(songlist, inputSetting) {
         setting.rank.forEach(rank => {
             // console.log(song.曲名, rank, song.等级[rank]);
             if (筛歌过程(song.等级[rank])) {
-                output.push({
+                let songPreview = {
                     id: song.id,
                     rank: rank,
                     preview: {
@@ -130,7 +139,9 @@ export default function songFilter(songlist, inputSetting) {
                         rank: rank,
                         lv: song.等级[rank]
                     }
-                })
+                };
+                // console.log('output 被塞了这个：', songPreview);
+                output.push(songPreview);
             }
         })
     });

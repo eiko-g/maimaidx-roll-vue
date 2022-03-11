@@ -7,17 +7,15 @@
 <script>
 export default {
   name: "Error",
-  methods: {
-    backToHome() {
-      setTimeout(() => {
-        this.$router.push({ name: "Roll" });
-      }, 3000);
-    },
-  },
-  mounted() {
-    this.backToHome();
-  },
 };
+</script>
+
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+setTimeout(() => {
+  router.push({ name: "Roll" });
+}, 3000);
 </script>
 
 <style>

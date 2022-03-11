@@ -1,31 +1,24 @@
 <template>
-  <div id="app">
-    <div class="main-body">
-      <router-view />
-    </div>
-    <div class="main-footer">
-      <div class="main-footer-inner">
-        <p>本网站非 &copy;SEGA 或 华立科技 官方制作，仅为爱好者作品</p>
-        <p>
-          项目地址：
-          <a
-            href="https://github.com/eiko-g/maimaidx-roll-vue"
-            target="_blank"
-            rel="noopener noreferrer"
-          >GayHub</a>
-        </p>
-      </div>
-    </div>
-    <BackgroundVue></BackgroundVue>
+  <div class="main-body">
+    <router-view />
   </div>
+  <div class="main-footer">
+    <div class="main-footer-inner">
+      <p>本网站非 &copy;SEGA 或 华立科技 官方制作，仅为爱好者作品</p>
+      <p>
+        项目地址：
+        <a
+          href="https://github.com/eiko-g/maimaidx-roll-vue"
+          target="_blank"
+          rel="noopener noreferrer"
+        >GayHub</a>
+      </p>
+    </div>
+  </div>
+  <BackgroundVue></BackgroundVue>
 </template>
-<script>
+<script setup>
 import BackgroundVue from "./components/Background.vue"
-export default {
-  components: {
-    BackgroundVue
-  }
-}
 </script>
 <style lang="scss">
 :root {

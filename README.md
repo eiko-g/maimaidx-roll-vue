@@ -18,9 +18,15 @@
 
 总之这样应该比以前的方式公平点，毕竟 EmpError 这种也是在 14+ 占了两个位置的嘛。
 
+## 歌曲封面
+
+因为封面太多了所以就没加进 Git 里，有需要的请去 `public/assets/img/cover.png` 里面看相关说明。
+
 ## How to 开发
 
 就是 Vue 那一套啦，什么 `npm run serve` 什么 `npm run build` 之类的。
+
+默认路径是 `maimai.web/maimaidx`，需要放其他地方的请自己改改 `vue.config.js` 里面的设置。
 
 ## 后续计划
 

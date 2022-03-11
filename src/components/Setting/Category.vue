@@ -80,87 +80,67 @@
 <script>
 export default {
   name: "Category",
-  data() {
-    return {
-      category: [],
-    };
-  },
-  methods: {
-    // 点击全选则取消其他选项
-    catClickAll() {
-      let elements = document.querySelectorAll("input.cat:not(.all)");
-      elements.forEach((item) => (item.checked = false));
-      document.querySelector("input.cat.all").checked = true;
-    },
-    // 点其他的取消勾选 All，全取消了就选上 All
-    catClickOther() {
-      document.querySelector("input.cat.all").checked = false;
-      let other = document.querySelectorAll("input.cat:not(.all):checked");
-      if (other.length === 0) {
-        document.querySelector("input.cat.all").checked = true;
-      }
-    },
-
-    /**
-     * 载入后获取数据系列
-     */
-    // 获取分类
-    getCat() {
-      this.category = this.$store.getters.getCat;
-      console.log("Get Categoty", this.category);
-    },
-
-    /**
-     * 检查各种设置
-     */
-    // 检查难度
-    checkCat(cat) {
-      if (this.category.length == 0) {
-        if (cat === "all") {
-          return true;
-        }
-      } else {
-        return this.category.includes(cat);
-      }
-    },
-
-    /**
-     * 保存动作
-     */
-    // 保存难度设置
-    saveCat() {
-      let elements = document.querySelectorAll("input.cat:checked"),
-        cat = [];
-      elements.forEach((item) => {
-        console.log(item.value);
-        cat.push(item.value);
-      });
-      this.$store.commit("saveCat", cat);
-      this.category = cat;
-    },
-  },
-  created() {
-    this.getCat();
-  },
-  mounted() {
-    // 给非 All 分类注册事件
-    document.querySelectorAll("input.cat:not(.all)").forEach((item) => {
-      item.addEventListener("click", () => {
-        this.catClickOther();
-      });
-    });
-    // 给所有分类注册事件
-    document.querySelectorAll("input.cat").forEach((item) => {
-      // 点击就保存
-      item.addEventListener("change", () => {
-        this.saveCat();
-        console.log("Save cat", this.category);
-      });
-      // 打开页面时检查已勾选的难度
-      item.checked = this.checkCat(item.value);
-    });
-  },
 };
+</script>
+
+<script setup>
+import {useStore} from "vuex";
+import {onMounted} from "vue";
+const store = useStore();
+
+let category = store.getters.getCat;
+console.log("Get Category", category);
+
+// 点击全选则取消其他选项
+function catClickAll() {
+  let elements = document.querySelectorAll("input.cat:not(.all)");
+  elements.forEach((item) => (item.checked = false));
+  document.querySelector("input.cat.all").checked = true;
+}
+// 点其他的取消勾选 All，全取消了就选上 All
+function catClickOther() {
+  document.querySelector("input.cat.all").checked = false;
+  let other = document.querySelectorAll("input.cat:not(.all):checked");
+  if (other.length === 0) {
+    document.querySelector("input.cat.all").checked = true;
+  }
+}
+
+// 勾选分类
+function checkCat(cat) {
+    return category.includes(cat);
+}
+
+// 保存难度设置
+function saveCat() {
+  let elements = document.querySelectorAll("input.cat:checked"),
+      cat = [];
+  elements.forEach((item) => {
+    console.log(item.value);
+    cat.push(item.value);
+  });
+  store.commit("saveCat", cat);
+  category = cat;
+}
+
+onMounted(()=>{
+  // 给非 All 分类注册事件
+  document.querySelectorAll("input.cat:not(.all)").forEach((item) => {
+    item.addEventListener("click", () => {
+      catClickOther();
+    });
+  });
+  // 给所有分类注册事件
+  document.querySelectorAll("input.cat").forEach((item) => {
+    // 点击就保存
+    item.addEventListener("change", () => {
+      saveCat();
+      console.log("Save cat", category);
+    });
+    // 打开页面时检查已勾选的分类
+    item.checked = checkCat(item.value);
+  });
+});
 </script>
 
 <style lang="scss" scoped>
