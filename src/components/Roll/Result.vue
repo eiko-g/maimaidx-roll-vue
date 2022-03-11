@@ -2,7 +2,7 @@
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
     <div class="cover-area">
-      <img :src="getCover" alt="Cover" class="cover" />
+      <img :src="getCover" alt="Cover" class="cover" :class="coverRank" />
       <div :class="['song-type', currentSong.类型]">
         <span class="text">{{ currentSong.类型 }}</span>
       </div>
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <script setup>
-import {computed, defineProps, toRefs} from 'vue';
+import {computed, defineProps, onUpdated, ref, toRefs} from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -69,6 +69,12 @@ const props = defineProps({
 });
 
 let { currentSong } = toRefs(props);
+let coverRank = ref('');
+
+onUpdated(()=>{
+  coverRank.value = store.getters.getCurrentDifficulty;
+  console.log('Cover Rank', coverRank)
+})
 
 function currentRank(input) {
   return input === store.getters.getCurrentDifficulty;
@@ -124,19 +130,19 @@ let getCat = computed(()=>{
   height: 200px;
   margin: 10px auto 20px;
   &.B {
-    box-shadow: 0 0 0 5px var(--color-B);
+    box-shadow: 0 0 0 5px var(--color-B-dark);
   }
   &.A {
-    box-shadow: 0 0 0 5px var(--color-A);
+    box-shadow: 0 0 0 5px var(--color-A-dark);
   }
   &.E {
-    box-shadow: 0 0 0 5px var(--color-E);
+    box-shadow: 0 0 0 5px var(--color-E-dark);
   }
   &.M {
-    box-shadow: 0 0 0 5px var(--color-M);
+    box-shadow: 0 0 0 5px var(--color-M-dark);
   }
   &.R {
-    box-shadow: 0 0 0 5px var(--color-R);
+    box-shadow: 0 0 0 5px var(--color-R-dark);
   }
 }
 .song-type {
