@@ -142,7 +142,7 @@ let getCat = computed(()=>{
     box-shadow: 0 0 0 5px var(--color-M-dark);
   }
   &.R {
-    box-shadow: 0 0 0 5px var(--color-R-dark);
+    box-shadow: 0 0 0 5px var(--color-R);
   }
 }
 .song-type {

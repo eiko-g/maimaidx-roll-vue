@@ -59,7 +59,7 @@
         <div class="level-number-block radio min">
           <label class="level-radio-label" for="level-number-plus-no">
             <input
-              :checked="!this.level.lvMinPlus"
+              :checked="!level.lvMinPlus"
               @click="
                 setLvMinPlus(false);
                 saveLvMinPlus(false);
@@ -73,7 +73,7 @@
           </label>
           <label class="level-radio-label" for="level-number-plus-yes">
             <input
-              :checked="this.level.lvMinPlus"
+              :checked="level.lvMinPlus"
               @click="
                 setLvMinPlus(true);
                 saveLvMinPlus(true);
@@ -106,7 +106,7 @@
         <div class="level-number-block radio min">
           <label class="level-radio-label" for="level-min-plus-no">
             <input
-              :checked="!this.level.lvMinPlus"
+              :checked="!level.lvMinPlus"
               @click="
                 setLvMinPlus(false);
                 saveLvMinPlus(false);
@@ -120,7 +120,7 @@
           </label>
           <label class="level-radio-label" for="level-min-plus-yes">
             <input
-              :checked="this.level.lvMinPlus"
+              :checked="level.lvMinPlus"
               @click="
                 setLvMinPlus(true);
                 saveLvMinPlus(true);
@@ -148,7 +148,7 @@
         <div class="level-number-block radio max">
           <label class="level-radio-label" for="level-max-plus-no">
             <input
-              :checked="!this.level.lvMaxPlus"
+              :checked="!level.lvMaxPlus"
               @click="
                 setLvMaxPlus(false);
                 saveLvMaxPlus(false);
@@ -162,7 +162,7 @@
           </label>
           <label class="level-radio-label" for="level-max-plus-yes">
             <input
-              :checked="this.level.lvMaxPlus"
+              :checked="level.lvMaxPlus"
               @click="
                 setLvMaxPlus(true);
                 saveLvMaxPlus(true);
@@ -183,91 +183,6 @@
 <script>
 export default {
   name: "Level",
-  /*
-  methods: {
-    // 切换是否多选等级
-    switchMultiple(state) {
-      this.lvMultiple = state;
-    },
-    // 随机填个等级
-    randomLevel() {
-      if (this.level.lvMin === 0) {
-        return Math.floor(Math.random() * 14) + 1;
-      }
-    },
-
-    // 最低等级带加号
-    setLvMinPlus(state) {
-      this.level.lvMinPlus = state;
-    },
-    // 最高等级带加号
-    setLvMaxPlus(state) {
-      this.level.lvMaxPlus = state;
-    },
-
-    // 获取等级设置
-    getLv() {
-      this.level = this.$store.getters.getLv;
-      console.log("Get Lv", this.level);
-    },
-    getLvMul() {
-      console.log("get LvM", this.$store.getters.getLvMul);
-      this.lvMultiple = this.$store.getters.getLvMul;
-      console.log("Get LvMul", this.lvMultiple);
-    },
-
-    saveLvMin(lv) {
-      this.$store.commit("saveLvMin", lv);
-      console.log("Save LvMin", this.level.lvMin);
-    },
-    saveLvMinPlus(state) {
-      this.$store.commit("saveLvMinPlus", state);
-      console.log("Save LvMinPlus", this.level.lvMinPlus);
-    },
-    saveLvMax(lv) {
-      this.$store.commit("saveLvMax", lv);
-      console.log("Save LvMax", this.level.lvMax);
-    },
-    saveLvMaxPlus(state) {
-      this.$store.commit("saveLvMaxPlus", state);
-      console.log("Save LvMaxPlus", this.level.lvMaxPlus);
-    },
-    saveLvMul() {
-      // 就尼玛离谱，如果直接获取 input.value 的话会传成字符串而不是布尔值
-      this.$store.commit("saveLvMultiple", this.lvMultiple);
-      console.log("Save LvMul", this.lvMultiple);
-    },
-  },
-  mounted() {
-    // 如果没有设置就随便给个等级
-    if (!this.level.lvMin) {
-      this.level.lvMin = this.randomLevel();
-      this.saveLvMin(this.level.lvMin);
-    }
-    if (!this.level.lvMax) {
-      this.level.lvMax = Number(this.level.lvMin) + 1;
-      this.saveLvMax(this.level.lvMax);
-    }
-
-    // 绑定切换范围的事件
-    document.querySelectorAll('input[name="level-select"]').forEach((item) => {
-      item.addEventListener("click", () => {
-        this.saveLvMul();
-      });
-    });
-    // 绑定保存等级的事件
-    document.querySelectorAll("#level-number, #level-min").forEach((item) => {
-      item.addEventListener("change", () => {
-        this.saveLvMin(item.value);
-      });
-    });
-    document.querySelectorAll("#level-max").forEach((item) => {
-      item.addEventListener("change", () => {
-        this.saveLvMax(item.value);
-      });
-    });
-  },
-*/
 };
 </script>
 

@@ -12,13 +12,6 @@
 
 export default {
   name: "Loading",
-  methods: {
-
-
-  },
-  mounted() {
-    this.fetchSongList();
-  },
 };
 </script>
 
