@@ -17,9 +17,9 @@ export default {
 </script>
 
 <script setup>
-import {ref} from "vue";
-import {useStore} from 'vuex';
-import {useRouter} from 'vue-router';
+import { ref } from "vue";
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 import Category from "../components/Setting/Category.vue";
 import Level from "../components/Setting/Level.vue";
@@ -58,12 +58,6 @@ function backToRoll() {
     alert("歌单未成功生成，请检查设置是否有误");
   }
 }
-
-let songList = store.getters.getOriginalSongList;
-if (!songList.data) {
-  console.log("没载入到歌单，回去载入");
-  router.push({ name: "Loading" });
-}
 </script>
 
 <style lang="scss" scoped>
@@ -95,7 +89,7 @@ if (!songList.data) {
 }
 </style>
 <style lang="scss">
-.setting{
+.setting {
   .title {
     font-size: 18px;
     line-height: 1.5;
