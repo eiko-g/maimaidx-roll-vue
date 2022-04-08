@@ -5,7 +5,7 @@
     <Buttons @rollClicked="roll" :rollDisabled="rollDisabled" />
 
     <div class="footer">
-      <p>ver 0.43-20220312.02</p>
+      <p>ver 0.44-20220408.01</p>
     </div>
     <!-- .footer -->
   </div>
@@ -20,16 +20,12 @@ export default {
 <script setup>
 import { reactive, ref } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-
 import Result from "../components/Roll/Result.vue";
 import SettingInfo from "../components/Roll/SettingInfo.vue";
 import Buttons from "../components/Roll/Buttons.vue";
-
 import shuffleArray from "../mixins/shuffleArray.js";
 
 const store = useStore();
-const router = useRouter();
 
 let
   notFirstRun = ref(false),
@@ -49,13 +45,8 @@ setting = store.getters.getSetting;
 console.log("获取设置", setting);
 
 let songList = store.getters.getOriginalSongList;
-if (!songList.data) {
-  console.log("没载入到歌单，回去载入");
-  router.push({ name: "Loading" });
-} else {
-  originalSongList = songList;
-  console.log("原始歌单", originalSongList);
-}
+originalSongList = songList;
+console.log("原始歌单", originalSongList);
 
 function roll() {
   console.log("Roll!");
