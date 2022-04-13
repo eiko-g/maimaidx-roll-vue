@@ -5,7 +5,7 @@
     <Buttons @rollClicked="roll" :rollDisabled="rollDisabled" />
 
     <div class="footer">
-      <p>ver 0.44-20220408.01</p>
+      <p>ver 0.45-20220414.01</p>
     </div>
     <!-- .footer -->
   </div>
@@ -84,6 +84,7 @@ function roll() {
     }
   }
 }
+
 .footer {
   color: #666;
   font-size: 12px;

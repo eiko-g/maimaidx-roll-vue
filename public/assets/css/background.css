@@ -1,0 +1,113 @@
+/**
+ * 整个背景
+ */
+.background {
+  z-index: 1;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  top: 0;
+}
+
+.cats .milk,
+.cats .shama {
+  background-repeat: no-repeat;
+  position: fixed;
+  background-size: 100%;
+}
+@media only screen and (max-width: 600px) {
+  .cats .milk,
+  .cats .shama {
+    display: none;
+  }
+}
+
+.cats .milk {
+  width: 283px;
+  height: 597px;
+  top: 100px;
+  left: 30px;
+  background-image: url("../img/background/milk_universe.png");
+}
+
+.cats .shama {
+  width: 374px;
+  height: 596px;
+  top: 100px;
+  right: 10px;
+  background-image: url("../img/background/shama_universe.png");
+  /*
+  @include max-screen(1200px) {
+    width: 187px;
+    height: 298px;
+  }
+  */
+}
+@media only screen and (max-width: 1200px) {
+  .cats .milk {
+    width: 141.5px;
+    height: 298.5px;
+  }
+  .cats .shama {
+    width: 187px;
+    height: 298px;
+  }
+}
+
+.corner .left-top,
+.corner .bottom-right {
+  background-repeat: no-repeat;
+  position: fixed;
+  background-size: 100%;
+}
+
+.corner .left-top {
+  left: 0;
+  top: 0;
+  width: 530px;
+  height: 530px;
+  background-image: url("../img/background/corner_left.png");
+}
+
+.corner .bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 560px;
+  height: 580px;
+  background-image: url("../img/background/corner_right.png");
+}
+@media only screen and (max-width: 600px) {
+  .corner .left-top {
+    width: 265px;
+    height: 265px;
+  }
+  .corner .bottom-right {
+    width: 280px;
+    height: 290px;
+  }
+}
+
+/**
+ * 底栏 Footer
+ */
+.main-footer {
+  position: relative;
+  z-index: 100;
+  margin-top: 100px;
+  padding: 50px 50px 200px;
+  background: #fff;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 20px 0 rgba(28, 111, 176, 0.8);
+  background-image: url("../img/background/footer_bg.png");
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+}
+.main-footer-inner {
+  color: #333;
+  font-size: 14px;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}

@@ -2,24 +2,8 @@
   <div class="main-body">
     <router-view />
   </div>
-  <div class="main-footer">
-    <div class="main-footer-inner">
-      <p>本网站非 &copy;SEGA 或 华立科技 官方制作，仅为爱好者作品</p>
-      <p>
-        项目地址：
-        <a
-          href="https://github.com/eiko-g/maimaidx-roll-vue"
-          target="_blank"
-          rel="noopener noreferrer"
-        >GayHub</a>
-      </p>
-    </div>
-  </div>
-  <BackgroundVue></BackgroundVue>
 </template>
-<script setup>
-import BackgroundVue from "./components/Background.vue"
-</script>
+
 <style lang="scss">
 :root {
   --color-B: #ccffcc;
@@ -34,20 +18,24 @@ import BackgroundVue from "./components/Background.vue"
   --color-M-dark: #9f51dc;
   --color-R-dark: #c346e7;
 }
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 body {
   background: #57c0ff;
   margin: 0;
   padding: 0;
 }
+
 a {
   color: #ff8db0;
   text-decoration: none;
 }
+
 .main-body {
   position: relative;
   z-index: 100;
@@ -61,23 +49,5 @@ a {
     0 0 20px 15px rgba(#1c6fb0, 0.8);
   border-radius: 10px;
   padding: 20px;
-}
-.main-footer {
-  position: relative;
-  z-index: 100;
-  margin-top: 100px;
-  padding: 50px 50px 200px;
-  background: #fff;
-  box-shadow: 0 0 0 10px rgba(#fff, 0.4), 0 0 20px 0 rgba(#1c6fb0, 0.8);
-  background-image: url("./assets/img/background/footer_bg.png");
-  background-repeat: repeat-x;
-  background-position: 0 100%;
-  &-inner {
-    color: #333;
-    font-size: 14px;
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-  }
 }
 </style>
