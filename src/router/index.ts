@@ -37,6 +37,11 @@ const router = createRouter({
           component: () => import("../views/Roll/RollSettingView.vue")
         }
       ]
+    },
+    {
+      path:'/:pathMatch(.*)*',
+      name:"notFound",
+      component:()=>import('../views/ErrorView.vue')
     }
   ],
 });

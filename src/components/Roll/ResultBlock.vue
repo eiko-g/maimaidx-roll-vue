@@ -2,7 +2,7 @@
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
     <div class="cover-area">
-      <img :src="coverSrc" alt="Cover" class="cover M" />
+      <img :src="coverSrc" alt="Cover" :class="['cover', props.currentRank]" />
       <div :class="['song-type', currentSong.类型]">
         <span class="text">{{ currentSong.类型 }}</span>
       </div>
