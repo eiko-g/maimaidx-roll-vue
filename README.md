@@ -1,32 +1,46 @@
-# 舞萌DX Roll 歌网页 Vue 版
+# 舞萌DX 抽歌网页
 
-嗨呀，虽然原生 JavaScript 跑起来很快写起来很爽，但是扩展性还是稍微弱了点，所以就换成了 Vue.js 来写啦。
+用 Vite 重新构建了捏，目前是 `pnpm + vite + vue3.x + pinia`，测试的时候速度嗖嗖的，爽。
+
+虽然编译速度好像区别不太大。
 
 [点击试用](https://roll.maimoe.in/maimaidx/)
 
----
-
-## 工作流程
-
-旧版是先筛符合抽歌要求的歌曲，再抽某首歌，如果有多个难度都符合要求再抽难度。但是觉得这样不太对，所以这次就改了个新流程：
-
-0. 给每首歌分配个 ID，因为我没拿到官方的 ID
-1. 筛一遍分类
-2. 筛一遍版本
-3. 遍历剩下的歌，看对应的难度的等级合不合要求
-4. 最后输出 `[{id: "歌曲 ID",rank:"对应难度",preview:{...预览信息}}]`
-
-总之这样应该比以前的方式公平点，毕竟 EmpError 这种也是在 14+ 占了两个位置的嘛。
-
 ## 歌曲封面
 
-因为封面太多了所以就没加进 Git 里，有需要的请去 `public/assets/img/cover.png` 里面看相关说明。
+因为封面太多了所以就没加进 Git 里，有需要的请去 `public/assets/img/cover.png/readme.md` 里面看相关说明。
 
-## How to 开发
+## 开发相关
 
-就是 Vue 那一套啦，什么 `npm run serve` 什么 `npm run build` 之类的。
+如果没有装 `pnpm` 的话就先 `npm install -g pnpm`，速度比用 `npm` 要快。
 
-默认路径是 `maimai.web/maimaidx`，需要放其他地方的请自己改改 `vue.config.js` 里面的设置。
+推荐开发工具：[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) （记得禁用 Vetur）+ [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin)，装完之后要开 [Takeover mode](https://staging-cn.vuejs.org/guide/typescript/overview.html#takeover-mode)。
+
+默认路径为 `maimai.web/maimaidx`，如果需要部署在其他目录的请去 `vite.config.ts` 修改或注释。
+
+安装：
+
+```sh
+pnpm install
+```
+
+开发：
+
+```sh
+pnpm dev
+```
+
+构建：
+
+```sh
+pnpm build
+```
+
+语法检查：
+
+```sh
+pnpm lint
+```
 
 ## 后续计划
 
@@ -37,11 +51,12 @@
 
 ## 资料来源
 
-- [maimai fc2 wiki](https://maimai.wiki.fc2.com/)
+- [maimai fc2 wiki](https://maimai.wiki.fc2.com/) （已挂）
 - [maimaiDX Offcial](https://maimai.sega.jp/song/)
 - [官方数据.json（日版）](https://maimai.sega.jp/data/maimai_songs.json)
 - [maimai Fandom 中文维基](https://maimai.fandom.com/zh/wiki/Maimai%E4%B8%AD%E6%96%87_%E7%BB%B4%E5%9F%BA)
+- [maimai Gamerch wiki（日文）](https://maimai.gamerch.com/)
 
 ## LICENSE
 
-WTFPL
+代码部分为 WTFPL，其他图片素材什么的为原作者所有

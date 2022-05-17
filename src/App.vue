@@ -1,8 +1,12 @@
 <template>
   <div class="main-body">
-    <router-view />
+    <RouterView />
   </div>
 </template>
+
+<script setup lang="ts">
+import { RouterView } from "vue-router";
+</script>
 
 <style lang="scss">
 :root {
@@ -17,6 +21,9 @@
   --color-E-dark: #ff818d;
   --color-M-dark: #9f51dc;
   --color-R-dark: #c346e7;
+
+  --color-border: #2b2ea3;
+  --color-bg: #319df8;
 }
 
 *,
