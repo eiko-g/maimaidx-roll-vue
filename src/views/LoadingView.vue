@@ -39,7 +39,7 @@ onMounted(async () => {
     push("准备完成，正在跳转~");
     setTimeout(() => {
       router.push({ name: "roll" });
-    }, 500);
+    }, 800);
   } else {
     push("载入 JSON 炸了，HTTP-Error: " + response.status, "error");
     console.log("Response: ", response);

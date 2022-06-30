@@ -33,6 +33,7 @@ import { RouterView } from "vue-router";
 }
 
 body {
+  font-family: sans-serif;
   background: #57c0ff;
   margin: 0;
   padding: 0;

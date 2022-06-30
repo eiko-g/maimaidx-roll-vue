@@ -27,15 +27,17 @@ const store = useSettingsStore();
 const songlistStore = useSonglistStore();
 
 function backToRoll() {
-  console.log("Back to Roll from Setting");
+  console.log('点击了保存设置');
+  
   store.isFirstRun = false;
 
-  // 嗨呀我吐了，不知道为啥只能 any
+  // !!AnyScript
   let tempSonglist: any = songFilter(songlistStore.originSonglist, store);
 
   if (tempSonglist.length > 0) {
     songlistStore.rollSonglist = tempSonglist;
     console.log("生成的歌单：", songlistStore.rollSonglist);
+    console.log("从设置界面回到 Roll 歌界面");
     router.push({ name: "roll" });
   } else {
     console.warn("歌单没筛出来东西");
