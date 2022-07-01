@@ -74,8 +74,10 @@ export default function songFilter(
   console.log("是否高低一致：", 高低一致);
 
   // 如果是单一难度的话
-  if (高低一致 === true || setting.lvMultiple === false) {
-    let 抽歌等级: number | string = setting.lvMin;
+  if (高低一致 === true || setting.lvMultiple !== true) {
+    console.log("现在抽的是单难度");
+
+    let 抽歌等级: string = setting.lvMin.toString();
     if (setting.lvMinPlus === true) {
       抽歌等级 = 抽歌等级 + "+";
     }
@@ -106,6 +108,8 @@ export default function songFilter(
       }
     });
   } else if (setting.lvMultiple === true && 高低一致 === false) {
+    console.log("现在抽的是范围难度");
+
     // 如果是 范围难度 且 不是同样的设置
     if (setting.lvMin === setting.lvMax) {
       console.log("等级的数字部分相同");
