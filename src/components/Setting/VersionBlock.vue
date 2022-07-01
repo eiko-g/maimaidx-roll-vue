@@ -177,6 +177,17 @@
         />
         <div class="inner">DX2021</div>
       </label>
+
+      <label for="version-DX2022" class="version-label DX2022">
+        <input
+          type="checkbox"
+          name="版本"
+          id="version-DX2022"
+          value="DX2022"
+          class="version"
+        />
+        <div class="inner">DX2022</div>
+      </label>
     </div>
   </div>
 </template>
