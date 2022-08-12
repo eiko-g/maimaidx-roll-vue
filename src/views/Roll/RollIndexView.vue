@@ -1,13 +1,10 @@
 <template>
-  <ResultBlock
-    :currentSong="songlistStore.currentSong"
-    :currentRank="songlistStore.currentRank"
-  ></ResultBlock>
+  <ResultBlock :currentSong="songlistStore.currentSong" :currentRank="songlistStore.currentRank"></ResultBlock>
   <SettingInfoBlock :setting="settingStore"></SettingInfoBlock>
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.5.2-20220701.04</p>
+    <p>ver 0.5.3-20220813.01</p>
   </div>
 </template>
 

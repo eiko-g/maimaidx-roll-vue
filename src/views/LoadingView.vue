@@ -19,7 +19,7 @@ let go = ref(false);
 
 onMounted(async () => {
   push("开始载入了捏");
-  let response = await fetch("./data/maimaidxCN.json?ver=20220701.01"),
+  let response = await fetch("./data/maimaidxCN.json?ver=20220813.01"),
     json: IJson;
   if (response.ok) {
     push("歌单加载成功，正在处理");

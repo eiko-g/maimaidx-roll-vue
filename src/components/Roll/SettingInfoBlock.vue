@@ -5,24 +5,12 @@
       [
       <span class="rank">
         <span v-if="!setting.rank">难度</span>
-        <span v-if="setting.rank && setting.rank.includes('all')" class="all"
-          >全难度</span
-        >
-        <span v-if="setting.rank && setting.rank.includes('B')" class="B"
-          >B</span
-        >
-        <span v-if="setting.rank && setting.rank.includes('A')" class="A"
-          >A</span
-        >
-        <span v-if="setting.rank && setting.rank.includes('E')" class="E"
-          >E</span
-        >
-        <span v-if="setting.rank && setting.rank.includes('M')" class="M"
-          >M</span
-        >
-        <span v-if="setting.rank && setting.rank.includes('R')" class="R"
-          >R</span
-        >
+        <span v-if="setting.rank && setting.rank.includes('all')" class="all">全难度</span>
+        <span v-if="setting.rank && setting.rank.includes('B')" class="B">B</span>
+        <span v-if="setting.rank && setting.rank.includes('A')" class="A">A</span>
+        <span v-if="setting.rank && setting.rank.includes('E')" class="E">E</span>
+        <span v-if="setting.rank && setting.rank.includes('M')" class="M">M</span>
+        <span v-if="setting.rank && setting.rank.includes('R')" class="R">R</span>
       </span>
       ]
       <span class="lv">{{ lvText }}</span>
@@ -37,7 +25,7 @@
     </p>
     <p>
       <b>抽选歌单：</b>
-      <span class="songlist">ver.CH1.20-A</span>
+      <span class="songlist">ver.CH1.20-B</span>
     </p>
   </div>
 </template>
@@ -111,22 +99,28 @@ let verText = computed(() => {
   color: #333;
   font-size: 12px;
   text-align: center;
+
   .rank {
-    > span:not(:last-child)::after {
+    >span:not(:last-child)::after {
       content: ".";
     }
+
     .B {
       color: var(--color-B-dark);
     }
+
     .A {
       color: var(--color-A-dark);
     }
+
     .E {
       color: var(--color-E-dark);
     }
+
     .M {
       color: var(--color-M-dark);
     }
+
     .R {
       color: var(--color-R-dark);
     }
