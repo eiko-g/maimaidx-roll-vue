@@ -16,7 +16,7 @@
 
 推荐开发工具：[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=vue.volar) （记得禁用 Vetur）+ [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=vue.vscode-typescript-vue-plugin)，装完之后要开 [Takeover mode](https://cn.vuejs.org/guide/typescript/overview.html#volar-takeover-mode)。
 
-默认路径为 `maimai.web/maimaidx`，如果需要部署在其他目录的请去 `vite.config.ts` 修改或注释。
+默认路径为 `roll.web/maimaidx`，如果需要部署在其他目录的请去 `vite.config.ts` 修改或注释。
 
 安装：
 
