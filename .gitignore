@@ -33,5 +33,8 @@ public/assets/img/cover/*.jpg
 public/assets/img/cover.new
 public/assets/img/cover.old
 
+# npm 的一点配置
+.npmrc
+
 # 处理歌单的东西
 aaa
