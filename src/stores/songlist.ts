@@ -1,41 +1,27 @@
 import { defineStore } from "pinia";
 import type ISong from "@/interface/ISong";
-import { toRaw } from "vue";
+import { reactive, ref, toRaw } from "vue";
 
-export const useSonglistStore = defineStore({
-  id: "songlist",
-  state: (): IState => ({
-    originSonglist: [],
-    currentSong: {
-      id: -1,
-      分类: "某个分类",
-      曲名: "油婶么呢？",
-      等级: {
-        B: "m",
-        A: "a",
-        E: "i",
-        M: "D",
-        R: "X",
-      },
-      类型: "谱面类型",
-      版本: "版本",
-      封面: undefined,
+export const useSonglistStore = defineStore('songlist', () => {
+  let originSonglist: Array<ISong> = [];
+  let currentSong: ISong = reactive({
+    id: -1,
+    分类: "某个分类",
+    曲名: "油婶么呢？",
+    等级: {
+      B: "m",
+      A: "a",
+      E: "i",
+      M: "D",
+      R: "X",
     },
-    currentRank: "",
-    rollSonglist: [],
-  }),
-  getters: {
-    // !!AnyScript
-    getRawRollsonglist(state): any {
-      return toRaw(state.rollSonglist);
-    },
-  },
-  actions: {},
-});
+    类型: "谱面类型",
+    版本: "版本",
+    封面: undefined,
+  });
 
-interface IState {
-  originSonglist: Array<ISong>;
-  currentSong: ISong;
-  currentRank: string;
-  rollSonglist: Array<any>;
-}
+  let currentRank = ref('');
+  let rollSonglist = ref([]);
+
+  return { originSonglist, currentSong, currentRank, rollSonglist };
+})

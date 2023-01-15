@@ -1,28 +1,25 @@
-import type ISetting from "@/interface/ISetting";
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useSettingsStore = defineStore({
-  id: 'settings',
-  state: (): ISetting => ({
-    // 首次运行
-    isFirstRun: true,
-    // 难度
-    rank: ['all'],
-    // 分类
-    category: ['all'],
-    // 难度多选
-    lvMultiple: false,
-    // 最低等级
-    lvMin: 0,
-    // 最低等级带加号
-    lvMinPlus: false,
-    // 最高等级
-    lvMax: 0,
-    // 最高等级带加号
-    lvMaxPlus: false,
-    // 版本
-    version: ['all'],
-  }),
-  getters: {},
-  actions: {}
+export const useSettingsStore = defineStore("settings", () => {
+  // 首次运行
+  let isFirstRun = ref(true);
+  // 难度
+  let rank = ref(["all"]);
+  // 分类
+  let category = ref(["all"]);
+  // 难度多选
+  let lvMultiple = ref(false);
+  // 最低等级
+  let lvMin = ref(0);
+  // 最低等级带加号
+  let lvMinPlus = ref(false);
+  // 最高等级
+  let lvMax = ref(0);
+  // 最高等级带加号
+  let lvMaxPlus = ref(false);
+  // 版本
+  let version = ref(["all"]);
+
+  return {isFirstRun,rank,category,lvMultiple,lvMin,lvMinPlus,lvMax,lvMaxPlus,version}
 });
