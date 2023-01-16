@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type ISong from "@/interface/ISong";
-import { reactive, ref, toRaw } from "vue";
+import { reactive, ref } from "vue";
 
 export const useSonglistStore = defineStore('songlist', () => {
   let originSonglist: Array<ISong> = [];

@@ -9,6 +9,10 @@
   overflow: hidden;
   pointer-events: none;
   top: 0;
+
+  /*
+  background: linear-gradient(#d5aeff 26.3%,#fff 36.3% 63.7%,#fdfa78 73.7% 100%)
+  */
 }
 
 .cats .milk,
@@ -61,7 +65,6 @@
   height: 100%;
   background-image: url("../img/background/bubble_center.png");
   background-repeat: repeat;
-  background-size: 100% auto;
   position: fixed;
 }
 

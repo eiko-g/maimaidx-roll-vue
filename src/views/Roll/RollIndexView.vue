@@ -4,7 +4,7 @@
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.5.6-20230107.02</p>
+    <p>ver 0.6.0dev-20230116.01</p>
   </div>
 </template>
 
@@ -26,7 +26,8 @@ function roll() {
   console.log("Roll!", new Date());
   buttonDisable.value = true;
 
-  let rollSonglist = songlistStore.getRawRollsonglist;
+  // !!AnyScript
+  let rollSonglist: any = songlistStore.rollSonglist;
 
   shuffleArray(rollSonglist);
 
