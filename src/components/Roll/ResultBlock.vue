@@ -27,34 +27,19 @@
       </thead>
       <tbody>
         <tr>
-          <td
-            id="table-lv-num-B"
-            :class="['table-lv-num', { current: currentRank('B') }]"
-          >
+          <td id="table-lv-num-B" :class="['table-lv-num', { current: currentRank('B') }]">
             {{ currentSong.等级.B }}
           </td>
-          <td
-            id="table-lv-num-A"
-            :class="['table-lv-num', { current: currentRank('A') }]"
-          >
+          <td id="table-lv-num-A" :class="['table-lv-num', { current: currentRank('A') }]">
             {{ currentSong.等级.A }}
           </td>
-          <td
-            id="table-lv-num-E"
-            :class="['table-lv-num', { current: currentRank('E') }]"
-          >
+          <td id="table-lv-num-E" :class="['table-lv-num', { current: currentRank('E') }]">
             {{ currentSong.等级.E }}
           </td>
-          <td
-            id="table-lv-num-M"
-            :class="['table-lv-num', { current: currentRank('M') }]"
-          >
+          <td id="table-lv-num-M" :class="['table-lv-num', { current: currentRank('M') }]">
             {{ currentSong.等级.M }}
           </td>
-          <td
-            id="table-lv-num-R"
-            :class="['table-lv-num', { current: currentRank('R') }]"
-          >
+          <td id="table-lv-num-R" :class="['table-lv-num', { current: currentRank('R') }]">
             {{ currentSong.等级.R }}
           </td>
         </tr>
@@ -71,7 +56,7 @@ const props = defineProps<{ currentSong: ISong; currentRank: string }>();
 
 let coverSrc = computed(() => {
   let coverStr: string;
-  if (props.currentSong.封面 != undefined) {
+  if (props.currentSong.封面 != undefined || props.currentSong.封面 != null) {
     coverStr = `./assets/img/cover.png/${props.currentSong.封面}`;
   } else {
     coverStr = "./assets/img/nocover.png";
@@ -119,23 +104,29 @@ let catText = computed(() => {
 .cover-area {
   position: relative;
 }
+
 .cover {
   display: block;
   width: 200px;
   height: 200px;
   margin: 10px auto 20px;
+
   &.B {
     box-shadow: 0 0 0 5px var(--color-B-dark);
   }
+
   &.A {
     box-shadow: 0 0 0 5px var(--color-A-dark);
   }
+
   &.E {
     box-shadow: 0 0 0 5px var(--color-E-dark);
   }
+
   &.M {
     box-shadow: 0 0 0 5px var(--color-M-dark);
   }
+
   &.R {
     box-shadow: 0 0 0 5px var(--color-R);
   }
@@ -151,6 +142,7 @@ let catText = computed(() => {
   background-color: #45aeff;
   border-radius: 999em;
   box-shadow: 0 0 3px 1px #ccc;
+
   .text {
     display: inline-block;
     padding: 5px 8px;
@@ -162,6 +154,7 @@ let catText = computed(() => {
   &.DX {
     background-color: #fff;
     box-shadow: 0 0 3px 1px #ccc;
+
     .text {
       color: #ff4628;
       background: linear-gradient(150deg, #ff4628 50%, #faad07 100%);
@@ -179,6 +172,7 @@ let catText = computed(() => {
   line-height: 1.5;
   margin: 0;
 }
+
 .info {
   font-size: 14px;
   color: #333;
@@ -191,6 +185,7 @@ let catText = computed(() => {
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 15px 0;
+
   th,
   td {
     font-size: 16px;
@@ -199,36 +194,46 @@ let catText = computed(() => {
     border: 1px solid #ccc;
     padding: 5px;
   }
+
   .table-lv-name {
     &.B {
       background-color: var(--color-B);
     }
+
     &.A {
       background-color: var(--color-A);
     }
+
     &.E {
       background-color: var(--color-E);
     }
+
     &.M {
       background-color: var(--color-M);
     }
+
     &.R {
       background-color: var(--color-R);
     }
   }
+
   #table-lv-num {
     &-B.current {
       background-color: var(--color-B);
     }
+
     &-A.current {
       background-color: var(--color-A);
     }
+
     &-E.current {
       background-color: var(--color-E);
     }
+
     &-M.current {
       background-color: var(--color-M);
     }
+
     &-R.current {
       background-color: var(--color-R);
     }
