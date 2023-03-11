@@ -22,7 +22,7 @@ onMounted(async () => {
   let response = await fetch("./data/maimaidxCN.json?ver=20230202.01"),
     json: IJson;
   if (response.ok) {
-    push("歌单加载成功，正在处理");
+    push("歌单加载中，正在处理");
     json = await response.json();
     //#region 给每首歌加个 id
     // 在这里做是因为我没拿到那些 bot 都有的 ID，所以就自己加个
