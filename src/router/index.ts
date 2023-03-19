@@ -39,6 +39,16 @@ const router = createRouter({
       ]
     },
     {
+      path: "/detail/",
+      name: "detail",
+      component: () => import('../views/Detail/DetailIndexView.vue')
+    },
+    {
+      path: "/detail/:id",
+      name: "songDetail",
+      component: () => import('../views/Detail/DetailSongView.vue')
+    },
+    {
       path: "/custom",
       component: () => import('../views/CustomView.vue'),
       redirect: { name: "custom" },

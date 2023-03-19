@@ -1,50 +1,38 @@
 <template>
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
-    <div class="cover-area">
-      <img :src="coverSrc" alt="Cover" :class="['cover', props.currentRank]" />
-      <div :class="['song-type', currentSong.类型]">
-        <span class="text">{{ currentSong.类型 }}</span>
+
+    <div :class="['result-display', props.currentRank]">
+      <div :class="['type', currentSong.类型]">
+        <div class="dx">
+          <span class="text">
+            <span>で</span>
+            <span>ら</span>
+            <span>っ</span>
+            <span>く</span>
+            <span>す</span>
+          </span>
+        </div>
+        <div class="standard"><span class="text">スタンダード</span></div>
       </div>
+      <div class="result-cover">
+        <img :src="coverSrc" class="cover" alt="歌曲封面" />
+      </div>
+      <div class="result-meta">
+        <div class="song-rank">{{ rankText }}</div>
+        <div class="song-lv">Lv <span class="song-lv-num">{{ lvText }}</span></div>
+      </div>
+      <div class="song-info">
+        <h3 class="song-title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
+        <p class="song-author" lang="ja-jp">{{ currentSong.作者 }}</p>
+      </div>
+
+      <p class="other-info">
+        <span class="cat">{{ catText }}</span>
+        /
+        <span class="version">{{ currentSong.版本 }}</span>
+      </p>
     </div>
-
-    <h3 class="title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
-    <p class="info">
-      <span class="cat">{{ catText }}</span>
-      /
-      <span class="version">{{ currentSong.版本 }}</span>
-    </p>
-
-    <table class="table-lv">
-      <thead>
-        <tr>
-          <th class="table-lv-name B">B</th>
-          <th class="table-lv-name A">A</th>
-          <th class="table-lv-name E">E</th>
-          <th class="table-lv-name M">M</th>
-          <th class="table-lv-name R">R</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="table-lv-num-B" :class="['table-lv-num', { current: currentRank('B') }]">
-            {{ currentSong.等级.B }}
-          </td>
-          <td id="table-lv-num-A" :class="['table-lv-num', { current: currentRank('A') }]">
-            {{ currentSong.等级.A }}
-          </td>
-          <td id="table-lv-num-E" :class="['table-lv-num', { current: currentRank('E') }]">
-            {{ currentSong.等级.E }}
-          </td>
-          <td id="table-lv-num-M" :class="['table-lv-num', { current: currentRank('M') }]">
-            {{ currentSong.等级.M }}
-          </td>
-          <td id="table-lv-num-R" :class="['table-lv-num', { current: currentRank('R') }]">
-            {{ currentSong.等级.R }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
@@ -70,20 +58,73 @@ function currentRank(input: string) {
 
 let catText = computed(() => {
   switch (props.currentSong.分类) {
-    case "pops_anime":
+    case "pops_anime": {
       return "动画 & 流行";
-    case "niconico":
+    }
+    case "niconico": {
       return "nico & V家";
-    case "toho":
+    }
+    case "toho": {
       return "东方 Project";
-    case "variety":
+    }
+    case "variety": {
       return "其他游戏";
-    case "maimai":
+    }
+    case "maimai": {
       return "maimai";
-    case "gekichu":
+    }
+    case "gekichu": {
       return "音击 & 中二";
-    default:
+    }
+    default: {
       return "分类";
+    }
+  }
+});
+
+let rankText = computed(() => {
+  switch (props.currentRank) {
+    case "B": {
+      return "Basic";
+    }
+    case "A": {
+      return "Advanced";
+    }
+    case "E": {
+      return "Expert";
+    }
+    case "M": {
+      return "Master";
+    }
+    case "R": {
+      return "Re:Master";
+    }
+    default: {
+      return "难度";
+    }
+  }
+});
+// 万事 Swtich
+let lvText = computed(() => {
+  switch (props.currentRank) {
+    case "B": {
+      return props.currentSong.等级.B;
+    }
+    case "A": {
+      return props.currentSong.等级.A;
+    }
+    case "E": {
+      return props.currentSong.等级.E;
+    }
+    case "M": {
+      return props.currentSong.等级.M;
+    }
+    case "R": {
+      return props.currentSong.等级.R;
+    }
+    default: {
+      return "??";
+    }
   }
 });
 </script>
@@ -101,142 +142,131 @@ let catText = computed(() => {
   line-height: 1.5;
 }
 
-.cover-area {
-  position: relative;
-}
+.result-display {
+  margin: 50px auto;
+  max-width: 300px;
+  background-color: #eee;
 
-.cover {
-  display: block;
-  width: 200px;
-  height: 200px;
-  margin: 10px auto 20px;
-
-  &.B {
-    box-shadow: 0 0 0 5px var(--color-B-dark);
-  }
-
-  &.A {
-    box-shadow: 0 0 0 5px var(--color-A-dark);
-  }
-
-  &.E {
-    box-shadow: 0 0 0 5px var(--color-E-dark);
-  }
-
-  &.M {
-    box-shadow: 0 0 0 5px var(--color-M-dark);
-  }
-
-  &.R {
-    box-shadow: 0 0 0 5px var(--color-R);
-  }
-}
-
-.song-type {
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-left: 50%;
-  transform: translateX(-50%) translateY(50%);
-  background-color: #45aeff;
-  border-radius: 999em;
-  box-shadow: 0 0 3px 1px #ccc;
-
-  .text {
-    display: inline-block;
-    padding: 5px 8px;
-    font-size: 16px;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  &.DX {
-    background-color: #fff;
-    box-shadow: 0 0 3px 1px #ccc;
-
-    .text {
-      color: #ff4628;
-      background: linear-gradient(150deg, #ff4628 50%, #faad07 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      // text-fill-color: transparent;
-    }
-  }
-}
-
-.title {
-  color: #2e94f4;
-  font-size: 20px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.info {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.table-lv {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 15px 0;
-
-  th,
-  td {
-    font-size: 16px;
+  .type {
+    font-size: 14px;
     text-align: center;
-    width: 20%;
-    border: 1px solid #ccc;
-    padding: 5px;
+    font-weight: bold;
+    font-weight: 900;
+
+    &.DX {
+      &>.dx {
+        opacity: 1;
+      }
+
+      &>.standard {
+        opacity: 0;
+      }
+    }
+
+    &>div {
+      display: inline-block;
+      width: 50%;
+      margin: 15px auto;
+      transition: opacity .2s;
+
+      &>.text {
+        width: 100%;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 15px;
+      }
+    }
+
+    &>.dx {
+      opacity: 0;
+
+      .text {
+        background-color: #fff;
+
+        &>span:nth-child(1) {
+          color: #ff4646
+        }
+
+        &>span:nth-child(2) {
+          color: #ffa02d;
+        }
+
+        &>span:nth-child(3) {
+          color: #ffdc00;
+        }
+
+        &>span:nth-child(4) {
+          color: #9ac948;
+        }
+
+        &>span:nth-child(5) {
+          color: #00aae6;
+        }
+      }
+    }
+
+    &>.standard {
+      .text {
+        background-color: #45aeff;
+        color: #fff;
+      }
+    }
   }
 
-  .table-lv-name {
-    &.B {
-      background-color: var(--color-B);
-    }
+  .result-cover {
+    .cover {
+      display: block;
+      width: 100%;
+      height: auto;
 
-    &.A {
-      background-color: var(--color-A);
-    }
-
-    &.E {
-      background-color: var(--color-E);
-    }
-
-    &.M {
-      background-color: var(--color-M);
-    }
-
-    &.R {
-      background-color: var(--color-R);
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
-  #table-lv-num {
-    &-B.current {
-      background-color: var(--color-B);
+  .result-meta {
+    display: flex;
+
+    .song-rank {
+      font-size: 18px;
+      width: 60%;
+      padding: 10px 15px;
+      background-color: #ddd;
+      text-transform: uppercase;
     }
 
-    &-A.current {
-      background-color: var(--color-A);
+    .song-lv {
+      width: 40%;
+      padding: 10px 15px;
+      font-size: 12px;
+
+      .song-lv-num {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .song-info {
+    .song-title {
+      font-size: 20px;
+      line-height: 1.5;
+      margin: 10px 0;
+      padding: 0;
     }
 
-    &-E.current {
-      background-color: var(--color-E);
+    .song-author {
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
     }
+  }
 
-    &-M.current {
-      background-color: var(--color-M);
-    }
-
-    &-R.current {
-      background-color: var(--color-R);
-    }
+  .other-info {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 10px 0;
   }
 }
 </style>

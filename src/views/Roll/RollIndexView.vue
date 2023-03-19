@@ -4,7 +4,7 @@
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.6.0dev-20230307.01</p>
+    <p>ver 0.6.0dev-20230319.01</p>
   </div>
 </template>
 

@@ -10,9 +10,7 @@
   pointer-events: none;
   top: 0;
 
-  /*
   background: linear-gradient(#d5aeff 26.3%,#fff 36.3% 63.7%,#fdfa78 73.7% 100%)
-  */
 }
 
 .cats .milk,
@@ -111,8 +109,8 @@
   padding: 50px 50px 200px;
   background: #fff;
   box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4),
-    0 0 20px 0 rgba(28, 111, 176, 0.8);
-  background-image: url("../img/universe/footer_bg.png");
+    0 0 20px 0 rgba(111,52,176,.7);
+  background-image: url("../img/festival/footer_bg.png");
   background-repeat: repeat-x;
   background-position: 0 100%;
 }
