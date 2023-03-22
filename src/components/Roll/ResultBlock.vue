@@ -15,32 +15,36 @@
         </div>
         <div class="standard"><span class="text">スタンダード</span></div>
       </div>
-      <div class="result-cover">
+      <div class="result-cover" @click="viewDetail(currentSong.id)">
         <img :src="coverSrc" class="cover" alt="歌曲封面" />
       </div>
+
       <div class="result-meta">
         <div class="song-rank">{{ rankText }}</div>
         <div class="song-lv">Lv <span class="song-lv-num">{{ lvText }}</span></div>
       </div>
-      <div class="song-info">
-        <h3 class="song-title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
-        <p class="song-author" lang="ja-jp">{{ currentSong.作者 }}</p>
-      </div>
-
-      <p class="other-info">
-        <span class="cat">{{ catText }}</span>
-        /
-        <span class="version">{{ currentSong.版本 }}</span>
-      </p>
     </div>
+    <div class="song-info">
+      <h3 class="song-title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
+      <p class="song-author" lang="ja-jp">{{ currentSong.作者 }}</p>
+    </div>
+
+    <p class="other-info">
+      <span class="cat">{{ catText }}</span>
+      /
+      <span class="version">{{ currentSong.版本 }}</span>
+    </p>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import type ISong from "@/interface/ISong";
+import { useRouter } from "vue-router";
 
 const props = defineProps<{ currentSong: ISong; currentRank: string }>();
+const router = useRouter();
 
 let coverSrc = computed(() => {
   let coverStr: string;
@@ -54,6 +58,13 @@ let coverSrc = computed(() => {
 
 function currentRank(input: string) {
   return input === props.currentRank;
+}
+
+function viewDetail(id: number) {
+  console.log(id);
+  if (id >= 1) {
+    router.push({ name: 'detail', params: { id: id } });
+  }
 }
 
 let catText = computed(() => {
@@ -143,8 +154,8 @@ let lvText = computed(() => {
 }
 
 .result-display {
-  margin: 50px auto;
-  max-width: 300px;
+  margin: 10px auto;
+  max-width: 250px;
   background-color: #eee;
 
   .type {
@@ -246,27 +257,30 @@ let lvText = computed(() => {
       }
     }
   }
+}
 
-  .song-info {
-    .song-title {
-      font-size: 20px;
-      line-height: 1.5;
-      margin: 10px 0;
-      padding: 0;
-    }
-
-    .song-author {
-      font-size: 12px;
-      line-height: 1.5;
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  .other-info {
-    font-size: 14px;
+.song-info {
+  .song-title {
+    color: #0b3871;
+    font-size: 20px;
     line-height: 1.5;
-    margin: 10px 0;
+    margin: 0;
+    padding: 0;
   }
+
+  .song-author {
+    color: #333;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.other-info {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 10px 0;
 }
 </style>

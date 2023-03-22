@@ -39,14 +39,14 @@ const router = createRouter({
       ]
     },
     {
-      path: "/detail/",
-      name: "detail",
-      component: () => import('../views/Detail/DetailIndexView.vue')
+      path: "/list/",
+      name: "list",
+      component: () => import('../views/List/ListView.vue')
     },
     {
       path: "/detail/:id",
-      name: "songDetail",
-      component: () => import('../views/Detail/DetailSongView.vue')
+      name: "detail",
+      component: () => import('../views/Detail/DetailView.vue')
     },
     {
       path: "/custom",
