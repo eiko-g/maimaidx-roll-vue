@@ -34,12 +34,15 @@ function roll() {
   let selectThis = rollSonglist[0];
   console.log("选到了这首歌：", selectThis);
 
-  // 这里用 find 效率肯定更高，但是可能会返回 undefined
-  // https://stackoverflow.com/questions/54738221/typescript-array-find-possibly-undefined
-  // 虽然有解决方法，但是看不懂 desu
-  songlistStore.currentSong = songlistStore.originSonglist.filter((song) => {
+  let selectedSong = songlistStore.originSonglist.find((song) => {
     return song.id === selectThis.id;
-  })[0];
+  });
+  if (selectedSong !== undefined) {
+    songlistStore.currentSong = selectedSong;
+  } else {
+    throw new Error('啥情况，怎么 roll 完了找不到歌？');
+  }
+
   console.log("歌曲详情：", songlistStore.currentSong);
   songlistStore.currentRank = selectThis.rank;
 

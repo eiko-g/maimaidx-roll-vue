@@ -6,14 +6,10 @@
       <div :class="['type', currentSong.类型]">
         <div class="dx">
           <span class="text">
-            <span>で</span>
-            <span>ら</span>
-            <span>っ</span>
-            <span>く</span>
-            <span>す</span>
+            <span class="inner">DX 谱面</span>
           </span>
         </div>
-        <div class="standard"><span class="text">スタンダード</span></div>
+        <div class="standard"><span class="text">标准谱面</span></div>
       </div>
       <div class="result-cover" @click="viewDetail(currentSong.id)">
         <img :src="coverSrc" class="cover" alt="歌曲封面" />
@@ -194,24 +190,13 @@ let lvText = computed(() => {
       .text {
         background-color: #fff;
 
-        &>span:nth-child(1) {
-          color: #ff4646
-        }
-
-        &>span:nth-child(2) {
-          color: #ffa02d;
-        }
-
-        &>span:nth-child(3) {
-          color: #ffdc00;
-        }
-
-        &>span:nth-child(4) {
-          color: #9ac948;
-        }
-
-        &>span:nth-child(5) {
-          color: #00aae6;
+        .inner {
+          color: #ff4628;
+          background: linear-gradient(150deg, #ff4628 0, #ff4628 50%, #faad07 50%, #faad07 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          // text-fill-color: transparent;
         }
       }
     }
