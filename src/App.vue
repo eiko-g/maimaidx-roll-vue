@@ -9,21 +9,23 @@ import { RouterView } from "vue-router";
 </script>
 
 <style lang="scss">
+@import '@/style/preset';
+
 :root {
-  --color-B: #ccffcc;
-  --color-A: #ffdd99;
-  --color-E: #ffccf7;
-  --color-M: #eeccff;
-  --color-R: #e9e6ff;
+  --color-B: #{$color-B};
+  --color-A: #{$color-A};
+  --color-E: #{$color-E};
+  --color-M: #{$color-M};
+  --color-R: #{$color-R};
 
-  --color-B-dark: #6fd43d;
-  --color-A-dark: #f8b709;
-  --color-E-dark: #ff818d;
-  --color-M-dark: #9f51dc;
-  --color-R-dark: #c346e7;
+  --color-B-dark: #{$color-B-dark};
+  --color-A-dark: #{$color-A-dark};
+  --color-E-dark: #{$color-E-dark};
+  --color-M-dark: #{$color-M-dark};
+  --color-R-dark: #{$color-R-dark};
 
-  --color-border: #2b2ea3;
-  --color-bg: #319df8;
+  --color-bg: #{$color-bg-uni};
+  --color-border: #{$color-border-uni};
 }
 
 *,

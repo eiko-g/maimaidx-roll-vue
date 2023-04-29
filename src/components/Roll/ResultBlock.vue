@@ -2,14 +2,14 @@
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
 
-    <div :class="['result-display', props.currentRank]">
+    <div :class="['result-display', props.currentRank, currentSong.类型]">
       <div :class="['type', currentSong.类型]">
         <div class="dx">
           <span class="text">
-            <span class="inner">DX 谱面</span>
+            <span class="inner">DX</span>
           </span>
         </div>
-        <div class="standard"><span class="text">标准谱面</span></div>
+        <div class="standard"><span class="text">标准</span></div>
       </div>
       <div class="result-cover" @click="viewDetail(currentSong.id)">
         <img :src="coverSrc" class="cover" alt="歌曲封面" />
@@ -51,10 +51,6 @@ let coverSrc = computed(() => {
   }
   return coverStr;
 });
-
-function currentRank(input: string) {
-  return input === props.currentRank;
-}
 
 function viewDetail(id: number) {
   console.log(id);
@@ -137,6 +133,8 @@ let lvText = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/mixin";
+
 .result {
   text-align: center;
 }
@@ -152,13 +150,20 @@ let lvText = computed(() => {
 .result-display {
   margin: 10px auto;
   max-width: 250px;
-  background-color: #eee;
+
 
   .type {
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     font-weight: bold;
     font-weight: 900;
+
+    .dx,
+    .standard {
+      background-color: rgba(var(--color-M-dark), .8);
+      border-radius: 10px 10px 0 0;
+      padding: 5px 5px 0;
+    }
 
     &.DX {
       &>.dx {
@@ -173,7 +178,7 @@ let lvText = computed(() => {
     &>div {
       display: inline-block;
       width: 50%;
-      margin: 15px auto;
+      margin: auto;
       transition: opacity .2s;
 
       &>.text {
@@ -209,7 +214,17 @@ let lvText = computed(() => {
     }
   }
 
+  &.DX {
+    .result-cover {
+      border-radius: 0 10px 0 0;
+    }
+  }
+
   .result-cover {
+    padding: 15px;
+    background-color: rgba(var(--color-M-dark), .8);
+    border-radius: 10px 0 0 0;
+
     .cover {
       display: block;
       width: 100%;
@@ -223,22 +238,31 @@ let lvText = computed(() => {
 
   .result-meta {
     display: flex;
+    color: #fff;
+    background-color: rgba(var(--color-M-dark), .8);
+    border-radius: 0 0 10px 10px;
 
     .song-rank {
       font-size: 18px;
       width: 60%;
       padding: 10px 15px;
-      background-color: #ddd;
       text-transform: uppercase;
+      font-weight: bold;
+      font-weight: 900;
+      @include txsh(var(--color-M-dark));
     }
 
     .song-lv {
       width: 40%;
       padding: 10px 15px;
       font-size: 12px;
+      background-color: rgba(#fff, .5);
+      @include txsh(var(--color-M-dark));
 
       .song-lv-num {
         font-size: 20px;
+        font-weight: bold;
+        font-weight: 900;
       }
     }
   }
