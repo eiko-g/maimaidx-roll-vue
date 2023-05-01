@@ -133,6 +133,7 @@ let lvText = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/preset";
 @import "@/style/mixin";
 
 .result {
@@ -150,7 +151,11 @@ let lvText = computed(() => {
 .result-display {
   margin: 10px auto;
   max-width: 250px;
+  filter: drop-shadow(0 0 3px #999);
 
+  & * {
+    transition: background-color .2s, border-radius .2s;
+  }
 
   .type {
     font-size: 16px;
@@ -160,7 +165,7 @@ let lvText = computed(() => {
 
     .dx,
     .standard {
-      background-color: rgba(var(--color-M-dark), .8);
+      // background-color: rgba($color-M-dark, .8);
       border-radius: 10px 10px 0 0;
       padding: 5px 5px 0;
     }
@@ -221,8 +226,8 @@ let lvText = computed(() => {
   }
 
   .result-cover {
-    padding: 15px;
-    background-color: rgba(var(--color-M-dark), .8);
+    padding: 15px 15px 0;
+    // background-color: rgba($color-M-dark, .8);
     border-radius: 10px 0 0 0;
 
     .cover {
@@ -239,7 +244,7 @@ let lvText = computed(() => {
   .result-meta {
     display: flex;
     color: #fff;
-    background-color: rgba(var(--color-M-dark), .8);
+    // background-color: rgba($color-M-dark, .8);
     border-radius: 0 0 10px 10px;
 
     .song-rank {
@@ -249,7 +254,7 @@ let lvText = computed(() => {
       text-transform: uppercase;
       font-weight: bold;
       font-weight: 900;
-      @include txsh(var(--color-M-dark));
+      // @include txsh(var(--color-M-dark));
     }
 
     .song-lv {
@@ -257,13 +262,70 @@ let lvText = computed(() => {
       padding: 10px 15px;
       font-size: 12px;
       background-color: rgba(#fff, .5);
-      @include txsh(var(--color-M-dark));
+      // @include txsh(var(--color-M-dark));
+      border-radius: 0 0 10px 0;
 
       .song-lv-num {
         font-size: 20px;
         font-weight: bold;
         font-weight: 900;
       }
+    }
+  }
+}
+
+$ranks: (
+  B:$color-B-dark,
+  A:$color-A-dark,
+  E:$color-E-dark,
+  M:$color-M-dark
+);
+
+@each $rank,
+$color in $ranks {
+  .result-display.#{$rank} {
+    .type {
+
+      .dx,
+      .standard {
+        background-color: rgba($color, .8);
+      }
+    }
+
+    .result-cover {
+      background-color: rgba($color, .8);
+    }
+
+    .result-meta {
+      background-color: rgba($color, .8);
+
+      .song-rank,
+      .song-lv {
+        @include txsh($color);
+      }
+    }
+  }
+}
+
+.result-display.R {
+  .type {
+
+    .dx,
+    .standard {
+      background-color: var(--color-R);
+    }
+  }
+
+  .result-cover {
+    background-color: var(--color-R);
+  }
+
+  .result-meta {
+    background-color: var(--color-R);
+
+    .song-rank,
+    .song-lv {
+      @include txsh($color-R-dark);
     }
   }
 }
