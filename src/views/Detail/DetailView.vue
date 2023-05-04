@@ -46,6 +46,7 @@
         </tbody>
       </table>
     </div>
+    <p class="tips">更多资料等以后再说</p>
     <button class="back-button" @click="router.back()">返回</button>
   </div>
   <div class="not-found" v-else>
@@ -114,6 +115,12 @@ let catText = computed(() => {
   font-size: 24px;
   line-height: 1.5;
   margin: 0;
+  text-align: center;
+}
+
+.tips {
+  color: #ccc;
+  font-size: 14px;
   text-align: center;
 }
 
