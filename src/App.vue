@@ -1,4 +1,5 @@
 <template>
+  <!-- <MainMenu></MainMenu> -->
   <div class="main-body">
     <RouterView />
   </div>
@@ -6,6 +7,7 @@
 
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import MainMenu from "./components/MainMenu.vue";
 </script>
 
 <style lang="scss">

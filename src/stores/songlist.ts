@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 import type ISong from "@/interface/ISong";
 import { reactive, ref } from "vue";
+import type ISongRollList from "@/interface/ISongRollList";
 
-export const useSonglistStore = defineStore('songlist', () => {
+export const useSonglistStore = defineStore("songlist", () => {
   let originSonglist: Array<ISong> = [];
   let currentSong: ISong = reactive({
     id: -1,
@@ -20,8 +21,13 @@ export const useSonglistStore = defineStore('songlist', () => {
     封面: undefined,
   });
 
-  let currentRank = ref('M');
-  let rollSonglist = ref([]);
+  let currentRank = ref("M");
+  let rollSonglist = reactive([
+    {
+      id: 0,
+      name: "完整歌单",
+    },
+  ]);
 
   return { originSonglist, currentSong, currentRank, rollSonglist };
-})
+});

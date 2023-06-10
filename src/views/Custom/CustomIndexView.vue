@@ -26,6 +26,12 @@
     border: 3px solid #ccc;
     padding: 10px;
 
+    p {
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
+    }
+
     &:hover {
       border-color: var(--color-border);
       cursor: pointer;
