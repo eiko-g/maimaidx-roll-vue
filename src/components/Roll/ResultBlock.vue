@@ -1,77 +1,50 @@
 <template>
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
-    <div class="cover-area">
-      <img :src="coverSrc" alt="Cover" :class="['cover', props.currentRank]" />
-      <div :class="['song-type', currentSong.类型]">
-        <span class="text">{{ currentSong.类型 }}</span>
+
+    <div :class="['result-display', props.currentRank, currentSong.类型]">
+      <div :class="['type', currentSong.类型]">
+        <div class="dx">
+          <span class="text">
+            <span class="inner">DX</span>
+          </span>
+        </div>
+        <div class="standard"><span class="text">标准</span></div>
+      </div>
+      <div class="result-cover" @click="viewDetail(currentSong.id)">
+        <img :src="coverSrc" class="cover" alt="歌曲封面" />
+      </div>
+
+      <div class="result-meta">
+        <div class="song-rank">{{ rankText }}</div>
+        <div class="song-lv">Lv <span class="song-lv-num">{{ lvText }}</span></div>
       </div>
     </div>
+    <div class="song-info">
+      <h3 class="song-title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
+      <p class="song-author" lang="ja-jp">{{ currentSong.作者 }}</p>
+    </div>
 
-    <h3 class="title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
-    <p class="info">
+    <p class="other-info">
       <span class="cat">{{ catText }}</span>
       /
       <span class="version">{{ currentSong.版本 }}</span>
     </p>
 
-    <table class="table-lv">
-      <thead>
-        <tr>
-          <th class="table-lv-name B">B</th>
-          <th class="table-lv-name A">A</th>
-          <th class="table-lv-name E">E</th>
-          <th class="table-lv-name M">M</th>
-          <th class="table-lv-name R">R</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td
-            id="table-lv-num-B"
-            :class="['table-lv-num', { current: currentRank('B') }]"
-          >
-            {{ currentSong.等级.B }}
-          </td>
-          <td
-            id="table-lv-num-A"
-            :class="['table-lv-num', { current: currentRank('A') }]"
-          >
-            {{ currentSong.等级.A }}
-          </td>
-          <td
-            id="table-lv-num-E"
-            :class="['table-lv-num', { current: currentRank('E') }]"
-          >
-            {{ currentSong.等级.E }}
-          </td>
-          <td
-            id="table-lv-num-M"
-            :class="['table-lv-num', { current: currentRank('M') }]"
-          >
-            {{ currentSong.等级.M }}
-          </td>
-          <td
-            id="table-lv-num-R"
-            :class="['table-lv-num', { current: currentRank('R') }]"
-          >
-            {{ currentSong.等级.R }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import type ISong from "@/interface/ISong";
+import { useRouter } from "vue-router";
 
 const props = defineProps<{ currentSong: ISong; currentRank: string }>();
+const router = useRouter();
 
 let coverSrc = computed(() => {
   let coverStr: string;
-  if (props.currentSong.封面 != undefined) {
+  if (props.currentSong.封面 != undefined || props.currentSong.封面 != null) {
     coverStr = `./assets/img/cover.png/${props.currentSong.封面}`;
   } else {
     coverStr = "./assets/img/nocover.png";
@@ -79,31 +52,90 @@ let coverSrc = computed(() => {
   return coverStr;
 });
 
-function currentRank(input: string) {
-  return input === props.currentRank;
+function viewDetail(id: number) {
+  console.log(id);
+  if (id >= 1) {
+    router.push({ name: 'detail', params: { id: id } });
+  }
 }
 
 let catText = computed(() => {
   switch (props.currentSong.分类) {
-    case "pops_anime":
+    case "pops_anime": {
       return "动画 & 流行";
-    case "niconico":
+    }
+    case "niconico": {
       return "nico & V家";
-    case "toho":
+    }
+    case "toho": {
       return "东方 Project";
-    case "variety":
+    }
+    case "variety": {
       return "其他游戏";
-    case "maimai":
+    }
+    case "maimai": {
       return "maimai";
-    case "gekichu":
+    }
+    case "gekichu": {
       return "音击 & 中二";
-    default:
+    }
+    default: {
       return "分类";
+    }
+  }
+});
+
+let rankText = computed(() => {
+  switch (props.currentRank) {
+    case "B": {
+      return "Basic";
+    }
+    case "A": {
+      return "Advanced";
+    }
+    case "E": {
+      return "Expert";
+    }
+    case "M": {
+      return "Master";
+    }
+    case "R": {
+      return "Re:Master";
+    }
+    default: {
+      return "难度";
+    }
+  }
+});
+// 万事 Swtich
+let lvText = computed(() => {
+  switch (props.currentRank) {
+    case "B": {
+      return props.currentSong.等级.B;
+    }
+    case "A": {
+      return props.currentSong.等级.A;
+    }
+    case "E": {
+      return props.currentSong.等级.E;
+    }
+    case "M": {
+      return props.currentSong.等级.M;
+    }
+    case "R": {
+      return props.currentSong.等级.R;
+    }
+    default: {
+      return "??";
+    }
   }
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/preset";
+@import "@/style/mixin";
+
 .result {
   text-align: center;
 }
@@ -116,122 +148,210 @@ let catText = computed(() => {
   line-height: 1.5;
 }
 
-.cover-area {
-  position: relative;
-}
-.cover {
-  display: block;
-  width: 200px;
-  height: 200px;
-  margin: 10px auto 20px;
-  &.B {
-    box-shadow: 0 0 0 5px var(--color-B-dark);
-  }
-  &.A {
-    box-shadow: 0 0 0 5px var(--color-A-dark);
-  }
-  &.E {
-    box-shadow: 0 0 0 5px var(--color-E-dark);
-  }
-  &.M {
-    box-shadow: 0 0 0 5px var(--color-M-dark);
-  }
-  &.R {
-    box-shadow: 0 0 0 5px var(--color-R);
-  }
-}
+.result-display {
+  margin: 10px auto;
+  max-width: 250px;
+  filter: drop-shadow(0 0 3px #999);
 
-.song-type {
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-left: 50%;
-  transform: translateX(-50%) translateY(50%);
-  background-color: #45aeff;
-  border-radius: 999em;
-  box-shadow: 0 0 3px 1px #ccc;
-  .text {
-    display: inline-block;
-    padding: 5px 8px;
+  & * {
+    transition: background-color .2s, border-radius .2s;
+  }
+
+  .type {
     font-size: 16px;
-    color: #fff;
+    text-align: center;
     font-weight: bold;
+    font-weight: 900;
+
+    .dx,
+    .standard {
+      // background-color: rgba($color-M-dark, .8);
+      border-radius: 10px 10px 0 0;
+      padding: 5px 5px 0;
+    }
+
+    &.DX {
+      &>.dx {
+        opacity: 1;
+      }
+
+      &>.standard {
+        opacity: 0;
+      }
+    }
+
+    &>div {
+      display: inline-block;
+      width: 50%;
+      margin: auto;
+      transition: opacity .2s;
+
+      &>.text {
+        width: 100%;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 15px;
+      }
+    }
+
+    &>.dx {
+      opacity: 0;
+
+      .text {
+        background-color: #fff;
+
+        .inner {
+          color: #ff4628;
+          background: linear-gradient(150deg, #ff4628 0, #ff4628 50%, #faad07 50%, #faad07 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          // text-fill-color: transparent;
+        }
+      }
+    }
+
+    &>.standard {
+      .text {
+        background-color: #45aeff;
+        color: #fff;
+      }
+    }
   }
 
   &.DX {
-    background-color: #fff;
-    box-shadow: 0 0 3px 1px #ccc;
-    .text {
-      color: #ff4628;
-      background: linear-gradient(150deg, #ff4628 50%, #faad07 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      // text-fill-color: transparent;
+    .result-cover {
+      border-radius: 0 10px 0 0;
+    }
+  }
+
+  .result-cover {
+    padding: 15px 15px 0;
+    // background-color: rgba($color-M-dark, .8);
+    border-radius: 10px 0 0 0;
+
+    .cover {
+      display: block;
+      width: 100%;
+      height: auto;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .result-meta {
+    display: flex;
+    color: #fff;
+    // background-color: rgba($color-M-dark, .8);
+    border-radius: 0 0 10px 10px;
+
+    .song-rank {
+      font-size: 18px;
+      width: 60%;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-weight: 900;
+      // @include txsh(var(--color-M-dark));
+    }
+
+    .song-lv {
+      width: 40%;
+      padding: 10px 15px;
+      font-size: 12px;
+      background-color: rgba(#fff, .5);
+      // @include txsh(var(--color-M-dark));
+      border-radius: 0 0 10px 0;
+
+      .song-lv-num {
+        font-size: 20px;
+        font-weight: bold;
+        font-weight: 900;
+      }
     }
   }
 }
 
-.title {
-  color: #2e94f4;
-  font-size: 20px;
-  line-height: 1.5;
-  margin: 0;
+$ranks: (
+  B:$color-B-dark,
+  A:$color-A-dark,
+  E:$color-E-dark,
+  M:$color-M-dark
+);
+
+@each $rank,
+$color in $ranks {
+  .result-display.#{$rank} {
+    .type {
+
+      .dx,
+      .standard {
+        background-color: rgba($color, .8);
+      }
+    }
+
+    .result-cover {
+      background-color: rgba($color, .8);
+    }
+
+    .result-meta {
+      background-color: rgba($color, .8);
+
+      .song-rank,
+      .song-lv {
+        @include txsh($color);
+      }
+    }
+  }
 }
-.info {
-  font-size: 14px;
+
+.result-display.R {
+  .type {
+
+    .dx,
+    .standard {
+      background-color: var(--color-R);
+    }
+  }
+
+  .result-cover {
+    background-color: var(--color-R);
+  }
+
+  .result-meta {
+    background-color: var(--color-R);
+
+    .song-rank,
+    .song-lv {
+      @include txsh($color-R-dark);
+    }
+  }
+}
+
+.song-info {
+  .song-title {
+    color: #0b3871;
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .song-author {
+    color: #333;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.other-info {
   color: #333;
+  font-size: 14px;
   line-height: 1.5;
-  margin: 0;
-}
-
-.table-lv {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 15px 0;
-  th,
-  td {
-    font-size: 16px;
-    text-align: center;
-    width: 20%;
-    border: 1px solid #ccc;
-    padding: 5px;
-  }
-  .table-lv-name {
-    &.B {
-      background-color: var(--color-B);
-    }
-    &.A {
-      background-color: var(--color-A);
-    }
-    &.E {
-      background-color: var(--color-E);
-    }
-    &.M {
-      background-color: var(--color-M);
-    }
-    &.R {
-      background-color: var(--color-R);
-    }
-  }
-  #table-lv-num {
-    &-B.current {
-      background-color: var(--color-B);
-    }
-    &-A.current {
-      background-color: var(--color-A);
-    }
-    &-E.current {
-      background-color: var(--color-E);
-    }
-    &-M.current {
-      background-color: var(--color-M);
-    }
-    &-R.current {
-      background-color: var(--color-R);
-    }
-  }
+  margin: 10px 0;
 }
 </style>

@@ -1,38 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh-Hans-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="stylesheet" href="/assets/css/normalize.min.css" />
+    <link rel="stylesheet" href="/assets/css/background.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>买买 DX 曲目抽奖页面</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" href="/favicon.png" />
-  <link rel="stylesheet" href="/assets/css/normalize.min.css">
-  <link rel="stylesheet" href="/assets/css/background.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>买买 DX 曲目抽奖页面</title>
-</head>
+  <body>
+    <div id="app"></div>
+    <div class="background">
+      <div class="middle">
+        <div class="triangle-top"></div>
+        <div class="triangle-bottom"></div>
+      </div>
 
-<body>
-  <div id="app"></div>
-  <div class="background">
-    <div class="corner">
-      <div class="left-top"></div>
-      <div class="bottom-right"></div>
+      <div class="garland"></div>
+
+      <div class="decoration-topleft">
+        <div class="baloon-y float bgFloating1"></div>
+        <div class="baloon-b float bgFloating2"></div>
+        <div class="baloon-dp float bgFloating1"></div>
+        <div class="baloon-p float bgFloating2"></div>
+        <div class="baloon-w1 float bgFloating1"></div>
+        <div class="baloon-w2 float bgFloating2"></div>
+        <div class="baloon-o float bgFloating1"></div>
+        <div class="swirl-h float bgFloating2"></div>
+        <div class="swirl-o type1 float bgFloating1"></div>
+        <div class="swirl-o type2 float bgFloating2"></div>
+        <div class="swirl-o type3 float bgFloating1"></div>
+      </div>
+      <div class="decoration-topright">
+        <div class="baloon-b float bgFloating2"></div>
+        <div class="baloon-y float bgFloating1"></div>
+        <div class="baloon-w2 float bgFloating2"></div>
+        <div class="swirl-b type1 float bgFloating1"></div>
+        <div class="swirl-o type2 float bgFloating2"></div>
+      </div>
+      <div class="decoration-bottom">
+        <div class="decoration-bottomleft">
+          <div class="box-p float bgFloating1"></div>
+          <div class="baloon-dp float bgFloating2"></div>
+          <div class="baloon-y float bgFloating1"></div>
+          <div class="baloon-w2 float bgFloating2"></div>
+        </div>
+        <div class="decoration-bottomright">
+          <div class="box-p float bgFloating1"></div>
+          <div class="baloon-o float bgFloating2"></div>
+          <div class="baloon-w2 float bgFloating1"></div>
+          <div class="baloon-y float bgFloating2"></div>
+        </div>
+      </div>
     </div>
-    <div class="cats">
-      <div class="milk"></div>
-      <div class="shama"></div>
-    </div>
-  </div>
 
-  <div class="main-footer">
-    <div class="main-footer-inner">
-      <p>本网站非 &copy;SEGA 或 华立科技 官方制作，仅为爱好者作品</p>
-      <p>
-        项目地址：
-        <a href="https://github.com/eiko-g/maimaidx-roll-vue" target="_blank" rel="noopener noreferrer">GayHub</a>
-      </p>
+    <div class="main-footer">
+      <div class="main-footer-inner">
+        <p>本网站非 &copy;SEGA 或 华立科技 官方制作，仅为爱好者作品</p>
+        <p>
+          项目地址：
+          <a
+            href="https://github.com/eiko-g/maimaidx-roll-vue"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GayHub</a
+          >
+        </p>
+      </div>
     </div>
-  </div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

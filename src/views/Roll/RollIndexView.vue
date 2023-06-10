@@ -4,7 +4,7 @@
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.5.9-20230428.01</p>
+    <p>ver 0.6.0-20230611.01</p>
   </div>
 </template>
 
@@ -26,16 +26,23 @@ function roll() {
   console.log("Roll!", new Date());
   buttonDisable.value = true;
 
-  let rollSonglist = songlistStore.getRawRollsonglist;
+  // !!AnyScript
+  let rollSonglist: any = songlistStore.rollSonglist;
 
   shuffleArray(rollSonglist);
 
   let selectThis = rollSonglist[0];
   console.log("选到了这首歌：", selectThis);
 
-  songlistStore.currentSong = songlistStore.originSonglist.filter((song) => {
+  let selectedSong = songlistStore.originSonglist.find((song) => {
     return song.id === selectThis.id;
-  })[0];
+  });
+  if (selectedSong !== undefined) {
+    songlistStore.currentSong = selectedSong;
+  } else {
+    throw new Error('啥情况，怎么 roll 完了找不到歌？');
+  }
+
   console.log("歌曲详情：", songlistStore.currentSong);
   songlistStore.currentRank = selectThis.rank;
 

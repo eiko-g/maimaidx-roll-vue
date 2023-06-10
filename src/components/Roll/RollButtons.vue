@@ -1,10 +1,6 @@
 <template>
   <div class="roll-buttons">
-    <button
-      class="button roll"
-      @click="$emit('rollClicked')"
-      :disabled="buttonDisable"
-    >
+    <button class="button roll" @click="$emit('rollClicked')" :disabled="buttonDisable">
       按条件 Roll
     </button>
     <button @click="gotoSetting" class="button setting">设置</button>
@@ -26,6 +22,7 @@ function gotoSetting() {
 
 <style scoped lang="scss">
 @import "@/style/mixin";
+
 button {
   display: block;
   background-color: transparent;
@@ -39,18 +36,22 @@ button {
   font-weight: bold;
   border-radius: 99em;
   cursor: pointer;
+
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.5;
   }
+
   &.roll {
-    @include bxsh();
-    @include txsh();
+    @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
+    @include txsh(#6f34b0);
   }
+
   &.setting {
     @include bxsh(#f48605, #ffd21f, #f48605);
     @include txsh(#f48605);
   }
+
   &.random {
     background-color: #f6b32c;
     border: 3px solid #e17400;

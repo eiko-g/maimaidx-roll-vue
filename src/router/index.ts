@@ -39,9 +39,31 @@ const router = createRouter({
       ]
     },
     {
-      path:'/:pathMatch(.*)*',
-      name:"notFound",
-      component:()=>import('../views/ErrorView.vue')
+      path: "/list/",
+      name: "list",
+      component: () => import('../views/List/ListView.vue')
+    },
+    {
+      path: "/detail/:id",
+      name: "detail",
+      component: () => import('../views/Detail/DetailView.vue')
+    },
+    {
+      path: "/custom",
+      component: () => import('../views/CustomView.vue'),
+      redirect: { name: "custom" },
+      children: [
+        {
+          path: "",
+          name: "custom",
+          component: () => import('../views/Custom/CustomIndexView.vue')
+        }
+      ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: "notFound",
+      component: () => import('../views/ErrorView.vue')
     }
   ],
 });
@@ -55,11 +77,11 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-function checkSonglist () {
+function checkSonglist() {
   const store = useSonglistStore();
-  if(store.originSonglist.length > 0) {
+  if (store.originSonglist.length > 0) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }

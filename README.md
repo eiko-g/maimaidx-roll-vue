@@ -18,6 +18,8 @@
 
 默认路径为 `roll.web/maimaidx`，如果需要部署在其他目录的请去 `vite.config.ts` 修改或注释。
 
+另外本项目的 id 均为自动赋值的 id，并不是官方的内部 id，因为我也没拿到相关数据。相关代码见 `/src/views/LoadingView.vue`。
+
 安装：
 
 ```sh

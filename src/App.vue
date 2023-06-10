@@ -1,4 +1,5 @@
 <template>
+  <!-- <MainMenu></MainMenu> -->
   <div class="main-body">
     <RouterView />
   </div>
@@ -6,24 +7,27 @@
 
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import MainMenu from "./components/MainMenu.vue";
 </script>
 
 <style lang="scss">
+@import '@/style/preset';
+
 :root {
-  --color-B: #ccffcc;
-  --color-A: #ffdd99;
-  --color-E: #ffccf7;
-  --color-M: #eeccff;
-  --color-R: #e9e6ff;
+  --color-B: #{$color-B};
+  --color-A: #{$color-A};
+  --color-E: #{$color-E};
+  --color-M: #{$color-M};
+  --color-R: #{$color-R};
 
-  --color-B-dark: #6fd43d;
-  --color-A-dark: #f8b709;
-  --color-E-dark: #ff818d;
-  --color-M-dark: #9f51dc;
-  --color-R-dark: #c346e7;
+  --color-B-dark: #{$color-B-dark};
+  --color-A-dark: #{$color-A-dark};
+  --color-E-dark: #{$color-E-dark};
+  --color-M-dark: #{$color-M-dark};
+  --color-R-dark: #{$color-R-dark};
 
-  --color-border: #2b2ea3;
-  --color-bg: #319df8;
+  --color-bg: #{$color-bg-uni};
+  --color-border: #{$color-border-uni};
 }
 
 *,
@@ -34,7 +38,7 @@ import { RouterView } from "vue-router";
 
 body {
   font-family: sans-serif;
-  background: #57c0ff;
+  // background: #57c0ff;
   margin: 0;
   padding: 0;
 }
@@ -52,9 +56,9 @@ a {
   min-height: 90vh;
   margin: 50px auto;
   background-color: #fff;
-  box-shadow: 0 0 0 5px #fc9494, 0 0 0 10px #fff, 0 0 0 15px #86d2fe,
+  box-shadow: inset 0 0 5px rgba(111, 52, 176, .7), 0 0 0 5px #fbfb71, 0 0 0 10px #fff, 0 0 0 15px #b98bf8,
     0 0 0 20px #fff, 0 0 0 25px rgba(255, 255, 255, 0.4),
-    0 0 20px 15px rgba(#1c6fb0, 0.8);
+    0 0 20px 15px rgba(111, 52, 176, .7);
   border-radius: 10px;
   padding: 20px;
 }
