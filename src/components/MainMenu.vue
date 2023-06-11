@@ -1,6 +1,7 @@
 <template>
   <ul class="main-menu">
     <li class="menu-item"><router-link to="/roll">抽歌</router-link></li>
+    <li class="menu-item"><router-link to="/list">曲目列表</router-link></li>
     <li class="menu-item"><router-link to="/custom">自定歌单</router-link></li>
     <li class="menu-item"><router-link to="/about">关于</router-link></li>
   </ul>
