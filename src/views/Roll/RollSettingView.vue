@@ -21,14 +21,19 @@ import LevelBlock from "@/components/Setting/LevelBlock.vue";
 import VersionBlock from "@/components/Setting/VersionBlock.vue";
 
 import songFilter from "@/mixins/songFilter";
+import { onBeforeUnmount } from "vue";
 
 const router = useRouter();
 const store = useSettingsStore();
 const songlistStore = useSonglistStore();
 
+onBeforeUnmount(() => {
+  alert('还没保存')
+});
+
 function backToRoll() {
   console.log('点击了保存设置');
-  
+
   store.isFirstRun = false;
 
   // !!AnyScript
@@ -48,6 +53,7 @@ function backToRoll() {
 
 <style lang="scss" scoped>
 @import "@/style/mixin";
+
 .main-title {
   color: var(--color-border);
   font-size: 24px;
@@ -55,12 +61,14 @@ function backToRoll() {
   margin: 0;
   text-align: center;
 }
+
 .setting :deep(.setting-block) {
   .title {
     font-size: 18px;
     line-height: 1.5;
     margin: 0.5em 0;
   }
+
   .tip {
     color: #666;
     font-size: 14px;
@@ -81,5 +89,4 @@ function backToRoll() {
   cursor: pointer;
   @include bxsh();
   @include txsh(#319df8);
-}
-</style>
+}</style>
