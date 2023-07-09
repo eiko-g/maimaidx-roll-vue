@@ -2,19 +2,36 @@
   <div class="list-view">
     <h2 class="main-title">曲目列表</h2>
     <div class="category-list">
-      <label for="cat-pops_anime"><input type="radio" id="cat-pops_anime" name="category" value="pops_anime"
-          class="category" checked><span>动画 & 流行</span></label>
-      <label for="cat-niconico"><input type="radio" id="cat-niconico" name="category" value="niconico"
-          class="category"><span>nico & V家</span></label>
-      <label for="cat-toho"><input type="radio" id="cat-toho" name="category" value="toho" class="category"><span>东方
-          Project</span></label>
-      <label for="cat-variety"><input type="radio" id="cat-variety" name="category" value="variety"
-          class="category"><span>其他游戏</span></label>
-      <label for="cat-maimai"><input type="radio" id="cat-maimai" name="category" value="maimai"
-          class="category"><span>maimai</span></label>
-      <label for="cat-gekichu"><input type="radio" id="cat-gekichu" name="category" value="gekichu"
-          class="category"><span>音击
-          & 中二</span></label>
+      <label class="cat-label all" for="cat-all"><input type="radio" id="cat-all" name="category" value="all"
+          class="category" checked>
+        <div class="inner">全部</div>
+      </label>
+      <label class="cat-label pops_anime" for="cat-pops_anime"><input type="radio" id="cat-pops_anime" name="category"
+          value="pops_anime" class="category">
+        <div class="inner">动画 & 流行</div>
+      </label>
+      <label class="cat-label niconico" for="cat-niconico"><input type="radio" id="cat-niconico" name="category"
+          value="niconico" class="category">
+        <div class="inner">nico & V家</div>
+      </label>
+      <label class="cat-label toho" for="cat-toho"><input type="radio" id="cat-toho" name="category" value="toho"
+          class="category">
+        <div class="inner">东方
+          Project</div>
+      </label>
+      <label class="cat-label variety" for="cat-variety"><input type="radio" id="cat-variety" name="category"
+          value="variety" class="category">
+        <div class="inner">其他游戏</div>
+      </label>
+      <label class="cat-label maimai" for="cat-maimai"><input type="radio" id="cat-maimai" name="category" value="maimai"
+          class="category">
+        <div class="inner">maimai</div>
+      </label>
+      <label class="cat-label gekichu" for="cat-gekichu"><input type="radio" id="cat-gekichu" name="category"
+          value="gekichu" class="category">
+        <div class="inner">音击
+          & 中二</div>
+      </label>
     </div>
     <div class="songlist">
       <div class="song-block" v-for="song in list" :key="song.id">
@@ -35,10 +52,15 @@
 
 <script lang="ts" setup>
 import { useSonglistStore } from "@/stores/songlist";
+import { ref } from "vue";
 
 const songlistStore = useSonglistStore();
 
 const list = songlistStore.originSonglist;
+
+let currentList = ref([]);
+
+let currentCategory = 'all';
 
 let coverSrc = (cover: string | undefined) => {
   let coverStr: string;
@@ -78,6 +100,8 @@ let catText = (category: string) => {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/mixin";
+
 .main-title {
   color: var(--color-border);
   font-size: 24px;
@@ -106,6 +130,64 @@ let catText = (category: string) => {
 
     .author {
       font-size: 12px;
+    }
+  }
+}
+
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .cat-label {
+    user-select: none;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    margin-bottom: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .inner {
+      display: block;
+      border: 3px solid #ccc;
+      padding: 5px;
+    }
+
+    &.all {
+      @include input-label();
+    }
+
+    &.pops_anime {
+      @include input-label(#ccc, #ff972a, #ff972a);
+    }
+
+    &.niconico {
+      @include input-label(#ccc, #09c8d4, #09c8d4);
+    }
+
+    &.toho {
+      @include input-label(#ccc, #ad59ee, #ad59ee);
+    }
+
+    &.variety {
+      @include input-label(#ccc, #42de6a, #42de6a);
+    }
+
+    &.maimai {
+      @include input-label(#ccc, #f74949, #f74949);
+    }
+
+    &.gekichu {
+      @include input-label(#ccc, #3585fe, #3585fe);
     }
   }
 }
