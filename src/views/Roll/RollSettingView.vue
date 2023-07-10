@@ -21,15 +21,15 @@ import LevelBlock from "@/components/Setting/LevelBlock.vue";
 import VersionBlock from "@/components/Setting/VersionBlock.vue";
 
 import songFilter from "@/mixins/songFilter";
-import { onBeforeUnmount } from "vue";
+// import { onBeforeUnmount } from "vue";
 
 const router = useRouter();
 const store = useSettingsStore();
 const songlistStore = useSonglistStore();
 
-onBeforeUnmount(() => {
-  alert('还没保存')
-});
+// onBeforeUnmount(() => {
+//   alert('还没保存')
+// });
 
 function backToRoll() {
   console.log('点击了保存设置');
@@ -89,4 +89,5 @@ function backToRoll() {
   cursor: pointer;
   @include bxsh();
   @include txsh(#319df8);
-}</style>
+}
+</style>
