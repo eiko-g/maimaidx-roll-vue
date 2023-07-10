@@ -1,13 +1,22 @@
 <template>
   <h2 class="main-title">自定义抽歌歌单</h2>
   <div class="custom-list">
-    <div class="custom-block add">
+    <div class="custom-block add" @click="show = true">
       <p>添加新的歌单</p>
     </div>
   </div>
+
+  <Teleport to="body">
+    <AddList :show="show" @close="show = false"></AddList>
+  </Teleport>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import AddList from '@/components/Custom/AddList.vue';
+import { ref } from 'vue';
+
+let show = ref(false);
+</script>
 
 <style lang="scss" scoped>
 .main-title {

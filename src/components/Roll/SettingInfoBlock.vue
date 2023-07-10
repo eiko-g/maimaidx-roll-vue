@@ -25,15 +25,20 @@
     </p>
     <p>
       <b>抽选歌单：</b>
-      <span class="songlist">ver.CH1.30-C</span>
+      <span class="songlist">{{ versionText }}</span>
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useSonglistStore } from "@/stores/songlist";
+
+const store = useSonglistStore();
 
 const props = defineProps(["setting"]);
+
+let versionText = store.version || '获取版本出错';
 
 let lvText = computed(() => {
   let str = "";

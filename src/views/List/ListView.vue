@@ -1,43 +1,44 @@
 <template>
   <div class="list-view">
     <h2 class="main-title">曲目列表</h2>
+    <p class="version">当前歌单版本：{{ songlistStore.version }}</p>
     <div class="category-list">
       <label class="cat-label all" for="cat-all"><input type="radio" id="cat-all" name="category" value="all"
-          class="category" checked>
+          class="category" checked @click="changeCurrentCategory('all')">
         <div class="inner">全部</div>
       </label>
       <label class="cat-label pops_anime" for="cat-pops_anime"><input type="radio" id="cat-pops_anime" name="category"
-          value="pops_anime" class="category">
+          value="pops_anime" class="category" @click="changeCurrentCategory('pops_anime')">
         <div class="inner">动画 & 流行</div>
       </label>
       <label class="cat-label niconico" for="cat-niconico"><input type="radio" id="cat-niconico" name="category"
-          value="niconico" class="category">
+          value="niconico" class="category" @click="changeCurrentCategory('niconico')">
         <div class="inner">nico & V家</div>
       </label>
       <label class="cat-label toho" for="cat-toho"><input type="radio" id="cat-toho" name="category" value="toho"
-          class="category">
+          class="category" @click="changeCurrentCategory('toho')">
         <div class="inner">东方
           Project</div>
       </label>
       <label class="cat-label variety" for="cat-variety"><input type="radio" id="cat-variety" name="category"
-          value="variety" class="category">
+          value="variety" class="category" @click="changeCurrentCategory('variety')">
         <div class="inner">其他游戏</div>
       </label>
       <label class="cat-label maimai" for="cat-maimai"><input type="radio" id="cat-maimai" name="category" value="maimai"
-          class="category">
+          class="category" @click="changeCurrentCategory('maimai')">
         <div class="inner">maimai</div>
       </label>
       <label class="cat-label gekichu" for="cat-gekichu"><input type="radio" id="cat-gekichu" name="category"
-          value="gekichu" class="category">
+          value="gekichu" class="category" @click="changeCurrentCategory('gekichu')">
         <div class="inner">音击
           & 中二</div>
       </label>
     </div>
     <div class="songlist">
-      <div class="song-block" v-for="song in list" :key="song.id">
+      <div class="song-block" v-if="currentCategory != 'all'" v-for="song in currentList" :key="song.id">
         <!-- {{ song }} -->
 
-        <img :src="coverSrc(song.封面)" alt="封面" class="cover">
+        <img :src="coverSrc(song.封面)" alt="封面" class="cover" loading="lazy">
         <div class="song-info">
           <p class="category">{{ catText(song.分类) }}</p>
           <h3 class="title">
@@ -46,21 +47,50 @@
           <p class="author">{{ song.作者 }}</p>
         </div>
       </div>
+      <p class="alert" v-else>因为显示所有歌太卡了，所以默认不显示全部。</p>
     </div>
+
+    <button class="reload" @click="reloadSongList">重新载入歌单</button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import type ISong from "@/interface/ISong";
 import { useSonglistStore } from "@/stores/songlist";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const songlistStore = useSonglistStore();
 
+const router = useRouter();
+
 const list = songlistStore.originSonglist;
 
-let currentList = ref([]);
+let currentList: Array<ISong> = reactive([]);
 
-let currentCategory = 'all';
+let currentCategory = ref('all');
+
+function changeCurrentCategory(category: string) {
+  currentCategory.value = category;
+  console.log('当前分类改为：', category);
+  changeCurrentList(category);
+}
+function changeCurrentList(category: string) {
+  console.log('当前歌单筛选为该分类：', category);
+  currentList.length = 0;
+  let temp = list.filter(item => item.分类 == category);
+  temp.forEach(item => currentList.push(item));
+}
+
+
+function reloadSongList() {
+  let go = confirm('是否重新载入歌单信息？');
+  console.log(go)
+  if (go) {
+    localStorage.removeItem('songlist');
+    router.push({ name: 'loading' })
+  }
+}
 
 let coverSrc = (cover: string | undefined) => {
   let coverStr: string;
@@ -113,6 +143,8 @@ let catText = (category: string) => {
 .song-block {
   display: flex;
   margin-bottom: 20px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
 
   .cover {
     width: 100px;
@@ -126,6 +158,10 @@ let catText = (category: string) => {
     h3 {
       margin: 0;
       line-height: 1.5;
+    }
+
+    .title {
+      font-size: 18px;
     }
 
     .author {
@@ -190,5 +226,21 @@ let catText = (category: string) => {
       @include input-label(#ccc, #3585fe, #3585fe);
     }
   }
+}
+
+.reload {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 30px auto;
+  padding: 5px;
+  border: 0;
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 99em;
+  cursor: pointer;
+  @include bxsh(#e02d2d, #f45656, rgba(111, 52, 176, .7));
+  @include txsh(#e02d2d);
 }
 </style>

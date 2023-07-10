@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type ISong from "@/interface/ISong";
-import { reactive, ref } from "vue";
+import { reactive, ref, type Ref } from "vue";
 import type ISongRollList from "@/interface/ISongRollList";
 
 export const useSonglistStore = defineStore("songlist", () => {
@@ -29,5 +29,7 @@ export const useSonglistStore = defineStore("songlist", () => {
     },
   ]);
 
-  return { originSonglist, currentSong, currentRank, rollSonglist };
+  let version: Ref<string | null> = ref(null);
+
+  return { originSonglist, currentSong, currentRank, rollSonglist, version };
 });

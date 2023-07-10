@@ -1,5 +1,5 @@
 <template>
-  <!-- <MainMenu></MainMenu> -->
+  <MainMenu></MainMenu>
   <div class="main-body">
     <RouterView />
   </div>
