@@ -21,5 +21,15 @@ export const useSettingsStore = defineStore("settings", () => {
   // 版本
   let version = ref(["all"]);
 
-  return {isFirstRun,rank,category,lvMultiple,lvMin,lvMinPlus,lvMax,lvMaxPlus,version}
+  return {
+    isFirstRun,
+    rank,
+    category,
+    lvMultiple,
+    lvMin,
+    lvMinPlus,
+    lvMax,
+    lvMaxPlus,
+    version,
+  };
 });
