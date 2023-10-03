@@ -31,7 +31,7 @@ onMounted(async () => {
   //   }, 800);
   // } else {
   push("歌单加载中……");
-  let response = await fetch("./data/maimaiDXCN_2023.json?ver=20230812.01"),
+  let response = await fetch("./data/maimaiDXCN_2023.json?ver=2023100301.01"),
     json: IJson;
   if (response.ok) {
     json = await response.json();
