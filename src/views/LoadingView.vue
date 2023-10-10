@@ -19,50 +19,37 @@ let go = ref(false);
 
 onMounted(async () => {
   push("开始载入了捏");
+  push("歌单加载中……");
+  let response = await fetch("./data/maimaiDXCN_2023.json?ver=20230710.01"),
+    json: IJson;
+  if (response.ok) {
+    json = await response.json();
+    push("歌单加载完成，正在处理");
+    //#region 给每首歌加个 id
+    // 在这里做是因为我没拿到那些 bot 都有的 ID，所以就自己加个
+    let id = 0;
+    json.曲目列表.map((item: ISong) => {
+      id++;
+      item.id = id;
+    });
+    //#endregion
+    console.log("加了 id 之后的 JSON", json);
+    store.originSonglist = json.曲目列表;
+    console.log("歌单载入完成");
 
-  let lsData = localStorage.getItem("songlist")
-  if (lsData !== null) {
-    push("有缓存歌单，可直接载入");
-    push(`歌单缓存日期：${localStorage.getItem('last_cached_time')}`)
-    store.originSonglist = JSON.parse(lsData).曲目列表;
-    push("已载入本地歌单，正在跳转~");
-    store.version = JSON.parse(lsData).version;
+    localStorage.setItem("songlist", JSON.stringify(json));
+    localStorage.setItem('last_cached_time', transTime());
+    push("已将歌单缓存到浏览器");
+    go.value = true;
+    push("准备完成，正在跳转~");
+    store.version = json.version;
     setTimeout(() => {
       router.push({ name: "roll" });
     }, 800);
   } else {
-    push("歌单加载中……");
-    let response = await fetch("./data/maimaiDXCN_2023.json?ver=20230710.01"),
-      json: IJson;
-    if (response.ok) {
-      json = await response.json();
-      push("歌单加载完成，正在处理");
-      //#region 给每首歌加个 id
-      // 在这里做是因为我没拿到那些 bot 都有的 ID，所以就自己加个
-      let id = 0;
-      json.曲目列表.map((item: ISong) => {
-        id++;
-        item.id = id;
-      });
-      //#endregion
-      console.log("加了 id 之后的 JSON", json);
-      store.originSonglist = json.曲目列表;
-      console.log("歌单载入完成");
-
-      localStorage.setItem("songlist", JSON.stringify(json));
-      localStorage.setItem('last_cached_time', transTime());
-      push("已将歌单缓存到浏览器");
-      go.value = true;
-      push("准备完成，正在跳转~");
-      store.version = json.version;
-      setTimeout(() => {
-        router.push({ name: "roll" });
-      }, 800);
-    } else {
-      push("载入 JSON 炸了，HTTP-Error: " + response.status, "error");
-      console.log("Response: ", response);
-      alert("怎么载入这 JSON 还会出错？HTTP-Error: " + response.status);
-    }
+    push("载入 JSON 炸了，HTTP-Error: " + response.status, "error");
+    console.log("Response: ", response);
+    alert("怎么载入这 JSON 还会出错？HTTP-Error: " + response.status);
   }
 });
 
