@@ -36,10 +36,6 @@ onMounted(async () => {
     console.log("加了 id 之后的 JSON", json);
     store.originSonglist = json.曲目列表;
     console.log("歌单载入完成");
-
-    localStorage.setItem("songlist", JSON.stringify(json));
-    localStorage.setItem('last_cached_time', transTime());
-    push("已将歌单缓存到浏览器");
     go.value = true;
     push("准备完成，正在跳转~");
     store.version = json.version;

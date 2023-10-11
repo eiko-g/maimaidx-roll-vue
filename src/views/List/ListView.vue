@@ -40,7 +40,7 @@
 
         <img :src="coverSrc(song.封面)" alt="封面" class="cover" loading="lazy">
         <div class="song-info">
-          <p class="category">{{ catText(song.分类) }}</p>
+          <p class="category">{{ catText(song.分类) }} &bull; {{ song.类型 }}</p>
           <h3 class="title">
             <router-link :to="{ name: 'detail', params: { id: song.id } }">{{ song.曲名 }}</router-link>
           </h3>
@@ -49,8 +49,6 @@
       </div>
       <p class="alert" v-else>因为显示所有歌太卡了，所以默认不显示全部。</p>
     </div>
-
-    <button class="reload" @click="reloadSongList">重新载入歌单</button>
   </div>
 </template>
 
@@ -82,15 +80,6 @@ function changeCurrentList(category: string) {
   temp.forEach(item => currentList.push(item));
 }
 
-
-function reloadSongList() {
-  let go = confirm('是否重新载入歌单信息？');
-  console.log(go)
-  if (go) {
-    localStorage.removeItem('songlist');
-    router.push({ name: 'loading' })
-  }
-}
 
 let coverSrc = (cover: string | undefined) => {
   let coverStr: string;
@@ -226,21 +215,5 @@ let catText = (category: string) => {
       @include input-label(#ccc, #3585fe, #3585fe);
     }
   }
-}
-
-.reload {
-  display: block;
-  width: 100%;
-  max-width: 200px;
-  margin: 30px auto;
-  padding: 5px;
-  border: 0;
-  font-size: 24px;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 99em;
-  cursor: pointer;
-  @include bxsh(#e02d2d, #f45656, rgba(111, 52, 176, .7));
-  @include txsh(#e02d2d);
 }
 </style>
