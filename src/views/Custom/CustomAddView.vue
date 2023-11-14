@@ -9,13 +9,16 @@
 </template>
 
 <script lang="ts" setup>
+import { custom } from '@/mixins/customList';
 function save() {
   let input = document.getElementById('list-name');
   let inputValue = (input as HTMLInputElement).value;
   if ((inputValue.trim()).length == 0) {
-    console.log('No')
+    console.log('No');
+    alert('请输入歌单名');
   } else {
     console.log('Yes', inputValue);
+    custom.add();
   }
 }
 </script>
