@@ -96,14 +96,14 @@
 </template>
 
 <script setup lang="ts">
-import { checkAll, checkOthers } from "@/mixins/checkInput";
-import { useSettingsStore } from "@/stores/settings";
-import { onMounted } from "vue";
+import { checkAll, checkOthers } from '@/mixins/checkInput';
+import { useSettingsStore } from '@/stores/settings';
+import { onMounted } from 'vue';
 const store = useSettingsStore();
 
 // 保存版本设置
 function saveVersion() {
-  let elements = document.querySelectorAll("input.version:checked"),
+  let elements = document.querySelectorAll('input.version:checked'),
     tempVer: Array<string> = [];
   elements.forEach((item) => {
     tempVer.push((item as HTMLInputElement).value);
@@ -114,36 +114,32 @@ function saveVersion() {
 onMounted(() => {
   //#region 版本选择事件
   // 非 all 版本
-  document
-    .querySelectorAll("input.version:not(input.version.all)")
-    .forEach((item) => {
-      item.addEventListener("click", () => {
-        checkOthers("input.version", "input.version.all");
-      });
+  document.querySelectorAll('input.version:not(input.version.all)').forEach((item) => {
+    item.addEventListener('click', () => {
+      checkOthers('input.version', 'input.version.all');
     });
+  });
 
   // all 版本
-  document.querySelector("input.version.all")!.addEventListener("click", () => {
-    checkAll("input.version", "input.version.all");
+  document.querySelector('input.version.all')!.addEventListener('click', () => {
+    checkAll('input.version', 'input.version.all');
   });
 
   // 所有版本选项
-  document.querySelectorAll("input.version").forEach((item) => {
-    (item as HTMLInputElement).addEventListener("change", (el) => {
-      console.log("Version changed: ", el);
+  document.querySelectorAll('input.version').forEach((item) => {
+    (item as HTMLInputElement).addEventListener('change', (el) => {
+      console.log('Version changed: ', el);
       saveVersion();
     });
 
     // 载入时勾上保存的版本
-    (item as HTMLInputElement).checked = store.version.includes(
-      (item as HTMLInputElement).value
-    );
+    (item as HTMLInputElement).checked = store.version.includes((item as HTMLInputElement).value);
   });
 });
 </script>
 
 <style scoped lang="scss">
-@import "@/style/mixin";
+@import '@/style/mixin';
 
 .versions {
   display: flex;
@@ -162,7 +158,7 @@ onMounted(() => {
       cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       display: none;
     }
 

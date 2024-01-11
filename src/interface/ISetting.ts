@@ -1,19 +1,19 @@
 export default interface ISetting {
-  isFirstRun: boolean,
+  isFirstRun: boolean;
   // 难度
-  rank: Array<string>,
+  rank: Array<string>;
   // 分类
-  category: Array<string>,
+  category: Array<string>;
   // 难度多选
-  lvMultiple: boolean,
+  lvMultiple: boolean;
   // 最低等级
-  lvMin: number | string,
+  lvMin: number | string;
   // 最低等级带加号
-  lvMinPlus: boolean,
+  lvMinPlus: boolean;
   // 最高等级
-  lvMax: number | string,
+  lvMax: number | string;
   // 最高等级带加号
-  lvMaxPlus: boolean,
+  lvMaxPlus: boolean;
   // 版本
-  version: Array<string>,
+  version: Array<string>;
 }

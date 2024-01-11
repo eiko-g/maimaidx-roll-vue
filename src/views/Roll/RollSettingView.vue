@@ -11,16 +11,16 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { useSettingsStore } from "@/stores/settings";
-import { useSonglistStore } from "@/stores/songlist";
+import { useRouter } from 'vue-router';
+import { useSettingsStore } from '@/stores/settings';
+import { useSonglistStore } from '@/stores/songlist';
 
-import RankBlock from "@/components/Setting/RankBlock.vue";
-import CategoryBlock from "@/components/Setting/CategoryBlock.vue";
-import LevelBlock from "@/components/Setting/LevelBlock.vue";
-import VersionBlock from "@/components/Setting/VersionBlock.vue";
+import RankBlock from '@/components/Setting/RankBlock.vue';
+import CategoryBlock from '@/components/Setting/CategoryBlock.vue';
+import LevelBlock from '@/components/Setting/LevelBlock.vue';
+import VersionBlock from '@/components/Setting/VersionBlock.vue';
 
-import songFilter from "@/mixins/songFilter";
+import songFilter from '@/mixins/songFilter';
 // import { onBeforeUnmount } from "vue";
 
 const router = useRouter();
@@ -41,18 +41,18 @@ function backToRoll() {
 
   if (tempSonglist.length > 0) {
     songlistStore.rollSonglist = tempSonglist;
-    console.log("生成的歌单：", songlistStore.rollSonglist);
-    console.log("从设置界面回到 Roll 歌界面");
-    router.push({ name: "roll" });
+    console.log('生成的歌单：', songlistStore.rollSonglist);
+    console.log('从设置界面回到 Roll 歌界面');
+    router.push({ name: 'roll' });
   } else {
-    console.warn("歌单没筛出来东西");
-    alert("筛选后的歌单为空，请检查设置");
+    console.warn('歌单没筛出来东西');
+    alert('筛选后的歌单为空，请检查设置');
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/mixin";
+@import '@/style/mixin';
 
 .main-title {
   color: var(--color-border);

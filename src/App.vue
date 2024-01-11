@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from "vue-router";
-import MainMenu from "./components/MainMenu.vue";
+import { RouterView } from 'vue-router';
+import MainMenu from './components/MainMenu.vue';
 </script>
 
 <style lang="scss">
@@ -56,9 +56,14 @@ a {
   min-height: 90vh;
   margin: 50px auto;
   background-color: #fff;
-  box-shadow: inset 0 0 5px rgba(111, 52, 176, .7), 0 0 0 5px #fbfb71, 0 0 0 10px #fff, 0 0 0 15px #b98bf8,
-    0 0 0 20px #fff, 0 0 0 25px rgba(255, 255, 255, 0.4),
-    0 0 20px 15px rgba(111, 52, 176, .7);
+  box-shadow:
+    inset 0 0 5px rgba(111, 52, 176, 0.7),
+    0 0 0 5px #fbfb71,
+    0 0 0 10px #fff,
+    0 0 0 15px #b98bf8,
+    0 0 0 20px #fff,
+    0 0 0 25px rgba(255, 255, 255, 0.4),
+    0 0 20px 15px rgba(111, 52, 176, 0.7);
   border-radius: 10px;
   padding: 20px;
 }

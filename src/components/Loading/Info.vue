@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from "vue";
+import { toRefs } from 'vue';
 
 const props = defineProps({
-  info: Object,
+  info: Object
 });
 let { info } = toRefs(props);
 </script>

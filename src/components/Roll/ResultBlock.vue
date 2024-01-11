@@ -17,7 +17,9 @@
 
       <div class="result-meta">
         <div class="song-rank">{{ rankText }}</div>
-        <div class="song-lv">Lv <span class="song-lv-num">{{ lvText }}</span></div>
+        <div class="song-lv">
+          Lv <span class="song-lv-num">{{ lvText }}</span>
+        </div>
       </div>
     </div>
     <div class="song-info">
@@ -30,14 +32,13 @@
       /
       <span class="version">{{ currentSong.版本 }}</span>
     </p>
-
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import type ISong from "@/interface/ISong";
-import { useRouter } from "vue-router";
+import { computed } from 'vue';
+import type ISong from '@/interface/ISong';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{ currentSong: ISong; currentRank: string }>();
 const router = useRouter();
@@ -47,7 +48,7 @@ let coverSrc = computed(() => {
   if (props.currentSong.封面 != undefined || props.currentSong.封面 != null) {
     coverStr = `./assets/img/cover.png/${props.currentSong.封面}`;
   } else {
-    coverStr = "./assets/img/nocover.png";
+    coverStr = './assets/img/nocover.png';
   }
   return coverStr;
 });
@@ -61,80 +62,80 @@ function viewDetail(id: number) {
 
 let catText = computed(() => {
   switch (props.currentSong.分类) {
-    case "pops_anime": {
-      return "动画 & 流行";
+    case 'pops_anime': {
+      return '动画 & 流行';
     }
-    case "niconico": {
-      return "nico & V家";
+    case 'niconico': {
+      return 'nico & V家';
     }
-    case "toho": {
-      return "东方 Project";
+    case 'toho': {
+      return '东方 Project';
     }
-    case "variety": {
-      return "其他游戏";
+    case 'variety': {
+      return '其他游戏';
     }
-    case "maimai": {
-      return "maimai";
+    case 'maimai': {
+      return 'maimai';
     }
-    case "gekichu": {
-      return "音击 & 中二";
+    case 'gekichu': {
+      return '音击 & 中二';
     }
     default: {
-      return "分类";
+      return '分类';
     }
   }
 });
 
 let rankText = computed(() => {
   switch (props.currentRank) {
-    case "B": {
-      return "Basic";
+    case 'B': {
+      return 'Basic';
     }
-    case "A": {
-      return "Advanced";
+    case 'A': {
+      return 'Advanced';
     }
-    case "E": {
-      return "Expert";
+    case 'E': {
+      return 'Expert';
     }
-    case "M": {
-      return "Master";
+    case 'M': {
+      return 'Master';
     }
-    case "R": {
-      return "Re:Master";
+    case 'R': {
+      return 'Re:Master';
     }
     default: {
-      return "难度";
+      return '难度';
     }
   }
 });
 // 万事 Swtich
 let lvText = computed(() => {
   switch (props.currentRank) {
-    case "B": {
+    case 'B': {
       return props.currentSong.等级.B;
     }
-    case "A": {
+    case 'A': {
       return props.currentSong.等级.A;
     }
-    case "E": {
+    case 'E': {
       return props.currentSong.等级.E;
     }
-    case "M": {
+    case 'M': {
       return props.currentSong.等级.M;
     }
-    case "R": {
+    case 'R': {
       return props.currentSong.等级.R;
     }
     default: {
-      return "??";
+      return '??';
     }
   }
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/preset";
-@import "@/style/mixin";
+@import '@/style/preset';
+@import '@/style/mixin';
 
 .result {
   text-align: center;
@@ -154,7 +155,9 @@ let lvText = computed(() => {
   filter: drop-shadow(0 0 3px #999);
 
   & * {
-    transition: background-color .2s, border-radius .2s;
+    transition:
+      background-color 0.2s,
+      border-radius 0.2s;
   }
 
   .type {
@@ -171,22 +174,22 @@ let lvText = computed(() => {
     }
 
     &.DX {
-      &>.dx {
+      & > .dx {
         opacity: 1;
       }
 
-      &>.standard {
+      & > .standard {
         opacity: 0;
       }
     }
 
-    &>div {
+    & > div {
       display: inline-block;
       width: 50%;
       margin: auto;
-      transition: opacity .2s;
+      transition: opacity 0.2s;
 
-      &>.text {
+      & > .text {
         width: 100%;
         display: inline-block;
         padding: 5px;
@@ -194,7 +197,7 @@ let lvText = computed(() => {
       }
     }
 
-    &>.dx {
+    & > .dx {
       opacity: 0;
 
       .text {
@@ -211,7 +214,7 @@ let lvText = computed(() => {
       }
     }
 
-    &>.standard {
+    & > .standard {
       .text {
         background-color: #45aeff;
         color: #fff;
@@ -261,7 +264,7 @@ let lvText = computed(() => {
       width: 40%;
       padding: 10px 15px;
       font-size: 12px;
-      background-color: rgba(#fff, .5);
+      background-color: rgba(#fff, 0.5);
       // @include txsh(var(--color-M-dark));
       border-radius: 0 0 10px 0;
 
@@ -275,29 +278,27 @@ let lvText = computed(() => {
 }
 
 $ranks: (
-  B:$color-B-dark,
-  A:$color-A-dark,
-  E:$color-E-dark,
-  M:$color-M-dark
+  B: $color-B-dark,
+  A: $color-A-dark,
+  E: $color-E-dark,
+  M: $color-M-dark
 );
 
-@each $rank,
-$color in $ranks {
+@each $rank, $color in $ranks {
   .result-display.#{$rank} {
     .type {
-
       .dx,
       .standard {
-        background-color: rgba($color, .8);
+        background-color: rgba($color, 0.8);
       }
     }
 
     .result-cover {
-      background-color: rgba($color, .8);
+      background-color: rgba($color, 0.8);
     }
 
     .result-meta {
-      background-color: rgba($color, .8);
+      background-color: rgba($color, 0.8);
 
       .song-rank,
       .song-lv {
@@ -309,7 +310,6 @@ $color in $ranks {
 
 .result-display.R {
   .type {
-
     .dx,
     .standard {
       background-color: var(--color-R);

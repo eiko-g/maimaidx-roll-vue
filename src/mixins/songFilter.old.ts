@@ -1,22 +1,22 @@
 /**
  * 输入原歌单和设置，然后一通操作后输出筛选后的歌单列表
  * 输出的格式为 [{id:"歌曲 ID",rank:"符合抽歌要求的难度"}]
- * @param {Array} songlist 
- * @param {Object} inputSetting 
+ * @param {Array} songlist
+ * @param {Object} inputSetting
  * @returns {Array}
  */
 
-import type ISetting from "@/interface/ISetting";
-import type ISong from "@/interface/ISong";
+import type ISetting from '@/interface/ISetting';
+import type ISong from '@/interface/ISong';
 
 interface ISongPreview {
-  id: number,
-  rank: string,
+  id: number;
+  rank: string;
   preview: {
-    name: string,
-    rank: string,
-    lv: number | string
-  }
+    name: string;
+    rank: string;
+    lv: number | string;
+  };
 }
 
 export default function songFilter(songlist: Array<ISong>, inputSetting: ISetting) {
@@ -26,8 +26,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
     return {};
   }
   console.log('输入进来的设置：', inputSetting);
-  let
-    setting = inputSetting,
+  let setting = inputSetting,
     tempSongList = songlist,
     output: Array<ISongPreview> = [];
   if (setting.rank.includes('all')) {
@@ -36,15 +35,15 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
   console.log('筛歌时的设置', setting);
 
   // 先筛分类
-  if (setting.category[0] !== "all") {
+  if (setting.category[0] !== 'all') {
     tempSongList = songlist.filter((item: ISong) => {
       return setting.category.includes(item.分类);
     });
   }
 
   // 再筛版本
-  if (setting.version[0] !== "all") {
-    tempSongList = tempSongList.filter(item => {
+  if (setting.version[0] !== 'all') {
+    tempSongList = tempSongList.filter((item) => {
       return setting.version.includes(item.版本);
     });
   }
@@ -60,7 +59,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
     setting.lvMultiple === true &&
     setting.lvMin === setting.lvMax &&
     setting.lvMinPlus === setting.lvMaxPlus;
-  console.log('高低一致', 高低一致)
+  console.log('高低一致', 高低一致);
   function 筛歌过程(等级: string) {
     // console.log('筛歌过程输入的等级', 等级);
     // 如果 非多等级筛选 或 最高等级跟最低等级设置一致
@@ -68,7 +67,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
       let 抽歌等级 = setting.lvMin;
       // 如果要带加号就加上
       if (setting.lvMinPlus) {
-        抽歌等级 = 抽歌等级 + "+";
+        抽歌等级 = 抽歌等级 + '+';
       }
       // console.log("抽歌等级", 抽歌等级);
       // 直接判断一不一样就是了
@@ -105,7 +104,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
           // what if 要求结尾是+
           setting.lvMinPlus === true &&
           // what if 结尾没有+
-          等级[等级.length - 1] !== "+"
+          等级[等级.length - 1] !== '+'
         ) {
           // 就不在抽歌范围了
           判定结果 = false;
@@ -121,7 +120,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
           // what if 要求结尾不是+
           setting.lvMaxPlus !== true &&
           // what if 结尾有+
-          等级[等级.length - 1] == "+"
+          等级[等级.length - 1] == '+'
         ) {
           // 就不在抽歌范围了
           判定结果 = false;
@@ -137,11 +136,11 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
   }
   //#endregion
   // 开始筛选
-  tempSongList.map(song => {
+  tempSongList.map((song) => {
     // console.log('正在判断的歌', song);
     for (const [songRank, songDifficulty] of Object.entries(song.等级)) {
       if (setting.rank.includes(songRank)) {
-        if (筛歌过程((songDifficulty as string))) {
+        if (筛歌过程(songDifficulty as string)) {
           let songPreview = {
             id: song.id,
             rank: songRank,
@@ -156,7 +155,6 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
         }
       }
     }
-
   });
   console.timeEnd('筛歌');
   return output;

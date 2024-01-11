@@ -31,52 +31,52 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useSonglistStore } from "@/stores/songlist";
+import { computed } from 'vue';
+import { useSonglistStore } from '@/stores/songlist';
 
 const store = useSonglistStore();
 
-const props = defineProps(["setting"]);
+const props = defineProps(['setting']);
 
 let versionText = store.version || '获取版本出错';
 
 let lvText = computed(() => {
-  let str = "";
+  let str = '';
   if (props.setting.lvMin > 0) {
     str = props.setting.lvMin;
     if (props.setting.lvMinPlus === true) {
-      str += "+";
+      str += '+';
     }
     if (props.setting.lvMultiple) {
       str += ` ~ ${props.setting.lvMax}`;
       if (props.setting.lvMaxPlus === true) {
-        str += "+";
+        str += '+';
       }
     }
   } else {
-    str = "未设置等级";
+    str = '未设置等级';
   }
   return str;
 });
 
 function getCatName(cat: string) {
   switch (cat) {
-    case "pops_anime":
-      return "动画 & 流行";
-    case "niconico":
-      return "nico & V家";
-    case "toho":
-      return "东方 Project";
-    case "variety":
-      return "其他游戏";
-    case "maimai":
-      return "maimai";
-    case "gekichu":
-      return "音击 & 中二";
-    case "all":
-      return "全部分类";
+    case 'pops_anime':
+      return '动画 & 流行';
+    case 'niconico':
+      return 'nico & V家';
+    case 'toho':
+      return '东方 Project';
+    case 'variety':
+      return '其他游戏';
+    case 'maimai':
+      return 'maimai';
+    case 'gekichu':
+      return '音击 & 中二';
+    case 'all':
+      return '全部分类';
     default:
-      return "分类有误";
+      return '分类有误';
   }
 }
 
@@ -85,15 +85,15 @@ let catText = computed(() => {
   props.setting.category.forEach((item: string) => {
     tempArr.push(getCatName(item));
   });
-  return tempArr.join("、");
+  return tempArr.join('、');
 });
 
 let verText = computed(() => {
-  let str = "";
-  if (props.setting.version[0] !== "all") {
-    str = props.setting.version.join("、");
+  let str = '';
+  if (props.setting.version[0] !== 'all') {
+    str = props.setting.version.join('、');
   } else {
-    str = "全部版本";
+    str = '全部版本';
   }
   return str;
 });
@@ -106,8 +106,8 @@ let verText = computed(() => {
   text-align: center;
 
   .rank {
-    >span:not(:last-child)::after {
-      content: ".";
+    > span:not(:last-child)::after {
+      content: '.';
     }
 
     .B {

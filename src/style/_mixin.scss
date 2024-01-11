@@ -1,10 +1,16 @@
 @mixin txsh($color: #3585fe, $width: 2px) {
-  text-shadow: 0 $width $width $color, $width 0 $width $color,
-    ($width * -1) 0 $width $color, 0 ($width * -1) $width $color;
+  text-shadow:
+    0 $width $width $color,
+    $width 0 $width $color,
+    ($width * -1) 0 $width $color,
+    0 ($width * -1) $width $color;
 }
 @mixin bxsh($bdc: #319df8, $bgc: #cff1eb, $backShadow: #1c6fb0) {
   background-color: $bgc;
-  box-shadow: 0 0 0 3px $bdc, 0 0 0 6px #fff, 0 0 0 9px rgba(#fff, 0.4),
+  box-shadow:
+    0 0 0 3px $bdc,
+    0 0 0 6px #fff,
+    0 0 0 9px rgba(#fff, 0.4),
     0 0 5px 5px $backShadow;
 }
 
@@ -26,12 +32,7 @@
   }
 }
 
-@mixin input-label(
-  $bdc: #ccc,
-  $bdc-hover: var(--color-border),
-  $tc: #333,
-  $tc-checked: #fff
-) {
+@mixin input-label($bdc: #ccc, $bdc-hover: var(--color-border), $tc: #333, $tc-checked: #fff) {
   .inner {
     color: $tc;
     border-color: $bdc;

@@ -21,7 +21,7 @@
   padding: 0 30px;
   margin: 30px auto;
   border-radius: 9999em;
-  box-shadow: 12px 12px 0 rgba(#000, .2);
+  box-shadow: 12px 12px 0 rgba(#000, 0.2);
 
   .menu-item {
     font-size: 20px;

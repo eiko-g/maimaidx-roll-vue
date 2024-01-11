@@ -1,13 +1,13 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-export const useSettingsStore = defineStore("settings", () => {
+export const useSettingsStore = defineStore('settings', () => {
   // 首次运行
   let isFirstRun = ref(true);
   // 难度
-  let rank = ref(["all"]);
+  let rank = ref(['all']);
   // 分类
-  let category = ref(["all"]);
+  let category = ref(['all']);
   // 难度多选
   let lvMultiple = ref(false);
   // 最低等级
@@ -19,7 +19,7 @@ export const useSettingsStore = defineStore("settings", () => {
   // 最高等级带加号
   let lvMaxPlus = ref(false);
   // 版本
-  let version = ref(["all"]);
+  let version = ref(['all']);
 
   return {
     isFirstRun,
@@ -30,6 +30,6 @@ export const useSettingsStore = defineStore("settings", () => {
     lvMinPlus,
     lvMax,
     lvMaxPlus,
-    version,
+    version
   };
 });

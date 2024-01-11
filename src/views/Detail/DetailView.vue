@@ -4,7 +4,8 @@
     <img :src="coverSrc" class="cover" alt="歌曲封面" />
     <div class="song-info">
       <h3 class="song-title">
-        <span :class="['type', song.类型]">{{ song.类型 }}</span>{{ song.曲名 }}
+        <span :class="['type', song.类型]">{{ song.类型 }}</span
+        >{{ song.曲名 }}
       </h3>
       <p class="author">{{ song.作者 }}</p>
 
@@ -63,45 +64,49 @@ const route = useRoute();
 const router = useRouter();
 const songlistStore = useSonglistStore();
 let song = ref();
-song.value = songlistStore.originSonglist.find(song => song.id === Number.parseInt(route.params.id as string));
+song.value = songlistStore.originSonglist.find(
+  (song) => song.id === Number.parseInt(route.params.id as string)
+);
 
 // 如果直接改了路由中的歌曲 ID 的话，就更新一下歌曲信息
 onUpdated(() => {
-  song.value = songlistStore.originSonglist.find(song => song.id === Number.parseInt(route.params.id as string));
-})
+  song.value = songlistStore.originSonglist.find(
+    (song) => song.id === Number.parseInt(route.params.id as string)
+  );
+});
 
 let coverSrc = computed(() => {
   let coverStr: string;
   if (song.value.封面 != undefined || song.value.封面 != null) {
     coverStr = `./assets/img/cover.png/${song.value.封面}`;
   } else {
-    coverStr = "./assets/img/nocover.png";
+    coverStr = './assets/img/nocover.png';
   }
   return coverStr;
 });
 
 let catText = computed(() => {
   switch (song.value.分类) {
-    case "pops_anime": {
-      return "动画 & 流行";
+    case 'pops_anime': {
+      return '动画 & 流行';
     }
-    case "niconico": {
-      return "nico & V家";
+    case 'niconico': {
+      return 'nico & V家';
     }
-    case "toho": {
-      return "东方 Project";
+    case 'toho': {
+      return '东方 Project';
     }
-    case "variety": {
-      return "其他游戏";
+    case 'variety': {
+      return '其他游戏';
     }
-    case "maimai": {
-      return "maimai";
+    case 'maimai': {
+      return 'maimai';
     }
-    case "gekichu": {
-      return "音击 & 中二";
+    case 'gekichu': {
+      return '音击 & 中二';
     }
     default: {
-      return "分类";
+      return '分类';
     }
   }
 });
@@ -246,7 +251,7 @@ let catText = computed(() => {
   cursor: pointer;
   text-align: center;
 
-  @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
+  @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, 0.7));
   @include txsh(#6f34b0);
 }
 </style>

@@ -8,20 +8,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 defineProps<{
   buttonDisable: boolean;
 }>();
-defineEmits(["rollClicked"]);
+defineEmits(['rollClicked']);
 function gotoSetting() {
-  router.push({ name: "rollSetting" });
+  router.push({ name: 'rollSetting' });
 }
 </script>
 
 <style scoped lang="scss">
-@import "@/style/mixin";
+@import '@/style/mixin';
 
 button {
   display: block;
@@ -43,7 +43,7 @@ button {
   }
 
   &.roll {
-    @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
+    @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, 0.7));
     @include txsh(#6f34b0);
   }
 

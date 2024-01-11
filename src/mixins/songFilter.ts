@@ -7,8 +7,8 @@
  * @returns {Array}
  */
 
-import type ISetting from "@/interface/ISetting";
-import type ISong from "@/interface/ISong";
+import type ISetting from '@/interface/ISetting';
+import type ISong from '@/interface/ISong';
 
 interface ISongPreview {
   id: number;
@@ -20,46 +20,43 @@ interface ISongPreview {
   };
 }
 
-export default function songFilter(
-  songlist: Array<ISong>,
-  inputSetting: ISetting
-) {
-  console.log("开始筛歌");
-  console.time("筛歌计时器");
+export default function songFilter(songlist: Array<ISong>, inputSetting: ISetting) {
+  console.log('开始筛歌');
+  console.time('筛歌计时器');
   if (!inputSetting || Object.keys(inputSetting).length === 0) {
-    console.error("筛歌函数没有加载到设置，代码写炸了");
+    console.error('筛歌函数没有加载到设置，代码写炸了');
     return {};
   }
-  console.log("输入进来的设置：", inputSetting);
+  console.log('输入进来的设置：', inputSetting);
 
   let setting = inputSetting,
     tempSongList = songlist,
     output: Array<ISongPreview> = [];
 
-  console.log("筛歌时的设置", setting);
+  console.log('筛歌时的设置', setting);
 
   // 如果难度是 all 则全部难度塞进去
-  if (setting.rank.includes("all")) {
-    setting.rank = ["B", "A", "E", "M", "R"];
+  if (setting.rank.includes('all')) {
+    setting.rank = ['B', 'A', 'E', 'M', 'R'];
   }
 
   // 先筛分类
-  if (setting.category[0] !== "all") {
+  if (setting.category[0] !== 'all') {
     tempSongList = songlist.filter((item: ISong) => {
       return setting.category.includes(item.分类);
     });
   }
 
-  console.log("筛了分类的歌单：", tempSongList);
+  console.log('筛了分类的歌单：', tempSongList);
 
   // 再筛版本
-  if (setting.version[0] !== "all") {
+  if (setting.version[0] !== 'all') {
     tempSongList = tempSongList.filter((item) => {
       return setting.version.includes(item.版本);
     });
   }
 
-  console.log("筛了版本的歌单：", tempSongList);
+  console.log('筛了版本的歌单：', tempSongList);
 
   //#region 筛歌过程
   // 屌，这里先转为数字才行
@@ -71,25 +68,25 @@ export default function songFilter(
     setting.lvMultiple === true &&
     setting.lvMin === setting.lvMax &&
     setting.lvMinPlus === setting.lvMaxPlus;
-  console.log("是否高低一致：", 高低一致);
+  console.log('是否高低一致：', 高低一致);
 
   // 如果是单一难度的话
   if (高低一致 === true || setting.lvMultiple !== true) {
-    console.log("现在抽的是单难度");
+    console.log('现在抽的是单难度');
 
     let 抽歌等级: string = setting.lvMin.toString();
     if (setting.lvMinPlus === true) {
-      抽歌等级 = 抽歌等级 + "+";
+      抽歌等级 = 抽歌等级 + '+';
     }
     // 对临时歌单进行处理
     tempSongList.map((song) => {
-      console.log("正在处理的歌：", song);
+      console.log('正在处理的歌：', song);
       for (const [songRank, songDifficulty] of Object.entries(song.等级)) {
-        console.log("正在判断的难度和等级：", songRank, songDifficulty);
+        console.log('正在判断的难度和等级：', songRank, songDifficulty);
         if (setting.rank.includes(songRank)) {
-          console.log("这个难度符合要求：", songRank);
+          console.log('这个难度符合要求：', songRank);
           if (抽歌等级 === songDifficulty.toString()) {
-            console.log("等级也符合要求：", songDifficulty);
+            console.log('等级也符合要求：', songDifficulty);
 
             let songPreview = {
               id: song.id,
@@ -97,34 +94,34 @@ export default function songFilter(
               preview: {
                 name: song.曲名,
                 rank: songRank,
-                lv: songDifficulty,
-              },
+                lv: songDifficulty
+              }
             };
 
-            console.log("output 被塞了这个：", songPreview);
+            console.log('output 被塞了这个：', songPreview);
             output.push(songPreview);
           }
         }
       }
     });
   } else if (setting.lvMultiple === true && 高低一致 === false) {
-    console.log("现在抽的是范围难度");
+    console.log('现在抽的是范围难度');
 
     // 如果是 范围难度 且 不是同样的设置
     if (setting.lvMin === setting.lvMax) {
-      console.log("等级的数字部分相同");
+      console.log('等级的数字部分相同');
       // 如果数字部分相同的话
       // 上面已经判断过带不带加号的情况了，这里就不用判断了
       let 抽歌等级 = setting.lvMin;
       // 对临时歌单进行处理
       tempSongList.map((song) => {
-        console.log("正在处理的歌：", song);
+        console.log('正在处理的歌：', song);
         for (const [songRank, songDifficulty] of Object.entries(song.等级)) {
-          console.log("正在判断的难度和等级：", songRank, songDifficulty);
+          console.log('正在判断的难度和等级：', songRank, songDifficulty);
           if (setting.rank.includes(songRank)) {
-            console.log("这个难度符合要求：", songRank);
+            console.log('这个难度符合要求：', songRank);
             if (抽歌等级 === Number.parseInt(songDifficulty as string)) {
-              console.log("等级也符合要求：", songDifficulty);
+              console.log('等级也符合要求：', songDifficulty);
 
               let songPreview = {
                 id: song.id,
@@ -132,11 +129,11 @@ export default function songFilter(
                 preview: {
                   name: song.曲名,
                   rank: songRank,
-                  lv: songDifficulty,
-                },
+                  lv: songDifficulty
+                }
               };
 
-              console.log("output 被塞了这个：", songPreview);
+              console.log('output 被塞了这个：', songPreview);
               output.push(songPreview);
             }
           }
@@ -144,23 +141,18 @@ export default function songFilter(
       });
     } else {
       // 如果数字部分不同的话
-      console.log("等级的数字部分不同", setting.lvMin, setting.lvMax);
-      console.log(
-        "低等级带加号：",
-        setting.lvMinPlus,
-        "高等级带加号：",
-        setting.lvMaxPlus
-      );
+      console.log('等级的数字部分不同', setting.lvMin, setting.lvMax);
+      console.log('低等级带加号：', setting.lvMinPlus, '高等级带加号：', setting.lvMaxPlus);
 
       // 对临时歌单进行处理
       tempSongList.map((song) => {
-        console.log("---分割线---");
+        console.log('---分割线---');
 
-        console.log("正在处理的歌：", song);
+        console.log('正在处理的歌：', song);
         for (const [songRank, songDifficulty] of Object.entries(song.等级)) {
-          console.log("正在判断的难度和等级：", songRank, songDifficulty);
+          console.log('正在判断的难度和等级：', songRank, songDifficulty);
           if (setting.rank.includes(songRank)) {
-            console.log("这个难度符合要求：", songRank);
+            console.log('这个难度符合要求：', songRank);
 
             // 预设结果
             let result = false;
@@ -174,19 +166,17 @@ export default function songFilter(
               Number.parseInt(songDifficulty as string) >= (setting.lvMin as number) &&
               Number.parseInt(songDifficulty as string) <= (setting.lvMax as number)
             ) {
-              console.log("等级的数字部分在设置范围内：", songDifficulty);
+              console.log('等级的数字部分在设置范围内：', songDifficulty);
               result = true;
             }
 
             console.log(
-              "等级整数等于lvMin：",
+              '等级整数等于lvMin：',
               Number.parseInt(songDifficulty as string) === setting.lvMin
             );
             console.log(
-              "结尾没有+：",
-              (songDifficulty as string)[
-              (songDifficulty as string).length - 1
-              ] !== "+"
+              '结尾没有+：',
+              (songDifficulty as string)[(songDifficulty as string).length - 1] !== '+'
             );
 
             // 再判断边缘情况
@@ -198,9 +188,7 @@ export default function songFilter(
               // what if 要求结尾是+
               setting.lvMinPlus === true &&
               // what if 结尾没有+
-              (songDifficulty as string)[
-              (songDifficulty as string).length - 1
-              ] !== "+"
+              (songDifficulty as string)[(songDifficulty as string).length - 1] !== '+'
             ) {
               // 就不在抽歌范围了
               result = false;
@@ -210,14 +198,12 @@ export default function songFilter(
             }
 
             console.log(
-              "等级整数等于lvMax：",
+              '等级整数等于lvMax：',
               Number.parseInt(songDifficulty as string) === setting.lvMax
             );
             console.log(
-              "结尾有+：",
-              (songDifficulty as string)[
-              (songDifficulty as string).length - 1
-              ] === "+"
+              '结尾有+：',
+              (songDifficulty as string)[(songDifficulty as string).length - 1] === '+'
             );
 
             // 判断最高等级的就是反过来的，我也不知道为什么这么写，但是感觉就该这样，脑子不太行。
@@ -227,9 +213,7 @@ export default function songFilter(
               // what if 要求结尾不是+
               setting.lvMaxPlus !== true &&
               // what if 结尾有+
-              (songDifficulty as string)[
-              (songDifficulty as string).length - 1
-              ] === "+"
+              (songDifficulty as string)[(songDifficulty as string).length - 1] === '+'
             ) {
               // 就不在抽歌范围了
               result = false;
@@ -239,7 +223,7 @@ export default function songFilter(
             }
 
             if (result === true) {
-              console.log("等级符合要求：", songDifficulty);
+              console.log('等级符合要求：', songDifficulty);
 
               let songPreview = {
                 id: song.id,
@@ -247,11 +231,11 @@ export default function songFilter(
                 preview: {
                   name: song.曲名,
                   rank: songRank,
-                  lv: songDifficulty,
-                },
+                  lv: songDifficulty
+                }
               };
 
-              console.log("output 被塞了这个：", songPreview);
+              console.log('output 被塞了这个：', songPreview);
               output.push(songPreview);
             }
           }
@@ -262,8 +246,8 @@ export default function songFilter(
 
   //#endregion
 
-  console.timeEnd("筛歌计时器");
-  console.log("筛歌结束");
+  console.timeEnd('筛歌计时器');
+  console.log('筛歌结束');
 
   // 挂到外面方便测试，虽然 TS 会报错但是能用
   // window.aaa = output;

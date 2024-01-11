@@ -160,8 +160,8 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from "@/stores/settings";
-import { onMounted } from "vue";
+import { useSettingsStore } from '@/stores/settings';
+import { onMounted } from 'vue';
 const store = useSettingsStore();
 
 onMounted(() => {
@@ -185,7 +185,7 @@ onMounted(() => {
     &:hover {
       cursor: pointer;
     }
-    input[type="radio"] {
+    input[type='radio'] {
       display: none;
     }
     .inner {
@@ -208,7 +208,7 @@ onMounted(() => {
       label {
         display: block;
       }
-      input[type="number"] {
+      input[type='number'] {
         display: block;
         width: 100%;
         max-width: 150px;
@@ -232,7 +232,7 @@ onMounted(() => {
         &:hover {
           cursor: pointer;
         }
-        input[type="radio"] {
+        input[type='radio'] {
           display: none;
         }
         .inner {
@@ -248,26 +248,26 @@ onMounted(() => {
       }
     }
     &.min {
-      input[type="number"] {
+      input[type='number'] {
         border-color: var(--color-A-dark);
         &:focus {
           box-shadow: 0 0 3px var(--color-A-dark);
         }
       }
-      input[type="radio"]:checked ~ .inner {
+      input[type='radio']:checked ~ .inner {
         color: #333;
         border-color: var(--color-A-dark);
         background-color: var(--color-A-dark);
       }
     }
     &.max {
-      input[type="number"] {
+      input[type='number'] {
         border-color: var(--color-M-dark);
         &:focus {
           box-shadow: 0 0 3px var(--color-M-dark);
         }
       }
-      input[type="radio"]:checked ~ .inner {
+      input[type='radio']:checked ~ .inner {
         color: #fff;
         border-color: var(--color-M-dark);
         background-color: var(--color-M-dark);

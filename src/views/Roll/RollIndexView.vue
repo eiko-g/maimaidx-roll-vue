@@ -1,5 +1,8 @@
 <template>
-  <ResultBlock :currentSong="songlistStore.currentSong" :currentRank="songlistStore.currentRank"></ResultBlock>
+  <ResultBlock
+    :currentSong="songlistStore.currentSong"
+    :currentRank="songlistStore.currentRank"
+  ></ResultBlock>
   <SettingInfoBlock :setting="settingStore"></SettingInfoBlock>
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
@@ -9,13 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { useSonglistStore } from "@/stores/songlist";
-import { useSettingsStore } from "@/stores/settings";
-import ResultBlock from "@/components/Roll/ResultBlock.vue";
-import SettingInfoBlock from "@/components/Roll/SettingInfoBlock.vue";
-import RollButtons from "@/components/Roll/RollButtons.vue";
-import { ref } from "vue";
-import shuffleArray from "@/mixins/shuffleArray";
+import { useSonglistStore } from '@/stores/songlist';
+import { useSettingsStore } from '@/stores/settings';
+import ResultBlock from '@/components/Roll/ResultBlock.vue';
+import SettingInfoBlock from '@/components/Roll/SettingInfoBlock.vue';
+import RollButtons from '@/components/Roll/RollButtons.vue';
+import { ref } from 'vue';
+import shuffleArray from '@/mixins/shuffleArray';
 
 const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
@@ -23,7 +26,7 @@ const settingStore = useSettingsStore();
 let buttonDisable = ref(settingStore.isFirstRun);
 
 function roll() {
-  console.log("Roll!", new Date());
+  console.log('Roll!', new Date());
   buttonDisable.value = true;
 
   // !!AnyScript
@@ -32,7 +35,7 @@ function roll() {
   shuffleArray(rollSonglist);
 
   let selectThis = rollSonglist[0];
-  console.log("选到了这首歌：", selectThis);
+  console.log('选到了这首歌：', selectThis);
 
   let selectedSong = songlistStore.originSonglist.find((song) => {
     return song.id === selectThis.id;
@@ -43,7 +46,7 @@ function roll() {
     throw new Error('啥情况，怎么 roll 完了找不到歌？');
   }
 
-  console.log("歌曲详情：", songlistStore.currentSong);
+  console.log('歌曲详情：', songlistStore.currentSong);
   songlistStore.currentRank = selectThis.rank;
 
   setTimeout(() => {
