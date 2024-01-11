@@ -171,8 +171,8 @@ export default function songFilter(
             // 同理，11/11+ 和 13/13+ 目前也是在范围内，下面再判断边缘情况
             // 抽 11+ ~ 12 也是没问题的，11/12+ 的情况在下面会判断
             if (
-              Number.parseInt(songDifficulty as string) >= setting.lvMin &&
-              Number.parseInt(songDifficulty as string) <= setting.lvMax
+              Number.parseInt(songDifficulty as string) >= (setting.lvMin as number) &&
+              Number.parseInt(songDifficulty as string) <= (setting.lvMax as number)
             ) {
               console.log("等级的数字部分在设置范围内：", songDifficulty);
               result = true;
@@ -185,7 +185,7 @@ export default function songFilter(
             console.log(
               "结尾没有+：",
               (songDifficulty as string)[
-                (songDifficulty as string).length - 1
+              (songDifficulty as string).length - 1
               ] !== "+"
             );
 
@@ -199,7 +199,7 @@ export default function songFilter(
               setting.lvMinPlus === true &&
               // what if 结尾没有+
               (songDifficulty as string)[
-                (songDifficulty as string).length - 1
+              (songDifficulty as string).length - 1
               ] !== "+"
             ) {
               // 就不在抽歌范围了
@@ -216,7 +216,7 @@ export default function songFilter(
             console.log(
               "结尾有+：",
               (songDifficulty as string)[
-                (songDifficulty as string).length - 1
+              (songDifficulty as string).length - 1
               ] === "+"
             );
 
@@ -228,7 +228,7 @@ export default function songFilter(
               setting.lvMaxPlus !== true &&
               // what if 结尾有+
               (songDifficulty as string)[
-                (songDifficulty as string).length - 1
+              (songDifficulty as string).length - 1
               ] === "+"
             ) {
               // 就不在抽歌范围了

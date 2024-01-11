@@ -27,6 +27,8 @@ coverage
 *.sln
 *.sw?
 
+*.tsbuildinfo
+
 # 歌曲封面文件夹
 public/assets/img/cover.png/*.png
 public/assets/img/cover/*.jpg
