@@ -106,8 +106,8 @@ let verText = computed(() => {
   text-align: center;
 
   .rank {
-    > span:not(:last-child)::after {
-      content: '.';
+    >span:not(:last-child)::after {
+      content: ".";
     }
 
     .B {

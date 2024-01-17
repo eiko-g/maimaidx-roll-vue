@@ -1,8 +1,5 @@
 <template>
-  <ResultBlock
-    :currentSong="songlistStore.currentSong"
-    :currentRank="songlistStore.currentRank"
-  ></ResultBlock>
+  <ResultBlock :currentSong="songlistStore.currentSong" :currentRank="songlistStore.currentRank"></ResultBlock>
   <SettingInfoBlock :setting="settingStore"></SettingInfoBlock>
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
