@@ -91,8 +91,8 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
         // 同理，11/11+ 和 13/13+ 目前也是在范围内，下面再判断边缘情况
         // 抽 11+ ~ 12 也是没问题的，11/12+ 的情况在下面会判断
         if (
-          Number.parseInt(等级) >= setting.lvMin &&
-          Number.parseInt(等级) <= setting.lvMax
+          Number.parseInt(等级) >= +setting.lvMin &&
+          Number.parseInt(等级) <= +setting.lvMax
         ) {
           判定结果 = true;
         }

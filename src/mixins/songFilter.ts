@@ -171,8 +171,8 @@ export default function songFilter(
             // 同理，11/11+ 和 13/13+ 目前也是在范围内，下面再判断边缘情况
             // 抽 11+ ~ 12 也是没问题的，11/12+ 的情况在下面会判断
             if (
-              Number.parseInt(songDifficulty as string) >= setting.lvMin &&
-              Number.parseInt(songDifficulty as string) <= setting.lvMax
+              Number.parseInt(songDifficulty as string) >= +setting.lvMin &&
+              Number.parseInt(songDifficulty as string) <= +setting.lvMax
             ) {
               console.log("等级的数字部分在设置范围内：", songDifficulty);
               result = true;
