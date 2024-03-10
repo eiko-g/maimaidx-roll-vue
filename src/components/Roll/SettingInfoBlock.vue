@@ -25,7 +25,7 @@
     </p>
     <p>
       <b>抽选歌单：</b>
-      <span class="songlist">ver.CH1.32-H</span>
+      <span class="songlist">ver.CH1.33-I</span>
     </p>
   </div>
 </template>
