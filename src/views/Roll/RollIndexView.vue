@@ -4,7 +4,7 @@
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.6.4-20240415.01</p>
+    <p>ver {{ version }}</p>
   </div>
 </template>
 
@@ -21,6 +21,8 @@ const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
 
 let buttonDisable = ref(settingStore.isFirstRun);
+
+const version = '0.6.5-20240716.01';
 
 function roll() {
   console.log("Roll!", new Date());

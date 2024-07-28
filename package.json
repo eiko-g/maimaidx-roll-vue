@@ -12,15 +12,15 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "pinia": "^2.1.7",
-    "vue": "^3.4.31",
+    "pinia": "^2.2.0",
+    "vue": "^3.4.34",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.10.3",
+    "@rushstack/eslint-patch": "^1.10.4",
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.14.10",
-    "@vitejs/plugin-vue": "^5.0.5",
+    "@types/node": "^20.14.13",
+    "@vitejs/plugin-vue": "^5.1.1",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
@@ -28,7 +28,7 @@
     "npm-run-all2": "^6.2.2",
     "sass": "^1.77.8",
     "typescript": "~5.3.3",
-    "vite": "^5.3.3",
+    "vite": "^5.3.5",
     "vue-tsc": "^1.8.27"
   }
 }
