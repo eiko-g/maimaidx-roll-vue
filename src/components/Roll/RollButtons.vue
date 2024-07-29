@@ -43,13 +43,13 @@ button {
   }
 
   &.roll {
-    @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
-    @include txsh(#6f34b0);
+    @include bxsh(#012d7b, #ffba42, rgba(#183665, .7));
+    @include txsh(#012d7b);
   }
 
   &.setting {
-    @include bxsh(#f48605, #ffd21f, #f48605);
-    @include txsh(#f48605);
+    @include bxsh(#e32b62, #fd4a81, rgba(#183665, .7));
+    @include txsh(#e32b62);
   }
 
   &.random {

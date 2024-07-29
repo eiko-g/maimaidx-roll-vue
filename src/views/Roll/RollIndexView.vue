@@ -22,7 +22,7 @@ const settingStore = useSettingsStore();
 
 let buttonDisable = ref(settingStore.isFirstRun);
 
-const version = '0.6.5-20240716.01';
+const version = '0.6.6-20240729.01';
 
 function roll() {
   console.log("Roll!", new Date());
