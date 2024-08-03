@@ -4,7 +4,7 @@
   <RollButtons @rollClicked="roll" :buttonDisable="buttonDisable"></RollButtons>
 
   <div class="footer">
-    <p>ver 0.6.4-20240415.01</p>
+    <p>ver {{ version }}</p>
   </div>
 </template>
 
@@ -21,6 +21,8 @@ const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
 
 let buttonDisable = ref(settingStore.isFirstRun);
+
+const version = '0.6.6-20240804.01';
 
 function roll() {
   console.log("Roll!", new Date());
@@ -40,6 +42,7 @@ function roll() {
   if (selectedSong !== undefined) {
     songlistStore.currentSong = selectedSong;
   } else {
+    alert('我去，Roll 歌炸了！');
     throw new Error('啥情况，怎么 roll 完了找不到歌？');
   }
 

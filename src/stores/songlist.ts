@@ -4,6 +4,7 @@ import { reactive, ref } from "vue";
 import type ISongRollList from "@/interface/ISongRollList";
 
 export const useSonglistStore = defineStore("songlist", () => {
+  let version:string|null = '';
   let originSonglist: Array<ISong> = [];
   let currentSong: ISong = reactive({
     id: -1,
@@ -29,5 +30,5 @@ export const useSonglistStore = defineStore("songlist", () => {
     },
   ]);
 
-  return { originSonglist, currentSong, currentRank, rollSonglist };
+  return { version,originSonglist, currentSong, currentRank, rollSonglist };
 });

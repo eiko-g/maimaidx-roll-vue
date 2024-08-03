@@ -91,6 +91,11 @@
         <input type="checkbox" name="版本" id="version-DX2023" value="DX2023" class="version" />
         <div class="inner">DX2023</div>
       </label>
+
+      <label for="version-DX2024" class="version-label DX2024">
+        <input type="checkbox" name="版本" id="version-DX2024" value="DX2024" class="version" />
+        <div class="inner">DX2024</div>
+      </label>
     </div>
   </div>
 </template>
@@ -151,12 +156,12 @@ onMounted(() => {
 
   .version-label {
     user-select: none;
+    margin-bottom: 10px;
 
     &:not(:last-child) {
       margin-right: 10px;
     }
 
-    margin-bottom: 10px;
 
     &:hover {
       cursor: pointer;

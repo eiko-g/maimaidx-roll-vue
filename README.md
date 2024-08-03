@@ -14,8 +14,6 @@
 
 如果没有装 `pnpm` 的话就先 `npm install -g pnpm`，速度比用 `npm` 要快。
 
-推荐开发工具：[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=vue.volar) （记得禁用 Vetur）+ [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=vue.vscode-typescript-vue-plugin)，装完之后要开 [Takeover mode](https://cn.vuejs.org/guide/typescript/overview.html#volar-takeover-mode)。
-
 默认路径为 `roll.web/maimaidx`，如果需要部署在其他目录的请去 `vite.config.ts` 修改或注释。
 
 另外本项目的 id 均为自动赋值的 id，并不是官方的内部 id，因为我也没拿到相关数据。相关代码见 `/src/views/LoadingView.vue`。

@@ -7,7 +7,21 @@
 
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import MainMenu from "./components/MainMenu.vue";
+// import MainMenu from "./components/MainMenu.vue";
+
+let pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
+let pattern_bg_postition = 5;
+setInterval(() => {
+  // console.log('pattern_bg_postition', pattern_bg_postition);
+
+  if (pattern_bg_postition <= 100) {
+    pattern_bg_postition += 5;
+  } else {
+    pattern_bg_postition = 5;
+  }
+  pattern_bg!.style.backgroundPosition = `${pattern_bg_postition}% 0`;
+}, 1000);
+
 </script>
 
 <style lang="scss">
@@ -44,7 +58,7 @@ body {
 }
 
 a {
-  color: #ff8db0;
+  color: #053264;
   text-decoration: none;
 }
 
@@ -54,11 +68,11 @@ a {
   width: 80%;
   max-width: 600px;
   min-height: 90vh;
-  margin: 50px auto;
+  margin: 100px auto;
   background-color: #fff;
-  box-shadow: inset 0 0 5px rgba(111, 52, 176, .7), 0 0 0 5px #fbfb71, 0 0 0 10px #fff, 0 0 0 15px #b98bf8,
+  box-shadow: inset 0 0 5px rgba(#ffba42, .7), 0 0 0 5px #183665, 0 0 0 10px #fff, 0 0 0 15px #ffba42,
     0 0 0 20px #fff, 0 0 0 25px rgba(255, 255, 255, 0.4),
-    0 0 20px 15px rgba(111, 52, 176, .7);
+    0 0 20px 15px rgba(#183665, .7);
   border-radius: 10px;
   padding: 20px;
 }

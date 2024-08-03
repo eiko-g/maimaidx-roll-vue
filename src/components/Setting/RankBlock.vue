@@ -4,68 +4,32 @@
 
     <div class="ranks">
       <label class="rank-label all" for="rank-all">
-        <input
-          type="checkbox"
-          name="rank"
-          value="all"
-          id="rank-all"
-          class="rank all"
-        />
+        <input type="checkbox" name="rank" value="all" id="rank-all" class="rank all" />
         <span class="inner">All</span>
       </label>
 
       <label class="rank-label B" for="rank-B">
-        <input
-          type="checkbox"
-          name="rank"
-          value="B"
-          id="rank-B"
-          class="rank B"
-        />
+        <input type="checkbox" name="rank" value="B" id="rank-B" class="rank B" />
         <span class="inner">B</span>
       </label>
 
       <label class="rank-label A" for="rank-A">
-        <input
-          type="checkbox"
-          name="rank"
-          value="A"
-          id="rank-A"
-          class="rank A"
-        />
+        <input type="checkbox" name="rank" value="A" id="rank-A" class="rank A" />
         <span class="inner">A</span>
       </label>
 
       <label class="rank-label E" for="rank-E">
-        <input
-          type="checkbox"
-          name="rank"
-          value="E"
-          id="rank-E"
-          class="rank E"
-        />
+        <input type="checkbox" name="rank" value="E" id="rank-E" class="rank E" />
         <span class="inner">E</span>
       </label>
 
       <label class="rank-label M" for="rank-M">
-        <input
-          type="checkbox"
-          name="rank"
-          value="M"
-          id="rank-M"
-          class="rank M"
-        />
+        <input type="checkbox" name="rank" value="M" id="rank-M" class="rank M" />
         <span class="inner">M</span>
       </label>
 
       <label class="rank-label R" for="rank-R">
-        <input
-          type="checkbox"
-          name="rank"
-          value="R"
-          id="rank-R"
-          class="rank R"
-        />
+        <input type="checkbox" name="rank" value="R" id="rank-R" class="rank R" />
         <span class="inner">R</span>
       </label>
     </div>
@@ -120,19 +84,24 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "@/style/mixin";
+
 .ranks {
   display: flex;
+
   .rank-label {
     user-select: none;
     width: calc(1 / 6 * 100%);
     text-align: center;
+    margin-bottom: 10px;
+
     &:not(:last-child) {
       margin-right: 10px;
     }
-    margin-bottom: 10px;
+
     &:hover {
       cursor: pointer;
     }
+
     input[type="checkbox"] {
       display: none;
     }
@@ -142,21 +111,27 @@ onMounted(() => {
       border: 3px solid #ccc;
       padding: 5px;
     }
+
     &.all {
       @include input-label();
     }
+
     &.B {
       @include input-label(var(--color-B), var(--color-B-dark));
     }
+
     &.A {
       @include input-label(var(--color-A), var(--color-A-dark));
     }
+
     &.E {
       @include input-label(var(--color-E), var(--color-E-dark));
     }
+
     &.M {
       @include input-label(var(--color-M), var(--color-M-dark));
     }
+
     &.R {
       @include input-label(var(--color-R), var(--color-R-dark));
     }
