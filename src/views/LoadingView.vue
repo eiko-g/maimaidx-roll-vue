@@ -20,7 +20,7 @@ let go = ref(false);
 onMounted(async () => {
   push("开始载入了捏");
 
-  let lsData = localStorage.getItem("songlist")
+  // let lsData = localStorage.getItem("songlist")
   // if (lsData !== null) {
   //   push("有缓存歌单，可直接载入");
   //   push(`歌单缓存日期：${localStorage.getItem('last_cached_time')}`)
@@ -31,7 +31,7 @@ onMounted(async () => {
   //   }, 800);
   // } else {
   push("歌单加载中……");
-  let response = await fetch("./data/maimaiDXCN_2023.json?ver=2024041501.01"),
+  let response = await fetch("./data/maimaiDXCN_2024.json?ver=2024080401.01"),
     json: IJson;
   if (response.ok) {
     json = await response.json();
@@ -47,6 +47,8 @@ onMounted(async () => {
     console.log("加了 id 之后的 JSON", json);
     store.originSonglist = json.曲目列表;
     console.log("歌单载入完成");
+
+    store.version = json.version;
 
     // localStorage.setItem("songlist", JSON.stringify(json));
     // localStorage.setItem('last_cached_time', transTime());
@@ -106,6 +108,7 @@ function push(msg: string, type = "log") {
 
 interface IJson {
   data: number;
+  version: string,
   曲目列表: Array<ISong>;
 }
 </script>

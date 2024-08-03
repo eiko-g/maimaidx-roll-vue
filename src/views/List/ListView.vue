@@ -23,8 +23,8 @@
           value="variety" class="category">
         <div class="inner">其他游戏</div>
       </label>
-      <label class="cat-label maimai" for="cat-maimai"><input type="radio" id="cat-maimai" name="category" value="maimai"
-          class="category">
+      <label class="cat-label maimai" for="cat-maimai"><input type="radio" id="cat-maimai" name="category"
+          value="maimai" class="category">
         <div class="inner">maimai</div>
       </label>
       <label class="cat-label gekichu" for="cat-gekichu"><input type="radio" id="cat-gekichu" name="category"
@@ -141,12 +141,12 @@ let catText = (category: string) => {
 
   .cat-label {
     user-select: none;
+    margin-bottom: 10px;
 
     &:not(:last-child) {
       margin-right: 10px;
     }
 
-    margin-bottom: 10px;
 
     &:hover {
       cursor: pointer;

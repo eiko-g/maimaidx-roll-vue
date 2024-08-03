@@ -25,15 +25,17 @@
     </p>
     <p>
       <b>抽选歌单：</b>
-      <span class="songlist">ver.CH1.34-J</span>
+      <span class="songlist">{{ songlistStore.version }}</span>
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useSonglistStore } from "@/stores/songlist";
 import { computed } from "vue";
 
 const props = defineProps(["setting"]);
+const songlistStore = useSonglistStore();
 
 let lvText = computed(() => {
   let str = "";
