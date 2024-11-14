@@ -28,7 +28,9 @@ function roll() {
   console.log("Roll!", new Date());
   buttonDisable.value = true;
 
-  // !! AnyScript
+  /**
+   * ! AnyScript
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rollSonglist:any = songlistStore.rollSonglist;
 
