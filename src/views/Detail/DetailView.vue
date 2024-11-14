@@ -62,7 +62,7 @@ import { computed, onUpdated, ref } from 'vue';
 const route = useRoute();
 const router = useRouter();
 const songlistStore = useSonglistStore();
-let song = ref();
+const song = ref();
 song.value = songlistStore.originSonglist.find(song => song.id === Number.parseInt(route.params.id as string));
 
 // 如果直接改了路由中的歌曲 ID 的话，就更新一下歌曲信息
@@ -70,7 +70,7 @@ onUpdated(() => {
   song.value = songlistStore.originSonglist.find(song => song.id === Number.parseInt(route.params.id as string));
 })
 
-let coverSrc = computed(() => {
+const coverSrc = computed(() => {
   let coverStr: string;
   if (song.value.封面 != undefined || song.value.封面 != null) {
     coverStr = `./assets/img/cover.png/${song.value.封面}`;
@@ -80,7 +80,7 @@ let coverSrc = computed(() => {
   return coverStr;
 });
 
-let catText = computed(() => {
+const catText = computed(() => {
   switch (song.value.分类) {
     case "pops_anime": {
       return "动画 & 流行";

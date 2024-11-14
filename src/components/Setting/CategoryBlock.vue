@@ -43,7 +43,7 @@ const store = useSettingsStore();
 
 // 保存分类设置
 function saveCat() {
-  let elements = document.querySelectorAll("input.cat:checked"),
+  const elements = document.querySelectorAll("input.cat:checked"),
     tempCat: Array<string> = [];
   elements.forEach((item) => {
     tempCat.push((item as HTMLInputElement).value);

@@ -20,7 +20,7 @@ import shuffleArray from "@/mixins/shuffleArray";
 const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
 
-let buttonDisable = ref(settingStore.isFirstRun);
+const buttonDisable = ref(settingStore.isFirstRun);
 
 const version = '0.6.6-20240909.01';
 
@@ -28,15 +28,16 @@ function roll() {
   console.log("Roll!", new Date());
   buttonDisable.value = true;
 
-  // !!AnyScript
-  let rollSonglist: any = songlistStore.rollSonglist;
+  // !! AnyScript
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rollSonglist:any = songlistStore.rollSonglist;
 
   shuffleArray(rollSonglist);
 
-  let selectThis = rollSonglist[0];
+  const selectThis = rollSonglist[0];
   console.log("选到了这首歌：", selectThis);
 
-  let selectedSong = songlistStore.originSonglist.find((song) => {
+  const selectedSong = songlistStore.originSonglist.find((song) => {
     return song.id === selectThis.id;
   });
   if (selectedSong !== undefined) {

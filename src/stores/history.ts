@@ -9,6 +9,6 @@ interface IHistory {
 }
 
 export const useSettingsStore = defineStore('history', () => {
-  let history: Array<IHistory> = reactive([]);
+  const history: Array<IHistory> = reactive([]);
   return { history }
 })

@@ -44,7 +44,7 @@ const store = useSettingsStore();
 
 // 保存难度设置
 function saveRank() {
-  let elements = document.querySelectorAll("input.rank:checked"),
+  const elements = document.querySelectorAll("input.rank:checked"),
     tempRank: Array<string> = [];
   elements.forEach((item) => {
     tempRank.push((item as HTMLInputElement).value);

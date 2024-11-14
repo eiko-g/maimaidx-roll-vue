@@ -10,7 +10,7 @@ import { toRefs } from "vue";
 const props = defineProps({
   info: Object,
 });
-let { info } = toRefs(props);
+const { info } = toRefs(props);
 </script>
 
 <style lang="scss" scoped>

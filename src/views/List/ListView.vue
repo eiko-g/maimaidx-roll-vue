@@ -52,17 +52,17 @@
 
 <script lang="ts" setup>
 import { useSonglistStore } from "@/stores/songlist";
-import { ref } from "vue";
+// import { ref } from "vue";
 
 const songlistStore = useSonglistStore();
 
 const list = songlistStore.originSonglist;
 
-let currentList = ref([]);
+// const currentList = ref([]);
 
-let currentCategory = 'all';
+// const currentCategory = 'all';
 
-let coverSrc = (cover: string | undefined) => {
+const coverSrc = (cover: string | undefined) => {
   let coverStr: string;
   if (cover != undefined || cover != null) {
     coverStr = `./assets/img/cover.png/${cover}`;
@@ -72,7 +72,7 @@ let coverSrc = (cover: string | undefined) => {
   return coverStr;
 };
 
-let catText = (category: string) => {
+const catText = (category: string) => {
   switch (category) {
     case "pops_anime": {
       return "动画 & 流行";

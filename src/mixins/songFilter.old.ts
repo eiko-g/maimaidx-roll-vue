@@ -1,8 +1,9 @@
+/* eslint-disable prefer-const */
 /**
  * 输入原歌单和设置，然后一通操作后输出筛选后的歌单列表
  * 输出的格式为 [{id:"歌曲 ID",rank:"符合抽歌要求的难度"}]
- * @param {Array} songlist 
- * @param {Object} inputSetting 
+ * @param {Array} songlist
+ * @param {Object} inputSetting
  * @returns {Array}
  */
 
@@ -56,7 +57,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
   setting.lvMax = setting.lvMax.toString();
   // 高低一致指的是在多选难度时，最低和最高的设置完全一致
   // 这时候就跟单难度的判断方法一样了
-  let 高低一致 =
+  const 高低一致 =
     setting.lvMultiple === true &&
     setting.lvMin === setting.lvMax &&
     setting.lvMinPlus === setting.lvMaxPlus;
@@ -142,7 +143,7 @@ export default function songFilter(songlist: Array<ISong>, inputSetting: ISettin
     for (const [songRank, songDifficulty] of Object.entries(song.等级)) {
       if (setting.rank.includes(songRank)) {
         if (筛歌过程((songDifficulty as string))) {
-          let songPreview = {
+          const songPreview = {
             id: song.id,
             rank: songRank,
             preview: {

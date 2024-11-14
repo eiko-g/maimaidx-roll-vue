@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import InfoVue from "@/components/Loading/Info.vue";
+import InfoVue from "@/components/Loading/InfoBlock.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useSonglistStore } from "@/stores/songlist";
@@ -15,7 +15,7 @@ import type ISong from "@/interface/ISong";
 const router = useRouter();
 const store = useSonglistStore();
 
-let go = ref(false);
+const go = ref(false);
 
 onMounted(async () => {
   push("开始载入了捏");
@@ -31,8 +31,8 @@ onMounted(async () => {
   //   }, 800);
   // } else {
   push("歌单加载中……");
-  let response = await fetch("./data/maimaiDXCN_2024.json?ver=2024090901.01"),
-    json: IJson;
+  const response = await fetch("./data/maimaiDXCN_2024.json?ver=2024090901.01");
+    let json: IJson;
   if (response.ok) {
     json = await response.json();
     push("歌单加载完成，正在处理");
@@ -71,10 +71,10 @@ interface IInfo {
   msg: string | null | undefined;
 }
 
-let infoArray: Array<IInfo> = reactive([]);
+const infoArray: Array<IInfo> = reactive([]);
 
 function transTime(input: Date = new Date()): string {
-  let date = input.toLocaleDateString(),
+  const date = input.toLocaleDateString(),
     time = input.toLocaleTimeString();
 
   return `${date} ${time}`;

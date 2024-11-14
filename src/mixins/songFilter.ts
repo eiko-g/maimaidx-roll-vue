@@ -32,9 +32,9 @@ export default function songFilter(
   }
   console.log("输入进来的设置：", inputSetting);
 
-  let setting = inputSetting,
-    tempSongList = songlist,
-    output: Array<ISongPreview> = [];
+  const setting = inputSetting;
+  let tempSongList = songlist;
+  const output: Array<ISongPreview> = [];
 
   console.log("筛歌时的设置", setting);
 
@@ -67,7 +67,7 @@ export default function songFilter(
   setting.lvMax = Number.parseInt(setting.lvMax as string);
   // 高低一致指的是在多选难度时，最低和最高的设置完全一致
   // 这时候就跟单难度的判断方法一样了
-  let 高低一致 =
+  const 高低一致 =
     setting.lvMultiple === true &&
     setting.lvMin === setting.lvMax &&
     setting.lvMinPlus === setting.lvMaxPlus;
@@ -91,7 +91,7 @@ export default function songFilter(
           if (抽歌等级 === songDifficulty.toString()) {
             console.log("等级也符合要求：", songDifficulty);
 
-            let songPreview = {
+            const songPreview = {
               id: song.id,
               rank: songRank,
               preview: {
@@ -115,7 +115,7 @@ export default function songFilter(
       console.log("等级的数字部分相同");
       // 如果数字部分相同的话
       // 上面已经判断过带不带加号的情况了，这里就不用判断了
-      let 抽歌等级 = setting.lvMin;
+      const 抽歌等级 = setting.lvMin;
       // 对临时歌单进行处理
       tempSongList.map((song) => {
         console.log("正在处理的歌：", song);
@@ -126,7 +126,7 @@ export default function songFilter(
             if (抽歌等级 === Number.parseInt(songDifficulty as string)) {
               console.log("等级也符合要求：", songDifficulty);
 
-              let songPreview = {
+              const songPreview = {
                 id: song.id,
                 rank: songRank,
                 preview: {
@@ -241,7 +241,7 @@ export default function songFilter(
             if (result === true) {
               console.log("等级符合要求：", songDifficulty);
 
-              let songPreview = {
+              const songPreview = {
                 id: song.id,
                 rank: songRank,
                 preview: {

@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import type ISong from "@/interface/ISong";
 import { reactive, ref } from "vue";
-import type ISongRollList from "@/interface/ISongRollList";
+// import type ISongRollList from "@/interface/ISongRollList";
 
 export const useSonglistStore = defineStore("songlist", () => {
-  let version:string|null = '';
-  let originSonglist: Array<ISong> = [];
-  let currentSong: ISong = reactive({
+  const version:string|null = '';
+  const originSonglist: Array<ISong> = [];
+  const currentSong: ISong = reactive({
     id: -1,
     分类: "某个分类",
     曲名: "油婶么呢？",
@@ -22,8 +22,8 @@ export const useSonglistStore = defineStore("songlist", () => {
     封面: undefined,
   });
 
-  let currentRank = ref("M");
-  let rollSonglist = reactive([
+  const currentRank = ref("M");
+  const rollSonglist = reactive([
     {
       id: 0,
       name: "完整歌单",

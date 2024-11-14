@@ -42,7 +42,7 @@ import { useRouter } from "vue-router";
 const props = defineProps<{ currentSong: ISong; currentRank: string }>();
 const router = useRouter();
 
-let coverSrc = computed(() => {
+const coverSrc = computed(() => {
   let coverStr: string;
   if (props.currentSong.封面 != undefined || props.currentSong.封面 != null) {
     coverStr = `./assets/img/cover.png/${props.currentSong.封面}`;
@@ -59,7 +59,7 @@ function viewDetail(id: number) {
   }
 }
 
-let catText = computed(() => {
+const catText = computed(() => {
   switch (props.currentSong.分类) {
     case "pops_anime": {
       return "动画 & 流行";
@@ -85,7 +85,7 @@ let catText = computed(() => {
   }
 });
 
-let rankText = computed(() => {
+const rankText = computed(() => {
   switch (props.currentRank) {
     case "B": {
       return "Basic";
@@ -108,7 +108,7 @@ let rankText = computed(() => {
   }
 });
 // 万事 Swtich
-let lvText = computed(() => {
+const lvText = computed(() => {
   switch (props.currentRank) {
     case "B": {
       return props.currentSong.等级.B;

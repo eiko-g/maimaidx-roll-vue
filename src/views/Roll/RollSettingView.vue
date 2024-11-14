@@ -37,7 +37,8 @@ function backToRoll() {
   store.isFirstRun = false;
 
   // !!AnyScript
-  let tempSonglist: any = songFilter(songlistStore.originSonglist, store);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tempSonglist: any = songFilter(songlistStore.originSonglist, store);
 
   if (tempSonglist.length > 0) {
     songlistStore.rollSonglist = tempSonglist;

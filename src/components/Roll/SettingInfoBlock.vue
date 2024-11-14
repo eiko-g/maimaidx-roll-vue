@@ -37,7 +37,7 @@ import { computed } from "vue";
 const props = defineProps(["setting"]);
 const songlistStore = useSonglistStore();
 
-let lvText = computed(() => {
+const lvText = computed(() => {
   let str = "";
   if (props.setting.lvMin > 0) {
     str = props.setting.lvMin;
@@ -77,15 +77,15 @@ function getCatName(cat: string) {
   }
 }
 
-let catText = computed(() => {
-  let tempArr: Array<string> = [];
+const catText = computed(() => {
+  const tempArr: Array<string> = [];
   props.setting.category.forEach((item: string) => {
     tempArr.push(getCatName(item));
   });
   return tempArr.join("、");
 });
 
-let verText = computed(() => {
+const verText = computed(() => {
   let str = "";
   if (props.setting.version[0] !== "all") {
     str = props.setting.version.join("、");

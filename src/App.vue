@@ -9,7 +9,7 @@
 import { RouterView } from "vue-router";
 // import MainMenu from "./components/MainMenu.vue";
 
-let pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
+const pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
 let pattern_bg_postition = 5;
 setInterval(() => {
   // console.log('pattern_bg_postition', pattern_bg_postition);

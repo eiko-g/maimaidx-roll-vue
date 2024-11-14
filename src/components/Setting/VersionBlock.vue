@@ -108,7 +108,7 @@ const store = useSettingsStore();
 
 // 保存版本设置
 function saveVersion() {
-  let elements = document.querySelectorAll("input.version:checked"),
+  const elements = document.querySelectorAll("input.version:checked"),
     tempVer: Array<string> = [];
   elements.forEach((item) => {
     tempVer.push((item as HTMLInputElement).value);
