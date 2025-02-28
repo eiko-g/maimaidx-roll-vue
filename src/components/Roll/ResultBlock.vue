@@ -133,8 +133,8 @@ const lvText = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/preset";
-@import "@/style/mixin";
+@use "@/style/preset";
+@use "@/style/mixin";
 
 .result {
   text-align: center;
@@ -254,7 +254,7 @@ const lvText = computed(() => {
       text-transform: uppercase;
       font-weight: bold;
       font-weight: 900;
-      // @include txsh(var(--color-M-dark));
+      // @include mixin.txsh(var(--color-M-dark));
     }
 
     .song-lv {
@@ -262,7 +262,7 @@ const lvText = computed(() => {
       padding: 10px 15px;
       font-size: 12px;
       background-color: rgba(#fff, .5);
-      // @include txsh(var(--color-M-dark));
+      // @include mixin.txsh(var(--color-M-dark));
       border-radius: 0 0 10px 0;
 
       .song-lv-num {
@@ -275,10 +275,10 @@ const lvText = computed(() => {
 }
 
 $ranks: (
-  B:$color-B-dark,
-  A:$color-A-dark,
-  E:$color-E-dark,
-  M:$color-M-dark
+  B:preset.$color-B-dark,
+  A:preset.$color-A-dark,
+  E:preset.$color-E-dark,
+  M:preset.$color-M-dark
 );
 
 @each $rank,
@@ -301,7 +301,7 @@ $color in $ranks {
 
       .song-rank,
       .song-lv {
-        @include txsh($color);
+        @include mixin.txsh($color);
       }
     }
   }
@@ -325,7 +325,7 @@ $color in $ranks {
 
     .song-rank,
     .song-lv {
-      @include txsh($color-R-dark);
+      @include mixin.txsh(preset.$color-R-dark);
     }
   }
 }

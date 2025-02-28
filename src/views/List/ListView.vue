@@ -100,7 +100,7 @@ const catText = (category: string) => {
 </script>
 
 <style scoped lang="scss">
-@import "@/style/mixin";
+@use "@/style/mixin";
 
 .main-title {
   color: var(--color-border);
@@ -163,31 +163,31 @@ const catText = (category: string) => {
     }
 
     &.all {
-      @include input-label();
+      @include mixin.input-label();
     }
 
     &.pops_anime {
-      @include input-label(#ccc, #ff972a, #ff972a);
+      @include mixin.input-label(#ccc, #ff972a, #ff972a);
     }
 
     &.niconico {
-      @include input-label(#ccc, #09c8d4, #09c8d4);
+      @include mixin.input-label(#ccc, #09c8d4, #09c8d4);
     }
 
     &.toho {
-      @include input-label(#ccc, #ad59ee, #ad59ee);
+      @include mixin.input-label(#ccc, #ad59ee, #ad59ee);
     }
 
     &.variety {
-      @include input-label(#ccc, #42de6a, #42de6a);
+      @include mixin.input-label(#ccc, #42de6a, #42de6a);
     }
 
     &.maimai {
-      @include input-label(#ccc, #f74949, #f74949);
+      @include mixin.input-label(#ccc, #f74949, #f74949);
     }
 
     &.gekichu {
-      @include input-label(#ccc, #3585fe, #3585fe);
+      @include mixin.input-label(#ccc, #3585fe, #3585fe);
     }
   }
 }

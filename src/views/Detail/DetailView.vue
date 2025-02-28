@@ -108,7 +108,7 @@ const catText = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/style/mixin';
+@use '@/style/mixin';
 
 .main-title {
   color: var(--color-border);
@@ -246,7 +246,7 @@ const catText = computed(() => {
   cursor: pointer;
   text-align: center;
 
-  @include bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
-  @include txsh(#6f34b0);
+  @include mixin.bxsh(#6f34b0, #b98bf8, rgba(111, 52, 176, .7));
+  @include mixin.txsh(#6f34b0);
 }
 </style>

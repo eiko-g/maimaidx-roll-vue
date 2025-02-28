@@ -21,7 +21,7 @@ function gotoSetting() {
 </script>
 
 <style scoped lang="scss">
-@import "@/style/mixin";
+@use "@/style/mixin";
 
 button {
   display: block;
@@ -43,19 +43,19 @@ button {
   }
 
   &.roll {
-    @include bxsh(#012d7b, #ffba42, rgba(#183665, .7));
-    @include txsh(#012d7b);
+    @include mixin.bxsh(#012d7b, #ffba42, rgba(#183665, .7));
+    @include mixin.txsh(#012d7b);
   }
 
   &.setting {
-    @include bxsh(#e32b62, #fd4a81, rgba(#183665, .7));
-    @include txsh(#e32b62);
+    @include mixin.bxsh(#e32b62, #fd4a81, rgba(#183665, .7));
+    @include mixin.txsh(#e32b62);
   }
 
   &.random {
     background-color: #f6b32c;
     border: 3px solid #e17400;
-    @include txsh(#e17400);
+    @include mixin.txsh(#e17400);
   }
 }
 </style>

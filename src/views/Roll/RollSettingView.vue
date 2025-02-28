@@ -55,7 +55,7 @@ function backToRoll() {
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/mixin";
+@use "@/style/mixin";
 
 .main-title {
   color: var(--color-border);
@@ -90,7 +90,7 @@ function backToRoll() {
   font-weight: bold;
   border-radius: 99em;
   cursor: pointer;
-  @include bxsh();
-  @include txsh(#319df8);
+  @include mixin.bxsh();
+  @include mixin.txsh(#319df8);
 }
 </style>

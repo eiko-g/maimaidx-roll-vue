@@ -25,23 +25,23 @@ setInterval(() => {
 </script>
 
 <style lang="scss">
-@import '@/style/preset';
+@use '@/style/preset';
 
 :root {
-  --color-B: #{$color-B};
-  --color-A: #{$color-A};
-  --color-E: #{$color-E};
-  --color-M: #{$color-M};
-  --color-R: #{$color-R};
+  --color-B: #{preset.$color-B};
+  --color-A: #{preset.$color-A};
+  --color-E: #{preset.$color-E};
+  --color-M: #{preset.$color-M};
+  --color-R: #{preset.$color-R};
 
-  --color-B-dark: #{$color-B-dark};
-  --color-A-dark: #{$color-A-dark};
-  --color-E-dark: #{$color-E-dark};
-  --color-M-dark: #{$color-M-dark};
-  --color-R-dark: #{$color-R-dark};
+  --color-B-dark: #{preset.$color-B-dark};
+  --color-A-dark: #{preset.$color-A-dark};
+  --color-E-dark: #{preset.$color-E-dark};
+  --color-M-dark: #{preset.$color-M-dark};
+  --color-R-dark: #{preset.$color-R-dark};
 
-  --color-bg: #{$color-bg-uni};
-  --color-border: #{$color-border-uni};
+  --color-bg: #{preset.$color-bg-uni};
+  --color-border: #{preset.$color-border-uni};
 }
 
 *,

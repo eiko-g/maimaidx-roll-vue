@@ -83,7 +83,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/mixin";
+@use "@/style/mixin";
 
 .ranks {
   display: flex;
@@ -113,27 +113,27 @@ onMounted(() => {
     }
 
     &.all {
-      @include input-label();
+      @include mixin.input-label();
     }
 
     &.B {
-      @include input-label(var(--color-B), var(--color-B-dark));
+      @include mixin.input-label(var(--color-B), var(--color-B-dark));
     }
 
     &.A {
-      @include input-label(var(--color-A), var(--color-A-dark));
+      @include mixin.input-label(var(--color-A), var(--color-A-dark));
     }
 
     &.E {
-      @include input-label(var(--color-E), var(--color-E-dark));
+      @include mixin.input-label(var(--color-E), var(--color-E-dark));
     }
 
     &.M {
-      @include input-label(var(--color-M), var(--color-M-dark));
+      @include mixin.input-label(var(--color-M), var(--color-M-dark));
     }
 
     &.R {
-      @include input-label(var(--color-R), var(--color-R-dark));
+      @include mixin.input-label(var(--color-R), var(--color-R-dark));
     }
   }
 }

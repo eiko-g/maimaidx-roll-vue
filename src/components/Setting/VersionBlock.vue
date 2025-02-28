@@ -148,7 +148,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import "@/style/mixin";
+@use "@/style/mixin";
 
 .versions {
   display: flex;
@@ -177,7 +177,7 @@ onMounted(() => {
       padding: 5px;
     }
 
-    @include input-label();
+    @include mixin.input-label();
   }
 }
 </style>
