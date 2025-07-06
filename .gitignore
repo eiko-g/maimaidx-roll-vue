@@ -34,6 +34,8 @@ public/assets/img/cover.png/*.png
 public/assets/img/cover/*.jpg
 public/assets/img/cover.new
 public/assets/img/cover.old
+public/assets/img/cover.old
+public/assets/img/jacket/*.png
 
 # npm 的一点配置
 .npmrc
