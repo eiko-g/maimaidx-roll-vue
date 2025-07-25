@@ -7,104 +7,24 @@
         <div class="inner">全部</div>
       </label>
 
-      <label for="version-无印" class="version-label 无印">
-        <input type="checkbox" name="版本" id="version-无印" value="无印" class="version" />
-        <div class="inner">无印</div>
-      </label>
-
-      <label for="version-无印Plus" class="version-label 无印Plus">
-        <input type="checkbox" name="版本" id="version-无印Plus" value="无印+" class="version" />
-        <div class="inner">无印+</div>
-      </label>
-
-      <label for="version-绿" class="version-label 绿">
-        <input type="checkbox" name="版本" id="version-绿" value="绿" class="version" />
-        <div class="inner">绿</div>
-      </label>
-
-      <label for="version-绿Plus" class="version-label 绿Plus">
-        <input type="checkbox" name="版本" id="version-绿Plus" value="绿+" class="version" />
-        <div class="inner">绿+</div>
-      </label>
-
-      <label for="version-橙" class="version-label 橙">
-        <input type="checkbox" name="版本" id="version-橙" value="橙" class="version" />
-        <div class="inner">橙</div>
-      </label>
-
-      <label for="version-橙Plus" class="version-label 橙Plus">
-        <input type="checkbox" name="版本" id="version-橙Plus" value="橙+" class="version" />
-        <div class="inner">橙+</div>
-      </label>
-
-      <label for="version-粉" class="version-label 粉">
-        <input type="checkbox" name="版本" id="version-粉" value="粉" class="version" />
-        <div class="inner">粉</div>
-      </label>
-
-      <label for="version-粉Plus" class="version-label 粉Plus">
-        <input type="checkbox" name="版本" id="version-粉Plus" value="粉+" class="version" />
-        <div class="inner">粉+</div>
-      </label>
-
-      <label for="version-紫" class="version-label 紫">
-        <input type="checkbox" name="版本" id="version-紫" value="紫" class="version" />
-        <div class="inner">紫</div>
-      </label>
-
-      <label for="version-紫Plus" class="version-label 紫Plus">
-        <input type="checkbox" name="版本" id="version-紫Plus" value="紫+" class="version" />
-        <div class="inner">紫+</div>
-      </label>
-
-      <label for="version-奶" class="version-label 奶">
-        <input type="checkbox" name="版本" id="version-奶" value="奶" class="version" />
-        <div class="inner">奶</div>
-      </label>
-
-      <label for="version-奶Plus" class="version-label 奶Plus">
-        <input type="checkbox" name="版本" id="version-奶Plus" value="奶+" class="version" />
-        <div class="inner">奶+</div>
-      </label>
-
-      <label for="version-FiNALE" class="version-label FiNALE">
-        <input type="checkbox" name="版本" id="version-FiNALE" value="FiNALE" class="version" />
-        <div class="inner">FiNALE</div>
-      </label>
-
-      <label for="version-DX" class="version-label DX">
-        <input type="checkbox" name="版本" id="version-DX" value="DX" class="version" />
-        <div class="inner">DX</div>
-      </label>
-
-      <label for="version-DX2021" class="version-label DX2021">
-        <input type="checkbox" name="版本" id="version-DX2021" value="DX2021" class="version" />
-        <div class="inner">DX2021</div>
-      </label>
-
-      <label for="version-DX2022" class="version-label DX2022">
-        <input type="checkbox" name="版本" id="version-DX2022" value="DX2022" class="version" />
-        <div class="inner">DX2022</div>
-      </label>
-
-      <label for="version-DX2023" class="version-label DX2023">
-        <input type="checkbox" name="版本" id="version-DX2023" value="DX2023" class="version" />
-        <div class="inner">DX2023</div>
-      </label>
-
-      <label for="version-DX2024" class="version-label DX2024">
-        <input type="checkbox" name="版本" id="version-DX2024" value="DX2024" class="version" />
-        <div class="inner">DX2024</div>
-      </label>
+      <template v-for="item in (songlistStore.version as IVersion[])" :key="`setting-version-${item.id}`">
+        <label :for="`version-${item.id}`" :class="['version-label', item.name]">
+          <input type="checkbox" name="version" :id="`version-${item.id}`" :value="item.id" class="version" />
+          <div class="inner">{{ item.name }}</div>
+        </label>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type IVersion from "@/interface/IVersion";
 import { checkAll, checkOthers } from "@/mixins/checkInput";
 import { useSettingsStore } from "@/stores/settings";
+import { useSonglistStore } from "@/stores/songlist";
 import { onMounted } from "vue";
-const store = useSettingsStore();
+const setttingStore = useSettingsStore();
+const songlistStore = useSonglistStore();
 
 // 保存版本设置
 function saveVersion() {
@@ -113,7 +33,7 @@ function saveVersion() {
   elements.forEach((item) => {
     tempVer.push((item as HTMLInputElement).value);
   });
-  store.version = tempVer;
+  setttingStore.version = tempVer;
 }
 
 onMounted(() => {
@@ -140,7 +60,7 @@ onMounted(() => {
     });
 
     // 载入时勾上保存的版本
-    (item as HTMLInputElement).checked = store.version.includes(
+    (item as HTMLInputElement).checked = setttingStore.version.includes(
       (item as HTMLInputElement).value
     );
   });

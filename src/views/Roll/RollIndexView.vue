@@ -16,23 +16,20 @@ import SettingInfoBlock from "@/components/Roll/SettingInfoBlock.vue";
 import RollButtons from "@/components/Roll/RollButtons.vue";
 import { ref } from "vue";
 import shuffleArray from "@/mixins/shuffleArray";
+import type ISongRollList from "@/interface/ISongRollList";
 
 const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
 
 const buttonDisable = ref(settingStore.isFirstRun);
 
-const version = '0.6.6-20240909.01';
+const version = '0.7.0-20250726.01';
 
 function roll() {
   console.log("Roll!", new Date());
   buttonDisable.value = true;
 
-  /**
-   * ! AnyScript
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rollSonglist:any = songlistStore.rollSonglist;
+  const rollSonglist:ISongRollList[] = songlistStore.rollSonglist;
 
   shuffleArray(rollSonglist);
 
@@ -50,7 +47,7 @@ function roll() {
   }
 
   console.log("歌曲详情：", songlistStore.currentSong);
-  songlistStore.currentRank = selectThis.rank;
+  songlistStore.currentRank = selectThis.difficult;
 
   setTimeout(() => {
     buttonDisable.value = false;

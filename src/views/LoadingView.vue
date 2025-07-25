@@ -10,7 +10,9 @@ import InfoVue from "@/components/Loading/InfoBlock.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useSonglistStore } from "@/stores/songlist";
-import type ISong from "@/interface/ISong";
+import type IVersion from "@/interface/IVersion";
+import type IGenre from "@/interface/IGenre";
+import type IMusic from "@/interface/IMusic";
 
 const router = useRouter();
 const store = useSonglistStore();
@@ -19,36 +21,18 @@ const go = ref(false);
 
 onMounted(async () => {
   push("开始载入了捏");
-
-  // let lsData = localStorage.getItem("songlist")
-  // if (lsData !== null) {
-  //   push("有缓存歌单，可直接载入");
-  //   push(`歌单缓存日期：${localStorage.getItem('last_cached_time')}`)
-  //   store.originSonglist = JSON.parse(lsData).曲目列表;
-  //   push("已载入本地歌单，正在跳转~");
-  //   setTimeout(() => {
-  //     router.push({ name: "roll" });
-  //   }, 800);
-  // } else {
   push("歌单加载中……");
-  const response = await fetch("./data/maimaiDXCN_2024.json?ver=2024090901.01");
+  const response = await fetch("./data/maiDX_CN/CN1.50-C.json?ver=20250708.01");
     let json: IJson;
   if (response.ok) {
     json = await response.json();
     push("歌单加载完成，正在处理");
-    //#region 给每首歌加个 id
-    // 在这里做是因为我没拿到那些 bot 都有的 ID，所以就自己加个
-    let id = 0;
-    json.曲目列表.map((item: ISong) => {
-      id++;
-      item.id = id;
-    });
-    //#endregion
-    console.log("加了 id 之后的 JSON", json);
-    store.originSonglist = json.曲目列表;
+    store.originSonglist = json.music;
     console.log("歌单载入完成");
 
+    store.songlistVersion = json.songlist_version;
     store.version = json.version;
+    store.genre = json.genre;
 
     // localStorage.setItem("songlist", JSON.stringify(json));
     // localStorage.setItem('last_cached_time', transTime());
@@ -107,9 +91,10 @@ function push(msg: string, type = "log") {
 }
 
 interface IJson {
-  data: number;
-  version: string,
-  曲目列表: Array<ISong>;
+  songlist_version: string;
+  version: IVersion[];
+  genre: IGenre[],
+  music: IMusic[];
 }
 </script>
 

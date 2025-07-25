@@ -1,34 +1,54 @@
 import { defineStore } from "pinia";
-import type ISong from "@/interface/ISong";
 import { reactive, ref } from "vue";
-// import type ISongRollList from "@/interface/ISongRollList";
+import type IMusic from "@/interface/IMusic";
+import type IVersion from "@/interface/IVersion";
+import type IGenre from "@/interface/IGenre";
+import type ISongRollList from "@/interface/ISongRollList";
 
 export const useSonglistStore = defineStore("songlist", () => {
-  const version:string|null = '';
-  const originSonglist: Array<ISong> = [];
-  const currentSong: ISong = reactive({
+  const songlistVersion: string|unknown = null;
+  const version:IVersion[]|unknown = null;
+  const genre:IGenre[]|unknown = null;
+  const originSonglist: IMusic[] = [];
+  const currentSong: IMusic = reactive({
     id: -1,
-    分类: "某个分类",
-    曲名: "油婶么呢？",
-    等级: {
-      B: "5",
-      A: "8",
-      E: "10",
-      M: "13",
-      R: "14+",
+    genre: 107,
+    name: "油婶么呢？",
+    bpm: 114,
+    disable: false,
+    levels: {
+      basic: 5,
+      advanced: 8,
+      expert: 10,
+      master: 13,
+      re_master: 14.6,
     },
-    类型: "谱面类型",
-    版本: "版本",
-    封面: undefined,
+    notes_data: {
+      utage:{
+        notes_designer: '-',
+        notes_count: {
+          tap: 1,
+          hold: 1,
+          slide: 4,
+          touch: 5,
+          break: 1,
+          all: 4
+        }
+      }
+    },
+    add_version: 13,
   });
 
-  const currentRank = ref("M");
-  const rollSonglist = reactive([
+  type RankKey = 'basic' | 'advanced' | 'expert' | 'master' | 're_master' | 'utage' | string;
+  const currentRank = ref<RankKey>("re_master");
+  const rollSonglist:ISongRollList[] = reactive([
     {
       id: 0,
       name: "完整歌单",
+      difficult: 'basic',
+      level: 0
     },
   ]);
 
-  return { version,originSonglist, currentSong, currentRank, rollSonglist };
+  return { songlistVersion,version,genre,originSonglist, currentSong, currentRank, rollSonglist };
 });

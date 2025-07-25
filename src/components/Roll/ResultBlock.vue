@@ -2,8 +2,8 @@
   <div class="result">
     <p class="tip">※ 封面切换时载入稍慢</p>
 
-    <div :class="['result-display', props.currentRank, currentSong.类型]">
-      <div :class="['type', currentSong.类型]">
+    <div :class="['result-display', props.currentRank, map_type]">
+      <div :class="['type', map_type]">
         <div class="dx">
           <span class="text">
             <span class="inner">DX</span>
@@ -21,14 +21,14 @@
       </div>
     </div>
     <div class="song-info">
-      <h3 class="song-title" lang="ja-jp">{{ currentSong.曲名 }}</h3>
-      <p class="song-author" lang="ja-jp">{{ currentSong.作者 }}</p>
+      <h3 class="song-title" lang="ja-jp">{{ currentSong.name }}</h3>
+      <p class="song-author" lang="ja-jp">{{ currentSong.artist_name }}</p>
     </div>
 
     <p class="other-info">
       <span class="cat">{{ catText }}</span>
       /
-      <span class="version">{{ currentSong.版本 }}</span>
+      <span class="version">{{ verText }}</span>
     </p>
 
   </div>
@@ -36,48 +36,68 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type ISong from "@/interface/ISong";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
+import type IMusic from "@/interface/IMusic";
+import { useSonglistStore } from "@/stores/songlist";
+import type IVersion from "@/interface/IVersion";
 
-const props = defineProps<{ currentSong: ISong; currentRank: string }>();
-const router = useRouter();
+type RankKey = 'basic' | 'advanced' | 'expert' | 'master' | 're_master' | 'utage';
+const props = defineProps<{ currentSong: IMusic; currentRank: RankKey | string }>();
+// const router = useRouter();
 
+const songlistStore = useSonglistStore();
+
+// 封面链接
 const coverSrc = computed(() => {
-  let coverStr: string;
-  if (props.currentSong.封面 != undefined || props.currentSong.封面 != null) {
-    coverStr = `./assets/img/cover.png/${props.currentSong.封面}`;
-  } else {
-    coverStr = "./assets/img/nocover.png";
+  if(props.currentSong.id > 0){
+    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6,'0')}.png`;
+  }else {
+    return `./assets/img/jacket/UI_Jacket_000000.png`;
   }
-  return coverStr;
 });
 
+// 谱面类型
+const map_type = computed(()=>{
+  if (props.currentSong.genre === 107) {
+    return 'type-utage';
+  }else if (props.currentSong.id > 10000) {
+    return 'type-dx';
+  }else {
+    return 'type-std';
+  }
+})
+
+// 查看曲目详情
 function viewDetail(id: number) {
-  console.log(id);
+  // TODO: 以后再写这部分
+  console.log('song id',id);
   if (id >= 1) {
-    router.push({ name: 'detail', params: { id: id } });
+    // router.push({ name: 'detail', params: { id: id } });
   }
 }
 
 const catText = computed(() => {
-  switch (props.currentSong.分类) {
-    case "pops_anime": {
+  switch (props.currentSong.genre) {
+    case 101: {
       return "动画 & 流行";
     }
-    case "niconico": {
+    case 102: {
       return "nico & V家";
     }
-    case "toho": {
+    case 103: {
       return "东方 Project";
     }
-    case "variety": {
+    case 104: {
       return "其他游戏";
     }
-    case "maimai": {
+    case 105: {
       return "maimai";
     }
-    case "gekichu": {
+    case 106: {
       return "音击 & 中二";
+    }
+    case 107: {
+      return "宴会场";
     }
     default: {
       return "分类";
@@ -87,49 +107,42 @@ const catText = computed(() => {
 
 const rankText = computed(() => {
   switch (props.currentRank) {
-    case "B": {
+    case "basic": {
       return "Basic";
     }
-    case "A": {
+    case "advanced": {
       return "Advanced";
     }
-    case "E": {
+    case "expert": {
       return "Expert";
     }
-    case "M": {
+    case "master": {
       return "Master";
     }
-    case "R": {
+    case "re_master": {
       return "Re:Master";
+    }
+    case "utage": {
+      return "宴会场"
     }
     default: {
       return "难度";
     }
   }
 });
-// 万事 Swtich
+
 const lvText = computed(() => {
-  switch (props.currentRank) {
-    case "B": {
-      return props.currentSong.等级.B;
-    }
-    case "A": {
-      return props.currentSong.等级.A;
-    }
-    case "E": {
-      return props.currentSong.等级.E;
-    }
-    case "M": {
-      return props.currentSong.等级.M;
-    }
-    case "R": {
-      return props.currentSong.等级.R;
-    }
-    default: {
-      return "??";
-    }
+  const level = props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
+  if ((level * 10) % 10 >= 6) {
+    return Math.floor(level) + '+';
+  } else {
+    return Math.floor(level);
   }
 });
+
+const verText = computed(()=>{
+  return (songlistStore.version as IVersion[]).find(item=> item.id == props.currentSong.add_version)?.name || '未知版本';
+})
 </script>
 
 <style lang="scss" scoped>
@@ -170,7 +183,7 @@ const lvText = computed(() => {
       padding: 5px 5px 0;
     }
 
-    &.DX {
+    &.type-dx {
       &>.dx {
         opacity: 1;
       }
@@ -219,7 +232,7 @@ const lvText = computed(() => {
     }
   }
 
-  &.DX {
+  &.type-dx {
     .result-cover {
       border-radius: 0 10px 0 0;
     }
@@ -275,10 +288,10 @@ const lvText = computed(() => {
 }
 
 $ranks: (
-  B:preset.$color-B-dark,
-  A:preset.$color-A-dark,
-  E:preset.$color-E-dark,
-  M:preset.$color-M-dark
+  basic:preset.$color-B-dark,
+  advanced:preset.$color-A-dark,
+  expert:preset.$color-E-dark,
+  master:preset.$color-M-dark
 );
 
 @each $rank,
@@ -307,7 +320,7 @@ $color in $ranks {
   }
 }
 
-.result-display.R {
+.result-display.re_master {
   .type {
 
     .dx,

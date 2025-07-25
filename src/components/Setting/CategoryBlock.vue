@@ -7,29 +7,33 @@
         <div class="inner">全分类</div>
       </label>
       <label for="cat-pops_anime" class="cat-label pops_anime">
-        <input type="checkbox" class="cat pops_anime" id="cat-pops_anime" name="category" value="pops_anime" />
+        <input type="checkbox" class="cat pops_anime" id="cat-pops_anime" name="category" value="101" />
         <div class="inner">动画 &amp; 流行</div>
       </label>
       <label for="cat-niconico" class="cat-label niconico">
-        <input type="checkbox" class="cat niconico" id="cat-niconico" name="category" value="niconico" />
+        <input type="checkbox" class="cat niconico" id="cat-niconico" name="category" value="102" />
         <div class="inner">nico &amp; V家</div>
       </label>
       <label for="cat-toho" class="cat-label toho">
-        <input type="checkbox" class="cat toho" id="cat-toho" name="category" value="toho" />
+        <input type="checkbox" class="cat toho" id="cat-toho" name="category" value="103" />
         <div class="inner">东方 Project</div>
       </label>
       <label for="cat-variety" class="cat-label variety">
-        <input type="checkbox" class="cat variety" id="cat-variety" name="category" value="variety" />
+        <input type="checkbox" class="cat variety" id="cat-variety" name="category" value="104" />
         <div class="inner">其他游戏</div>
       </label>
       <label for="cat-maimai" class="cat-label maimai">
-        <input type="checkbox" class="cat maimai" id="cat-maimai" name="category" value="maimai" />
+        <input type="checkbox" class="cat maimai" id="cat-maimai" name="category" value="105" />
         <div class="inner">maimai</div>
       </label>
       <label for="cat-gekichu" class="cat-label gekichu">
-        <input type="checkbox" class="cat gekichu" id="cat-gekichu" name="category" value="gekichu" />
+        <input type="checkbox" class="cat gekichu" id="cat-gekichu" name="category" value="106" />
         <div class="inner">音击 &amp; 中二</div>
       </label>
+      <!-- <label for="cat-utage" class="cat-label utage">
+        <input type="checkbox" class="cat utage" id="cat-utage" name="category" value="107" />
+        <div class="inner">宴会场</div>
+      </label> -->
     </div>
   </div>
 </template>

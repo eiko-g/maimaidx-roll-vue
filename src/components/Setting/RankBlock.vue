@@ -9,28 +9,28 @@
       </label>
 
       <label class="rank-label B" for="rank-B">
-        <input type="checkbox" name="rank" value="B" id="rank-B" class="rank B" />
-        <span class="inner">B</span>
+        <input type="checkbox" name="rank" value="basic" id="rank-B" class="rank B" />
+        <span class="inner">初级</span>
       </label>
 
       <label class="rank-label A" for="rank-A">
-        <input type="checkbox" name="rank" value="A" id="rank-A" class="rank A" />
-        <span class="inner">A</span>
+        <input type="checkbox" name="rank" value="advanced" id="rank-A" class="rank A" />
+        <span class="inner">高级</span>
       </label>
 
       <label class="rank-label E" for="rank-E">
-        <input type="checkbox" name="rank" value="E" id="rank-E" class="rank E" />
-        <span class="inner">E</span>
+        <input type="checkbox" name="rank" value="expert" id="rank-E" class="rank E" />
+        <span class="inner">专家</span>
       </label>
 
       <label class="rank-label M" for="rank-M">
-        <input type="checkbox" name="rank" value="M" id="rank-M" class="rank M" />
-        <span class="inner">M</span>
+        <input type="checkbox" name="rank" value="master" id="rank-M" class="rank M" />
+        <span class="inner">大师</span>
       </label>
 
       <label class="rank-label R" for="rank-R">
-        <input type="checkbox" name="rank" value="R" id="rank-R" class="rank R" />
-        <span class="inner">R</span>
+        <input type="checkbox" name="rank" value="re_master" id="rank-R" class="rank R" />
+        <span class="inner">宗师</span>
       </label>
     </div>
   </div>

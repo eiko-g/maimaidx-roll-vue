@@ -12,14 +12,10 @@ export const useSettingsStore = defineStore("settings", () => {
   const lvMultiple = ref(false);
   // 最低等级
   const lvMin = ref(0);
-  // 最低等级带加号
-  const lvMinPlus = ref(false);
   // 最高等级
   const lvMax = ref(0);
-  // 最高等级带加号
-  const lvMaxPlus = ref(false);
   // 版本
   const version = ref(["all"]);
 
-  return {isFirstRun,rank,category,lvMultiple,lvMin,lvMinPlus,lvMax,lvMaxPlus,version}
+  return {isFirstRun,rank,category,lvMultiple,lvMin,lvMax,version}
 });

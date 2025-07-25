@@ -3,17 +3,13 @@ export default interface ISetting {
   // 难度
   rank: Array<string>,
   // 分类
-  category: Array<string>,
+  category: Array<number|string>,
   // 难度多选
   lvMultiple: boolean,
   // 最低等级
-  lvMin: number | string,
-  // 最低等级带加号
-  lvMinPlus: boolean,
+  lvMin: number ,
   // 最高等级
-  lvMax: number | string,
-  // 最高等级带加号
-  lvMaxPlus: boolean,
+  lvMax: number ,
   // 版本
-  version: Array<string>,
+  version: Array<number|string>,
 }

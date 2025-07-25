@@ -1,83 +1,43 @@
 <template>
   <div class="setting-block level">
     <h3 class="title">等级设置</h3>
-    <p class="preview">
-      等级预览：{{ store.lvMin }}<span v-show="store.lvMinPlus">+</span>
-      <span v-show="store.lvMultiple">
-        ~ {{ store.lvMax }}<span v-show="store.lvMaxPlus">+</span>
-      </span>
-    </p>
+    <!-- <p class="preview">
+      等级预览：{{ settingStore.lvMin }}
+      <span v-show="settingStore.lvMultiple"> ~ {{ settingStore.lvMax }}</span>
+    </p> -->
 
     <div class="level-select">
-      <label for="level-select-single" :class="['level-select-label', { active: !store.lvMultiple }]">
-        <input :checked="!store.lvMultiple" @click="store.lvMultiple = false" id="level-select-single" type="radio"
+      <label for="level-select-single" :class="['level-select-label', { active: !settingStore.lvMultiple }]">
+        <input :checked="!settingStore.lvMultiple" @click="settingStore.lvMultiple = false" id="level-select-single" type="radio"
           name="level-select" value="false" />
         <span class="inner">单一难度</span>
       </label>
-      <label for="level-select-multiple" :class="['level-select-label', { active: store.lvMultiple }]">
-        <input :checked="store.lvMultiple" @click="store.lvMultiple = true" id="level-select-multiple" type="radio"
+      <label for="level-select-multiple" :class="['level-select-label', { active: settingStore.lvMultiple }]">
+        <input :checked="settingStore.lvMultiple" @click="settingStore.lvMultiple = true" id="level-select-multiple" type="radio"
           name="level-select" value="true" />
         <span class="inner">范围难度</span>
       </label>
     </div>
 
-    <div v-show="!store.lvMultiple">
+    <div v-show="!settingStore.lvMultiple">
       <div class="level-number single">
         <div class="level-number-block number min">
           <label for="level-number">抽选等级：</label>
-          <input type="number" name="level-number" id="level-number" min="1" max="15" v-model="store.lvMin" />
-        </div>
-        <p>抽选等级带加号？</p>
-        <div class="level-number-block radio min">
-          <label class="level-radio-label" for="level-number-plus-no">
-            <input :checked="!store.lvMinPlus" @click="store.lvMinPlus = false" type="radio" name="level-number-plus"
-              id="level-number-plus-no" value="false" />
-            <span class="inner">不带 + 号</span>
-          </label>
-          <label class="level-radio-label" for="level-number-plus-yes">
-            <input :checked="store.lvMinPlus" @click="store.lvMinPlus = true" type="radio" name="level-number-plus"
-              id="level-number-plus-yes" value="true" />
-            <span class="inner">带 + 号</span>
-          </label>
+          <input type="number" name="level-number" id="level-number" min="1" max="15" v-model="settingStore.lvMin" />
         </div>
       </div>
     </div>
 
-    <div v-show="store.lvMultiple">
+    <div v-show="settingStore.lvMultiple">
       <div class="level-number lv-min">
         <div class="level-number-block number min">
           <label for="level-min">最低抽选等级：</label>
-          <input type="number" name="level-min" id="level-min" min="1" max="15" v-model="store.lvMin" />
+          <input type="number" name="level-min" id="level-min" min="1" max="15" step="0.1" v-model="settingStore.lvMin" />
         </div>
-        <p>最低等级带加号？</p>
-        <div class="level-number-block radio min">
-          <label class="level-radio-label" for="level-min-plus-no">
-            <input :checked="!store.lvMinPlus" @click="store.lvMinPlus = false" type="radio" name="level-min-plus"
-              id="level-min-plus-no" value="false" />
-            <span class="inner">不带 + 号</span>
-          </label>
-          <label class="level-radio-label" for="level-min-plus-yes">
-            <input :checked="store.lvMinPlus" @click="store.lvMinPlus = true" type="radio" name="level-min-plus"
-              id="level-min-plus-yes" value="true" />
-            <span class="inner">带 + 号</span>
-          </label>
-        </div>
+
         <div class="level-number-block number max">
           <label for="level-max">最高抽选等级：</label>
-          <input type="number" name="level-max" id="level-max" min="1" max="15" v-model="store.lvMax" />
-        </div>
-        <p>最高等级带加号？</p>
-        <div class="level-number-block radio max">
-          <label class="level-radio-label" for="level-max-plus-no">
-            <input :checked="!store.lvMaxPlus" @click="store.lvMaxPlus = false" type="radio" name="level-max-plus"
-              id="level-max-plus-no" value="false" />
-            <span class="inner">不带 + 号</span>
-          </label>
-          <label class="level-radio-label" for="level-max-plus-yes">
-            <input :checked="store.lvMaxPlus" @click="store.lvMaxPlus = true" type="radio" name="level-max-plus"
-              id="level-max-plus-yes" value="true" />
-            <span class="inner">带 + 号</span>
-          </label>
+          <input type="number" name="level-max" id="level-max" min="1" max="15" step="0.1" v-model="settingStore.lvMax" />
         </div>
       </div>
     </div>
@@ -87,13 +47,13 @@
 <script setup lang="ts">
 import { useSettingsStore } from "@/stores/settings";
 import { onMounted } from "vue";
-const store = useSettingsStore();
+const settingStore = useSettingsStore();
 
 onMounted(() => {
   // 随便给个等级
-  if (store.lvMin === 0) {
-    store.lvMin = Math.floor(Math.random() * 14) + 1;
-    store.lvMax = store.lvMin + 1;
+  if (settingStore.lvMin === 0) {
+    settingStore.lvMin = +((Math.random() * 14).toFixed(1));
+    settingStore.lvMax = (settingStore.lvMin * 10 + 1) / 10;
   }
 });
 </script>
