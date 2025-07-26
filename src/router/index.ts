@@ -39,11 +39,6 @@ const router = createRouter({
       ],
     },
     {
-      path: '/list/',
-      name: 'list',
-      component: () => import('../views/List/ListView.vue'),
-    },
-    {
       path: '/detail/:id',
       name: 'detail',
       component: () => import('../views/Detail/DetailView.vue'),
