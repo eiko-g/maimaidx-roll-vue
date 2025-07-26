@@ -12,7 +12,16 @@
         <div class="standard"><span class="text">标准</span></div>
       </div>
       <div class="result-cover" @click="viewDetail(currentSong.id)">
-        <img :src="coverSrc" class="cover" alt="歌曲封面" />
+        <UseImage :src="coverSrc" class="cover" alt="歌曲封面">
+          <template #loading>
+            <img :src="'./assets/img/jacket/UI_Jacket_000000.png'" class="cover" alt="歌曲封面" />
+          </template>
+
+          <template #error>
+            <img :src="'./assets/img/jacket/UI_Jacket_000000.png'" class="cover" alt="歌曲封面" />
+          </template>
+        </UseImage>
+        <!-- <img :src="coverSrc" class="cover" alt="歌曲封面" /> -->
       </div>
 
       <div class="result-meta">
@@ -41,6 +50,7 @@ import { computed } from 'vue';
 import type IMusic from '@/interface/IMusic';
 import { useSonglistStore } from '@/stores/songlist';
 import type IVersion from '@/interface/IVersion';
+import { UseImage } from '@vueuse/components';
 
 type RankKey = 'basic' | 'advanced' | 'expert' | 'master' | 're_master' | 'utage';
 const props = defineProps<{ currentSong: IMusic; currentRank: RankKey | string }>();
