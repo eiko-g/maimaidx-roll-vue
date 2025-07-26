@@ -8,20 +8,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 defineProps<{
   buttonDisable: boolean;
 }>();
-defineEmits(["rollClicked"]);
+defineEmits(['rollClicked']);
 function gotoSetting() {
-  router.push({ name: "rollSetting" });
+  router.push({ name: 'rollSetting' });
 }
 </script>
 
 <style scoped lang="scss">
-@use "@/style/mixin";
+@use '@/style/mixin';
 
 button {
   display: block;
@@ -43,12 +43,12 @@ button {
   }
 
   &.roll {
-    @include mixin.bxsh(#012d7b, #ffba42, rgba(#183665, .7));
+    @include mixin.bxsh(#012d7b, #ffba42, rgba(#183665, 0.7));
     @include mixin.txsh(#012d7b);
   }
 
   &.setting {
-    @include mixin.bxsh(#e32b62, #fd4a81, rgba(#183665, .7));
+    @include mixin.bxsh(#e32b62, #fd4a81, rgba(#183665, 0.7));
     @include mixin.txsh(#e32b62);
   }
 

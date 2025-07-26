@@ -14,11 +14,11 @@ export default interface ISong {
   版本: string;
   封面: string | undefined;
   作者?: string | undefined;
-  lvMark?:{
-    B:number;
-    A:number;
-    E:number;
-    M:number;
-    R?:number;
-  }
+  lvMark?: {
+    B: number;
+    A: number;
+    E: number;
+    M: number;
+    R?: number;
+  };
 }

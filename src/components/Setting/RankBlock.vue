@@ -37,14 +37,14 @@
 </template>
 
 <script setup lang="ts">
-import { checkAll, checkOthers } from "@/mixins/checkInput";
-import { onMounted } from "vue";
-import { useSettingsStore } from "@/stores/settings";
+import { checkAll, checkOthers } from '@/mixins/checkInput';
+import { onMounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings';
 const store = useSettingsStore();
 
 // 保存难度设置
 function saveRank() {
-  const elements = document.querySelectorAll("input.rank:checked"),
+  const elements = document.querySelectorAll('input.rank:checked'),
     tempRank: Array<string> = [];
   elements.forEach((item) => {
     tempRank.push((item as HTMLInputElement).value);
@@ -55,35 +55,33 @@ function saveRank() {
 onMounted(() => {
   //#region 难度选项点击事件
   // 非 all 难度
-  document.querySelectorAll("input.rank:not(input.all)").forEach((item) => {
-    item.addEventListener("click", () => {
-      checkOthers("input.rank", "input.rank.all");
+  document.querySelectorAll('input.rank:not(input.all)').forEach((item) => {
+    item.addEventListener('click', () => {
+      checkOthers('input.rank', 'input.rank.all');
     });
   });
 
   // all 难度
-  document.querySelector("input.rank.all")!.addEventListener("click", () => {
-    checkAll("input.rank", "input.rank.all");
+  document.querySelector('input.rank.all')!.addEventListener('click', () => {
+    checkAll('input.rank', 'input.rank.all');
   });
 
   // 所有难度选项
-  document.querySelectorAll("input.rank").forEach((item) => {
+  document.querySelectorAll('input.rank').forEach((item) => {
     // 有变化时
-    item.addEventListener("change", (el) => {
-      console.log("Rank changed: ", el);
+    item.addEventListener('change', (el) => {
+      console.log('Rank changed: ', el);
       saveRank();
     });
     // 载入时勾上已选择的难度
-    (item as HTMLInputElement).checked = store.rank.includes(
-      (item as HTMLInputElement).value
-    );
+    (item as HTMLInputElement).checked = store.rank.includes((item as HTMLInputElement).value);
   });
   //#endregion
 });
 </script>
 
 <style lang="scss" scoped>
-@use "@/style/mixin";
+@use '@/style/mixin';
 
 .ranks {
   display: flex;
@@ -102,7 +100,7 @@ onMounted(() => {
       cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       display: none;
     }
 

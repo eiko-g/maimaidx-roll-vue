@@ -22,25 +22,25 @@ export default function songFilterV3(
   let temp_song_list = song_list.filter((item) => !item.disable);
 
   // 筛一下分类
-  console.log('筛分类')
+  console.log('筛分类');
   if (!input_setting.category.includes('all')) {
-    console.log('要筛的分类',input_setting.category)
+    console.log('要筛的分类', input_setting.category);
     temp_song_list = temp_song_list.filter((item) =>
-      input_setting.category.includes(item.genre.toString())
+      input_setting.category.includes(item.genre.toString()),
     );
   }
 
   // 筛一下版本
-  console.log('筛版本')
+  console.log('筛版本');
   if (!input_setting.version.includes('all')) {
-    console.log('要筛的版本',input_setting.version)
+    console.log('要筛的版本', input_setting.version);
     temp_song_list = temp_song_list.filter((item) =>
-      input_setting.version.includes(item.add_version.toString())
+      input_setting.version.includes(item.add_version.toString()),
     );
   }
 
   // 筛一下等级
-  console.log('筛等级')
+  console.log('筛等级');
   function levelFilter(level: number) {
     if (!input_setting.lvMultiple) {
       return level === input_setting.lvMin;
@@ -66,7 +66,7 @@ export default function songFilterV3(
           id: song_item.id,
           name: song_item.name ?? '',
           difficult: rank_item,
-          level: levelValue
+          level: levelValue,
         });
       }
     });

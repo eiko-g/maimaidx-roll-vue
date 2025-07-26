@@ -7,7 +7,13 @@
         <div class="inner">全分类</div>
       </label>
       <label for="cat-pops_anime" class="cat-label pops_anime">
-        <input type="checkbox" class="cat pops_anime" id="cat-pops_anime" name="category" value="101" />
+        <input
+          type="checkbox"
+          class="cat pops_anime"
+          id="cat-pops_anime"
+          name="category"
+          value="101"
+        />
         <div class="inner">动画 &amp; 流行</div>
       </label>
       <label for="cat-niconico" class="cat-label niconico">
@@ -39,15 +45,15 @@
 </template>
 
 <script setup lang="ts">
-import { checkAll, checkOthers } from "@/mixins/checkInput";
-import { onMounted } from "vue";
-import { useSettingsStore } from "@/stores/settings";
+import { checkAll, checkOthers } from '@/mixins/checkInput';
+import { onMounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings';
 
 const store = useSettingsStore();
 
 // 保存分类设置
 function saveCat() {
-  const elements = document.querySelectorAll("input.cat:checked"),
+  const elements = document.querySelectorAll('input.cat:checked'),
     tempCat: Array<string> = [];
   elements.forEach((item) => {
     tempCat.push((item as HTMLInputElement).value);
@@ -58,34 +64,32 @@ function saveCat() {
 onMounted(() => {
   //#region 分类选择事件
   // 非 all 分类
-  document.querySelectorAll("input.cat:not(input.cat.all)").forEach((item) => {
-    item.addEventListener("click", () => {
-      checkOthers("input.cat", "input.cat.all");
+  document.querySelectorAll('input.cat:not(input.cat.all)').forEach((item) => {
+    item.addEventListener('click', () => {
+      checkOthers('input.cat', 'input.cat.all');
     });
   });
 
   // all 分类
-  document.querySelector("input.cat.all")!.addEventListener("click", () => {
-    checkAll("input.cat", "input.cat.all");
+  document.querySelector('input.cat.all')!.addEventListener('click', () => {
+    checkAll('input.cat', 'input.cat.all');
   });
 
   // 所有分类选项
-  document.querySelectorAll("input.cat").forEach((item) => {
-    (item as HTMLInputElement).addEventListener("change", (el) => {
-      console.log("Cat changed: ", el);
+  document.querySelectorAll('input.cat').forEach((item) => {
+    (item as HTMLInputElement).addEventListener('change', (el) => {
+      console.log('Cat changed: ', el);
       saveCat();
     });
 
     // 载入时勾上保存的分类
-    (item as HTMLInputElement).checked = store.category.includes(
-      (item as HTMLInputElement).value
-    );
+    (item as HTMLInputElement).checked = store.category.includes((item as HTMLInputElement).value);
   });
 });
 </script>
 
 <style scoped lang="scss">
-@use "@/style/mixin";
+@use '@/style/mixin';
 
 .cats {
   display: flex;
@@ -99,12 +103,11 @@ onMounted(() => {
       margin-right: 10px;
     }
 
-
     &:hover {
       cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       display: none;
     }
 

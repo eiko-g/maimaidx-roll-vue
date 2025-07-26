@@ -17,7 +17,9 @@
 
       <div class="result-meta">
         <div class="song-rank">{{ rankText }}</div>
-        <div class="song-lv">Lv <span class="song-lv-num">{{ lvText }}</span></div>
+        <div class="song-lv">
+          Lv <span class="song-lv-num">{{ lvText }}</span>
+        </div>
       </div>
     </div>
     <div class="song-info">
@@ -30,16 +32,15 @@
       /
       <span class="version">{{ verText }}</span>
     </p>
-
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 // import { useRouter } from "vue-router";
-import type IMusic from "@/interface/IMusic";
-import { useSonglistStore } from "@/stores/songlist";
-import type IVersion from "@/interface/IVersion";
+import type IMusic from '@/interface/IMusic';
+import { useSonglistStore } from '@/stores/songlist';
+import type IVersion from '@/interface/IVersion';
 
 type RankKey = 'basic' | 'advanced' | 'expert' | 'master' | 're_master' | 'utage';
 const props = defineProps<{ currentSong: IMusic; currentRank: RankKey | string }>();
@@ -49,28 +50,28 @@ const songlistStore = useSonglistStore();
 
 // 封面链接
 const coverSrc = computed(() => {
-  if(props.currentSong.id > 0){
-    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6,'0')}.png`;
-  }else {
+  if (props.currentSong.id > 0) {
+    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6, '0')}.png`;
+  } else {
     return `./assets/img/jacket/UI_Jacket_000000.png`;
   }
 });
 
 // 谱面类型
-const map_type = computed(()=>{
+const map_type = computed(() => {
   if (props.currentSong.genre === 107) {
     return 'type-utage';
-  }else if (props.currentSong.id > 10000) {
+  } else if (props.currentSong.id > 10000) {
     return 'type-dx';
-  }else {
+  } else {
     return 'type-std';
   }
-})
+});
 
 // 查看曲目详情
 function viewDetail(id: number) {
   // TODO: 以后再写这部分
-  console.log('song id',id);
+  console.log('song id', id);
   if (id >= 1) {
     // router.push({ name: 'detail', params: { id: id } });
   }
@@ -79,60 +80,61 @@ function viewDetail(id: number) {
 const catText = computed(() => {
   switch (props.currentSong.genre) {
     case 101: {
-      return "动画 & 流行";
+      return '动画 & 流行';
     }
     case 102: {
-      return "nico & V家";
+      return 'nico & V家';
     }
     case 103: {
-      return "东方 Project";
+      return '东方 Project';
     }
     case 104: {
-      return "其他游戏";
+      return '其他游戏';
     }
     case 105: {
-      return "maimai";
+      return 'maimai';
     }
     case 106: {
-      return "音击 & 中二";
+      return '音击 & 中二';
     }
     case 107: {
-      return "宴会场";
+      return '宴会场';
     }
     default: {
-      return "分类";
+      return '分类';
     }
   }
 });
 
 const rankText = computed(() => {
   switch (props.currentRank) {
-    case "basic": {
-      return "Basic";
+    case 'basic': {
+      return 'Basic';
     }
-    case "advanced": {
-      return "Advanced";
+    case 'advanced': {
+      return 'Advanced';
     }
-    case "expert": {
-      return "Expert";
+    case 'expert': {
+      return 'Expert';
     }
-    case "master": {
-      return "Master";
+    case 'master': {
+      return 'Master';
     }
-    case "re_master": {
-      return "Re:Master";
+    case 're_master': {
+      return 'Re:Master';
     }
-    case "utage": {
-      return "宴会场"
+    case 'utage': {
+      return '宴会场';
     }
     default: {
-      return "难度";
+      return '难度';
     }
   }
 });
 
 const lvText = computed(() => {
-  const level = props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
+  const level =
+    props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
   if ((level * 10) % 10 >= 6) {
     return Math.floor(level) + '+';
   } else {
@@ -140,14 +142,17 @@ const lvText = computed(() => {
   }
 });
 
-const verText = computed(()=>{
-  return (songlistStore.version as IVersion[]).find(item=> item.id == props.currentSong.add_version)?.name || '未知版本';
-})
+const verText = computed(() => {
+  return (
+    (songlistStore.version as IVersion[]).find((item) => item.id == props.currentSong.add_version)
+      ?.name || '未知版本'
+  );
+});
 </script>
 
 <style lang="scss" scoped>
-@use "@/style/preset";
-@use "@/style/mixin";
+@use '@/style/preset';
+@use '@/style/mixin';
 
 .result {
   text-align: center;
@@ -167,7 +172,9 @@ const verText = computed(()=>{
   filter: drop-shadow(0 0 3px #999);
 
   & * {
-    transition: background-color .2s, border-radius .2s;
+    transition:
+      background-color 0.2s,
+      border-radius 0.2s;
   }
 
   .type {
@@ -184,22 +191,22 @@ const verText = computed(()=>{
     }
 
     &.type-dx {
-      &>.dx {
+      & > .dx {
         opacity: 1;
       }
 
-      &>.standard {
+      & > .standard {
         opacity: 0;
       }
     }
 
-    &>div {
+    & > div {
       display: inline-block;
       width: 50%;
       margin: auto;
-      transition: opacity .2s;
+      transition: opacity 0.2s;
 
-      &>.text {
+      & > .text {
         width: 100%;
         display: inline-block;
         padding: 5px;
@@ -207,7 +214,7 @@ const verText = computed(()=>{
       }
     }
 
-    &>.dx {
+    & > .dx {
       opacity: 0;
 
       .text {
@@ -224,7 +231,7 @@ const verText = computed(()=>{
       }
     }
 
-    &>.standard {
+    & > .standard {
       .text {
         background-color: #45aeff;
         color: #fff;
@@ -274,7 +281,7 @@ const verText = computed(()=>{
       width: 40%;
       padding: 10px 15px;
       font-size: 12px;
-      background-color: rgba(#fff, .5);
+      background-color: rgba(#fff, 0.5);
       // @include mixin.txsh(var(--color-M-dark));
       border-radius: 0 0 10px 0;
 
@@ -288,29 +295,27 @@ const verText = computed(()=>{
 }
 
 $ranks: (
-  basic:preset.$color-B-dark,
-  advanced:preset.$color-A-dark,
-  expert:preset.$color-E-dark,
-  master:preset.$color-M-dark
+  basic: preset.$color-B-dark,
+  advanced: preset.$color-A-dark,
+  expert: preset.$color-E-dark,
+  master: preset.$color-M-dark,
 );
 
-@each $rank,
-$color in $ranks {
+@each $rank, $color in $ranks {
   .result-display.#{$rank} {
     .type {
-
       .dx,
       .standard {
-        background-color: rgba($color, .8);
+        background-color: rgba($color, 0.8);
       }
     }
 
     .result-cover {
-      background-color: rgba($color, .8);
+      background-color: rgba($color, 0.8);
     }
 
     .result-meta {
-      background-color: rgba($color, .8);
+      background-color: rgba($color, 0.8);
 
       .song-rank,
       .song-lv {
@@ -322,7 +327,6 @@ $color in $ranks {
 
 .result-display.re_master {
   .type {
-
     .dx,
     .standard {
       background-color: var(--color-R);

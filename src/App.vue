@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from "vue-router";
+import { RouterView } from 'vue-router';
 // import MainMenu from "./components/MainMenu.vue";
 
 const pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
@@ -21,7 +21,6 @@ setInterval(() => {
   }
   pattern_bg!.style.backgroundPosition = `${pattern_bg_postition}% 0`;
 }, 1000);
-
 </script>
 
 <style lang="scss">
@@ -70,9 +69,14 @@ a {
   min-height: 90vh;
   margin: 100px auto;
   background-color: #fff;
-  box-shadow: inset 0 0 5px rgba(#ffba42, .7), 0 0 0 5px #183665, 0 0 0 10px #fff, 0 0 0 15px #ffba42,
-    0 0 0 20px #fff, 0 0 0 25px rgba(255, 255, 255, 0.4),
-    0 0 20px 15px rgba(#183665, .7);
+  box-shadow:
+    inset 0 0 5px rgba(#ffba42, 0.7),
+    0 0 0 5px #183665,
+    0 0 0 10px #fff,
+    0 0 0 15px #ffba42,
+    0 0 0 20px #fff,
+    0 0 0 25px rgba(255, 255, 255, 0.4),
+    0 0 20px 15px rgba(#183665, 0.7);
   border-radius: 10px;
   padding: 20px;
 }
