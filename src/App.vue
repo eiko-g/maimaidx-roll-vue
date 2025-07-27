@@ -70,10 +70,10 @@ a {
   margin: 100px auto;
   background-color: #fff;
   box-shadow:
-    inset 0 0 5px rgba(#ffba42, 0.7),
-    0 0 0 5px #183665,
+    inset 0 0 5px rgba(110,115,213, 0.7),
+    0 0 0 5px rgb(110,115,213),
     0 0 0 10px #fff,
-    0 0 0 15px #ffba42,
+    0 0 0 15px rgb(66,230,213),
     0 0 0 20px #fff,
     0 0 0 25px rgba(255, 255, 255, 0.4),
     0 0 20px 15px rgba(#183665, 0.7);

@@ -14,11 +14,11 @@
       <div class="result-cover" @click="viewDetail(currentSong.id)">
         <UseImage :src="coverSrc" class="cover" alt="歌曲封面">
           <template #loading>
-            <img :src="'./assets/img/jacket/UI_Jacket_000000.png'" class="cover" alt="歌曲封面" />
+            <img :src="'./assets/img/jacket/UI_Jacket_000000_s.png'" class="cover" alt="歌曲封面" />
           </template>
 
           <template #error>
-            <img :src="'./assets/img/jacket/UI_Jacket_000000.png'" class="cover" alt="歌曲封面" />
+            <img :src="'./assets/img/jacket/UI_Jacket_000000_s.png'" class="cover" alt="歌曲封面" />
           </template>
         </UseImage>
         <!-- <img :src="coverSrc" class="cover" alt="歌曲封面" /> -->
@@ -61,9 +61,9 @@ const songlistStore = useSonglistStore();
 // 封面链接
 const coverSrc = computed(() => {
   if (props.currentSong.id > 0) {
-    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6, '0')}.png`;
+    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6, '0')}_s.png`;
   } else {
-    return `./assets/img/jacket/UI_Jacket_000000.png`;
+    return `./assets/img/jacket/UI_Jacket_000000_s.png`;
   }
 });
 
@@ -163,6 +163,16 @@ const verText = computed(() => {
 <style lang="scss" scoped>
 @use '@/style/preset';
 @use '@/style/mixin';
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 .result {
   text-align: center;

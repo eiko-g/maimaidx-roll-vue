@@ -43,7 +43,7 @@ button {
   }
 
   &.roll {
-    @include mixin.bxsh(#012d7b, #ffba42, rgba(#183665, 0.7));
+    @include mixin.bxsh(rgb(78,82,181), rgb(110,115,209), rgb(78,82,181));
     @include mixin.txsh(#012d7b);
   }
 

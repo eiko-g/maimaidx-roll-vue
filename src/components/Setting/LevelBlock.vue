@@ -1,6 +1,6 @@
 <template>
   <div class="setting-block level">
-    <h3 class="title">等级设置</h3>
+    <h3 class="title">定数设置</h3>
     <!-- <p class="preview">
       等级预览：{{ settingStore.lvMin }}
       <span v-show="settingStore.lvMultiple"> ~ {{ settingStore.lvMax }}</span>
@@ -47,9 +47,11 @@
             id="level-number"
             min="1"
             max="15"
+            step="0.1"
             v-model="settingStore.lvMin"
           />
         </div>
+        <p class="tips">只会筛选当前定数的歌</p>
       </div>
     </div>
 
@@ -100,6 +102,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.tips {
+  color: #999;
+  font-size: 14px;
+}
 .level-select {
   display: flex;
 
