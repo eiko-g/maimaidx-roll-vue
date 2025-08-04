@@ -1,6 +1,6 @@
 function checkAll(otherElement: string, allElement: string) {
   const notAll = document.querySelectorAll(`${otherElement}:not(${allElement})`);
-  notAll.forEach(item => {
+  notAll.forEach((item) => {
     (item as HTMLInputElement).checked = false;
   });
 

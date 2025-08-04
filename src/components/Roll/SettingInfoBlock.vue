@@ -6,11 +6,11 @@
       <span class="rank">
         <span v-if="!setting.rank">难度</span>
         <span v-if="setting.rank && setting.rank.includes('all')" class="all">全难度</span>
-        <span v-if="setting.rank && setting.rank.includes('B')" class="B">B</span>
-        <span v-if="setting.rank && setting.rank.includes('A')" class="A">A</span>
-        <span v-if="setting.rank && setting.rank.includes('E')" class="E">E</span>
-        <span v-if="setting.rank && setting.rank.includes('M')" class="M">M</span>
-        <span v-if="setting.rank && setting.rank.includes('R')" class="R">R</span>
+        <span v-if="setting.rank && setting.rank.includes('basic')" class="B">B</span>
+        <span v-if="setting.rank && setting.rank.includes('advanced')" class="A">A</span>
+        <span v-if="setting.rank && setting.rank.includes('expert')" class="E">E</span>
+        <span v-if="setting.rank && setting.rank.includes('master')" class="M">M</span>
+        <span v-if="setting.rank && setting.rank.includes('re_master')" class="R">R</span>
       </span>
       ]
       <span class="lv">{{ lvText }}</span>
@@ -25,72 +25,78 @@
     </p>
     <p>
       <b>抽选歌单：</b>
-      <span class="songlist">{{ songlistStore.version }}</span>
+      <span class="songlist">{{ songlistStore.songlistVersion }}</span>
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useSonglistStore } from "@/stores/songlist";
-import { computed } from "vue";
+import type IVersion from '@/interface/IVersion';
+import { useSonglistStore } from '@/stores/songlist';
+import { computed } from 'vue';
 
-const props = defineProps(["setting"]);
+const props = defineProps(['setting']);
 const songlistStore = useSonglistStore();
 
 const lvText = computed(() => {
-  let str = "";
+  let str = '';
   if (props.setting.lvMin > 0) {
     str = props.setting.lvMin;
-    if (props.setting.lvMinPlus === true) {
-      str += "+";
-    }
     if (props.setting.lvMultiple) {
       str += ` ~ ${props.setting.lvMax}`;
-      if (props.setting.lvMaxPlus === true) {
-        str += "+";
-      }
     }
   } else {
-    str = "未设置等级";
+    str = '未设置等级';
   }
   return str;
 });
 
 function getCatName(cat: string) {
   switch (cat) {
-    case "pops_anime":
-      return "动画 & 流行";
-    case "niconico":
-      return "nico & V家";
-    case "toho":
-      return "东方 Project";
-    case "variety":
-      return "其他游戏";
-    case "maimai":
-      return "maimai";
-    case "gekichu":
-      return "音击 & 中二";
-    case "all":
-      return "全部分类";
+    case '101':
+      return '动画 & 流行';
+    case '102':
+      return 'nico & V家';
+    case '103':
+      return '东方 Project';
+    case '104':
+      return '其他游戏';
+    case '105':
+      return 'maimai';
+    case '106':
+      return '音击 & 中二';
+    case '107':
+      return '宴会场';
+    case 'all':
+      return '全部分类';
     default:
-      return "分类有误";
+      return '分类有误';
   }
 }
 
 const catText = computed(() => {
-  const tempArr: Array<string> = [];
+  const tempArr: string[] = [];
   props.setting.category.forEach((item: string) => {
     tempArr.push(getCatName(item));
   });
-  return tempArr.join("、");
+  return tempArr.join('、');
 });
 
 const verText = computed(() => {
-  let str = "";
-  if (props.setting.version[0] !== "all") {
-    str = props.setting.version.join("、");
+  let str = '';
+  if (!props.setting.version.includes('all')) {
+    const tempArr: string[] = [];
+    props.setting.version.map((sver_item: string) => {
+      const result = (songlistStore.version as IVersion[]).find(
+        (ver_item) => ver_item.id == +sver_item,
+      );
+      if (result) {
+        tempArr.push(result.name);
+      }
+    });
+    str = tempArr.join('、');
   } else {
-    str = "全部版本";
+    str = '全部版本';
   }
   return str;
 });
@@ -103,8 +109,8 @@ const verText = computed(() => {
   text-align: center;
 
   .rank {
-    >span:not(:last-child)::after {
-      content: ".";
+    > span:not(:last-child)::after {
+      content: '.';
     }
 
     .B {

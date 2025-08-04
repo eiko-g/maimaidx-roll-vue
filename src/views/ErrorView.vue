@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 setTimeout(() => {
-  router.push({ name: "roll" });
+  router.push({ name: 'roll' });
 }, 3000);
 </script>
 

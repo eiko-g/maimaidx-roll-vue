@@ -9,42 +9,42 @@
       </label>
 
       <label class="rank-label B" for="rank-B">
-        <input type="checkbox" name="rank" value="B" id="rank-B" class="rank B" />
-        <span class="inner">B</span>
+        <input type="checkbox" name="rank" value="basic" id="rank-B" class="rank B" />
+        <span class="inner">初级</span>
       </label>
 
       <label class="rank-label A" for="rank-A">
-        <input type="checkbox" name="rank" value="A" id="rank-A" class="rank A" />
-        <span class="inner">A</span>
+        <input type="checkbox" name="rank" value="advanced" id="rank-A" class="rank A" />
+        <span class="inner">高级</span>
       </label>
 
       <label class="rank-label E" for="rank-E">
-        <input type="checkbox" name="rank" value="E" id="rank-E" class="rank E" />
-        <span class="inner">E</span>
+        <input type="checkbox" name="rank" value="expert" id="rank-E" class="rank E" />
+        <span class="inner">专家</span>
       </label>
 
       <label class="rank-label M" for="rank-M">
-        <input type="checkbox" name="rank" value="M" id="rank-M" class="rank M" />
-        <span class="inner">M</span>
+        <input type="checkbox" name="rank" value="master" id="rank-M" class="rank M" />
+        <span class="inner">大师</span>
       </label>
 
       <label class="rank-label R" for="rank-R">
-        <input type="checkbox" name="rank" value="R" id="rank-R" class="rank R" />
-        <span class="inner">R</span>
+        <input type="checkbox" name="rank" value="re_master" id="rank-R" class="rank R" />
+        <span class="inner">宗师</span>
       </label>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { checkAll, checkOthers } from "@/mixins/checkInput";
-import { onMounted } from "vue";
-import { useSettingsStore } from "@/stores/settings";
+import { checkAll, checkOthers } from '@/mixins/checkInput';
+import { onMounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings';
 const store = useSettingsStore();
 
 // 保存难度设置
 function saveRank() {
-  const elements = document.querySelectorAll("input.rank:checked"),
+  const elements = document.querySelectorAll('input.rank:checked'),
     tempRank: Array<string> = [];
   elements.forEach((item) => {
     tempRank.push((item as HTMLInputElement).value);
@@ -55,35 +55,33 @@ function saveRank() {
 onMounted(() => {
   //#region 难度选项点击事件
   // 非 all 难度
-  document.querySelectorAll("input.rank:not(input.all)").forEach((item) => {
-    item.addEventListener("click", () => {
-      checkOthers("input.rank", "input.rank.all");
+  document.querySelectorAll('input.rank:not(input.all)').forEach((item) => {
+    item.addEventListener('click', () => {
+      checkOthers('input.rank', 'input.rank.all');
     });
   });
 
   // all 难度
-  document.querySelector("input.rank.all")!.addEventListener("click", () => {
-    checkAll("input.rank", "input.rank.all");
+  document.querySelector('input.rank.all')!.addEventListener('click', () => {
+    checkAll('input.rank', 'input.rank.all');
   });
 
   // 所有难度选项
-  document.querySelectorAll("input.rank").forEach((item) => {
+  document.querySelectorAll('input.rank').forEach((item) => {
     // 有变化时
-    item.addEventListener("change", (el) => {
-      console.log("Rank changed: ", el);
+    item.addEventListener('change', (el) => {
+      console.log('Rank changed: ', el);
       saveRank();
     });
     // 载入时勾上已选择的难度
-    (item as HTMLInputElement).checked = store.rank.includes(
-      (item as HTMLInputElement).value
-    );
+    (item as HTMLInputElement).checked = store.rank.includes((item as HTMLInputElement).value);
   });
   //#endregion
 });
 </script>
 
 <style lang="scss" scoped>
-@use "@/style/mixin";
+@use '@/style/mixin';
 
 .ranks {
   display: flex;
@@ -102,7 +100,7 @@ onMounted(() => {
       cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       display: none;
     }
 

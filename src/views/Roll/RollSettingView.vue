@@ -11,51 +11,51 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { useSettingsStore } from "@/stores/settings";
-import { useSonglistStore } from "@/stores/songlist";
+import { useRouter } from 'vue-router';
+import { useSettingsStore } from '@/stores/settings';
+import { useSonglistStore } from '@/stores/songlist';
 
-import RankBlock from "@/components/Setting/RankBlock.vue";
-import CategoryBlock from "@/components/Setting/CategoryBlock.vue";
-import LevelBlock from "@/components/Setting/LevelBlock.vue";
-import VersionBlock from "@/components/Setting/VersionBlock.vue";
+import RankBlock from '@/components/Setting/RankBlock.vue';
+import CategoryBlock from '@/components/Setting/CategoryBlock.vue';
+import LevelBlock from '@/components/Setting/LevelBlock.vue';
+import VersionBlock from '@/components/Setting/VersionBlock.vue';
 
-import songFilter from "@/mixins/songFilter";
-// import { onBeforeUnmount } from "vue";
+import songFilter from '@/mixins/songFilter.v3';
+import type ISongRollList from '@/interface/ISongRollList';
 
 const router = useRouter();
-const store = useSettingsStore();
+const settingStore = useSettingsStore();
 const songlistStore = useSonglistStore();
-
-// onBeforeUnmount(() => {
-//   alert('还没保存')
-// });
 
 function backToRoll() {
   console.log('点击了保存设置');
 
-  store.isFirstRun = false;
+  settingStore.isFirstRun = false;
 
-  /**
-   * ! AnyScript
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tempSonglist: any = songFilter(songlistStore.originSonglist, store);
+  // 一些处理
+  if (settingStore.lvMin > settingStore.lvMax) {
+    [settingStore.lvMin, settingStore.lvMax] = [settingStore.lvMax, settingStore.lvMin];
+  }
 
-  if (tempSonglist.length > 0) {
-    songlistStore.rollSonglist = tempSonglist;
-    console.log("生成的歌单：", songlistStore.rollSonglist);
-    console.log("从设置界面回到 Roll 歌界面");
-    router.push({ name: "roll" });
+  const tempSonglist: ISongRollList[] | undefined = songFilter(
+    songlistStore.originSonglist,
+    settingStore,
+  );
+
+  if (tempSonglist && tempSonglist!.length > 0) {
+    songlistStore.rollSonglist = tempSonglist as ISongRollList[];
+    console.log('生成的歌单：', songlistStore.rollSonglist);
+    console.log('从设置界面回到 Roll 歌界面');
+    router.push({ name: 'roll' });
   } else {
-    console.warn("歌单没筛出来东西");
-    alert("筛选后的歌单为空，请检查设置");
+    console.warn('歌单没筛出来东西');
+    alert('筛选后的歌单为空，请检查设置');
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@use "@/style/mixin";
+@use '@/style/mixin';
 
 .main-title {
   color: var(--color-border);
