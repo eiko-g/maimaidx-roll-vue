@@ -22,7 +22,7 @@ const go = ref(false);
 onMounted(async () => {
   push('开始载入了捏');
   push('歌单加载中……');
-  const response = await fetch('./data/maiDX_CN/CN1.51-F.json?ver=20251007.01');
+  const response = await fetch('./data/maiDX_CN/CN1.51-I.json?ver=20251124.01');
   let json: IJson;
   if (response.ok) {
     json = await response.json();
