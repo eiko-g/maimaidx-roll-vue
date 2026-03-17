@@ -9,18 +9,18 @@
 import { RouterView } from 'vue-router';
 // import MainMenu from "./components/MainMenu.vue";
 
-const pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
-let pattern_bg_postition = 5;
-setInterval(() => {
-  // console.log('pattern_bg_postition', pattern_bg_postition);
+// const pattern_bg: HTMLElement | null = document.querySelector('.pattern-bg');
+// let pattern_bg_postition = 5;
+// setInterval(() => {
+//   // console.log('pattern_bg_postition', pattern_bg_postition);
 
-  if (pattern_bg_postition <= 100) {
-    pattern_bg_postition += 5;
-  } else {
-    pattern_bg_postition = 5;
-  }
-  pattern_bg!.style.backgroundPosition = `${pattern_bg_postition}% 0`;
-}, 1000);
+//   if (pattern_bg_postition <= 100) {
+//     pattern_bg_postition += 5;
+//   } else {
+//     pattern_bg_postition = 5;
+//   }
+//   pattern_bg!.style.backgroundPosition = `${pattern_bg_postition}% 0`;
+// }, 1000);
 </script>
 
 <style lang="scss">
@@ -70,10 +70,10 @@ a {
   margin: 100px auto;
   background-color: #fff;
   box-shadow:
-    inset 0 0 5px rgba(110,115,213, 0.7),
-    0 0 0 5px rgb(110,115,213),
+    inset 0 0 5px rgba(110, 115, 213, 0.7),
+    0 0 0 5px rgb(110, 115, 213),
     0 0 0 10px #fff,
-    0 0 0 15px rgb(66,230,213),
+    0 0 0 15px rgb(66, 230, 213),
     0 0 0 20px #fff,
     0 0 0 25px rgba(255, 255, 255, 0.4),
     0 0 20px 15px rgba(#183665, 0.7);
