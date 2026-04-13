@@ -26,7 +26,7 @@ const settingStore = useSettingsStore();
 
 const buttonDisable = ref(settingStore.isFirstRun);
 
-const version = '0.7.0-20260317.01';
+const version = '0.7.0-20260413.01';
 
 function roll() {
   console.log('Roll!', new Date());
@@ -40,7 +40,7 @@ function roll() {
   console.log('选到了这首歌：', selectThis);
 
   const selectedSong = songlistStore.originSonglist.find((song) => {
-    return song.id === selectThis.id;
+    return song.id === selectThis!.id;
   });
   if (selectedSong !== undefined) {
     songlistStore.currentSong = selectedSong;
@@ -50,7 +50,7 @@ function roll() {
   }
 
   console.log('歌曲详情：', songlistStore.currentSong);
-  songlistStore.currentRank = selectThis.difficult;
+  songlistStore.currentRank = selectThis!.difficult;
 
   setTimeout(() => {
     buttonDisable.value = false;

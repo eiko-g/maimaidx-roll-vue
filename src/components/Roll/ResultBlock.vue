@@ -143,13 +143,7 @@ const rankText = computed(() => {
 });
 
 const lvText = computed(() => {
-  const level =
-    props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
-  if ((level * 10) % 10 >= 6) {
-    return Math.floor(level) + '+';
-  } else {
-    return Math.floor(level);
-  }
+  return props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
 });
 
 const verText = computed(() => {
