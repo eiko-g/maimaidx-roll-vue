@@ -4,6 +4,7 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
-    "edwinhuish.better-comments-next"
+    "edwinhuish.better-comments-next",
+    "oxc.oxc-vscode"
   ]
 }
