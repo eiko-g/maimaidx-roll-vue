@@ -1,6 +1,10 @@
 # maimaiDX 封面文件夹
 为啥这里没有图片呢？因为我没传，版权警告。
 
+**以下作废**，看隔壁 `jacket` 文件夹。
+
+---
+
 ## How to get 封面？
 先去 [官网](https://maimai.sega.jp/song)，然后开控制台，贴入以下代码：
 
