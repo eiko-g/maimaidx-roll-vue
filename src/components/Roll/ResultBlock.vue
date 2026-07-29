@@ -45,14 +45,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 // import { useRouter } from "vue-router";
-import type IMusic from '@/interface/IMusic';
-import { useSonglistStore } from '@/stores/songlist';
-import type IVersion from '@/interface/IVersion';
-import { UseImage } from '@vueuse/components';
+import type IMusic from "@/interface/IMusic";
+import { useSonglistStore } from "@/stores/songlist";
+import type IVersion from "@/interface/IVersion";
+import { UseImage } from "@vueuse/components";
 
-type RankKey = 'basic' | 'advanced' | 'expert' | 'master' | 're_master' | 'utage';
+type RankKey = "basic" | "advanced" | "expert" | "master" | "re_master" | "utage";
 const props = defineProps<{ currentSong: IMusic; currentRank: RankKey | string }>();
 // const router = useRouter();
 
@@ -61,7 +61,7 @@ const songlistStore = useSonglistStore();
 // 封面链接
 const coverSrc = computed(() => {
   if (props.currentSong.id > 0) {
-    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6, '0')}_s.png`;
+    return `./assets/img/jacket/UI_Jacket_${(props.currentSong.id % 10000).toString().padStart(6, "0")}_s.png`;
   } else {
     return `./assets/img/jacket/UI_Jacket_000000_s.png`;
   }
@@ -70,18 +70,18 @@ const coverSrc = computed(() => {
 // 谱面类型
 const map_type = computed(() => {
   if (props.currentSong.genre === 107) {
-    return 'type-utage';
+    return "type-utage";
   } else if (props.currentSong.id > 10000) {
-    return 'type-dx';
+    return "type-dx";
   } else {
-    return 'type-std';
+    return "type-std";
   }
 });
 
 // 查看曲目详情
 function viewDetail(id: number) {
   // TODO: 以后再写这部分
-  console.log('song id', id);
+  console.log("song id", id);
   if (id >= 1) {
     // router.push({ name: 'detail', params: { id: id } });
   }
@@ -90,73 +90,75 @@ function viewDetail(id: number) {
 const catText = computed(() => {
   switch (props.currentSong.genre) {
     case 101: {
-      return '动画 & 流行';
+      return "动画 & 流行";
     }
     case 102: {
-      return 'nico & V家';
+      return "nico & V家";
     }
     case 103: {
-      return '东方 Project';
+      return "东方 Project";
     }
     case 104: {
-      return '其他游戏';
+      return "其他游戏";
     }
     case 105: {
-      return 'maimai';
+      return "maimai";
     }
     case 106: {
-      return '音击 & 中二';
+      return "音击 & 中二";
     }
     case 107: {
-      return '宴会场';
+      return "宴会场";
     }
     default: {
-      return '分类';
+      return "分类";
     }
   }
 });
 
 const rankText = computed(() => {
   switch (props.currentRank) {
-    case 'basic': {
-      return 'Basic';
+    case "basic": {
+      return "Basic";
     }
-    case 'advanced': {
-      return 'Advanced';
+    case "advanced": {
+      return "Advanced";
     }
-    case 'expert': {
-      return 'Expert';
+    case "expert": {
+      return "Expert";
     }
-    case 'master': {
-      return 'Master';
+    case "master": {
+      return "Master";
     }
-    case 're_master': {
-      return 'Re:Master';
+    case "re_master": {
+      return "Re:Master";
     }
-    case 'utage': {
-      return '宴会场';
+    case "utage": {
+      return "宴会场";
     }
     default: {
-      return '难度';
+      return "难度";
     }
   }
 });
 
 const lvText = computed(() => {
-  return props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels];
+  return (
+    props.currentSong.levels[props.currentRank as keyof typeof props.currentSong.levels] as number
+  ).toFixed(1);
 });
 
 const verText = computed(() => {
   return (
     (songlistStore.version as IVersion[]).find((item) => item.id == props.currentSong.add_version)
-      ?.name || '未知版本'
+      ?.name || "未知版本"
   );
 });
 </script>
 
 <style lang="scss" scoped>
-@use '@/style/preset';
-@use '@/style/mixin';
+@use "@/style/preset";
+@use "@/style/mixin";
 
 .fade-enter-active,
 .fade-leave-active {
