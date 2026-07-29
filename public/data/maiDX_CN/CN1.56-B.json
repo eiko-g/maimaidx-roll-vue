@@ -1,26 +1,86 @@
 {
   "songlist_version": "CN1.56-B",
   "version": [
-    { "id": 0, "name": "maimai" },
-    { "id": 1, "name": "maimaiPLUS" },
-    { "id": 2, "name": "GreeN" },
-    { "id": 3, "name": "GreeNPLUS" },
-    { "id": 4, "name": "ORANGE" },
-    { "id": 5, "name": "ORANGEPLUS" },
-    { "id": 6, "name": "PiNK" },
-    { "id": 7, "name": "PiNKPLUS" },
-    { "id": 8, "name": "MURASAKi" },
-    { "id": 9, "name": "MURASAKiPLUS" },
-    { "id": 10, "name": "MiLK" },
-    { "id": 11, "name": "MiLKPLUS" },
-    { "id": 12, "name": "FiNALE" },
-    { "id": 13, "name": "maimaDX" },
-    { "id": 15, "name": "Splash" },
-    { "id": 17, "name": "UNiVERSE" },
-    { "id": 19, "name": "FESTiVAL" },
-    { "id": 21, "name": "BUDDiES" },
-    { "id": 23, "name": "PRiSM" },
-    { "id": 24, "name": "PRiSMPLUS" }
+    {
+      "id": 0,
+      "name": "maimai"
+    },
+    {
+      "id": 1,
+      "name": "maimaiPLUS"
+    },
+    {
+      "id": 2,
+      "name": "GreeN"
+    },
+    {
+      "id": 3,
+      "name": "GreeNPLUS"
+    },
+    {
+      "id": 4,
+      "name": "ORANGE"
+    },
+    {
+      "id": 5,
+      "name": "ORANGEPLUS"
+    },
+    {
+      "id": 6,
+      "name": "PiNK"
+    },
+    {
+      "id": 7,
+      "name": "PiNKPLUS"
+    },
+    {
+      "id": 8,
+      "name": "MURASAKi"
+    },
+    {
+      "id": 9,
+      "name": "MURASAKiPLUS"
+    },
+    {
+      "id": 10,
+      "name": "MiLK"
+    },
+    {
+      "id": 11,
+      "name": "MiLKPLUS"
+    },
+    {
+      "id": 12,
+      "name": "FiNALE"
+    },
+    {
+      "id": 13,
+      "name": "舞萌DX"
+    },
+    {
+      "id": 15,
+      "name": "舞萌DX 2021"
+    },
+    {
+      "id": 17,
+      "name": "舞萌DX 2022"
+    },
+    {
+      "id": 19,
+      "name": "舞萌DX 2023"
+    },
+    {
+      "id": 21,
+      "name": "舞萌DX 2024"
+    },
+    {
+      "id": 23,
+      "name": "舞萌DX 2025"
+    },
+    {
+      "id": 24,
+      "name": "舞萌DX 2026"
+    }
   ],
   "genre": [
     { "id": 101, "name": "POPSアニメ" },
