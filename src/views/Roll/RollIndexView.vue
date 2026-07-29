@@ -12,24 +12,24 @@
 </template>
 
 <script setup lang="ts">
-import { useSonglistStore } from '@/stores/songlist';
-import { useSettingsStore } from '@/stores/settings';
-import ResultBlock from '@/components/Roll/ResultBlock.vue';
-import SettingInfoBlock from '@/components/Roll/SettingInfoBlock.vue';
-import RollButtons from '@/components/Roll/RollButtons.vue';
-import { ref } from 'vue';
-import shuffleArray from '@/mixins/shuffleArray';
-import type ISongRollList from '@/interface/ISongRollList';
+import { useSonglistStore } from "@/stores/songlist";
+import { useSettingsStore } from "@/stores/settings";
+import ResultBlock from "@/components/Roll/ResultBlock.vue";
+import SettingInfoBlock from "@/components/Roll/SettingInfoBlock.vue";
+import RollButtons from "@/components/Roll/RollButtons.vue";
+import { ref } from "vue";
+import shuffleArray from "@/mixins/shuffleArray";
+import type ISongRollList from "@/interface/ISongRollList";
 
 const songlistStore = useSonglistStore();
 const settingStore = useSettingsStore();
 
 const buttonDisable = ref(settingStore.isFirstRun);
 
-const version = '0.7.0-20260413.01';
+const version = "0.7.0-20260729.01";
 
 function roll() {
-  console.log('Roll!', new Date());
+  console.log("Roll!", new Date());
   buttonDisable.value = true;
 
   const rollSonglist: ISongRollList[] = songlistStore.rollSonglist;
@@ -37,7 +37,7 @@ function roll() {
   shuffleArray(rollSonglist);
 
   const selectThis = rollSonglist[0];
-  console.log('选到了这首歌：', selectThis);
+  console.log("选到了这首歌：", selectThis);
 
   const selectedSong = songlistStore.originSonglist.find((song) => {
     return song.id === selectThis!.id;
@@ -45,11 +45,11 @@ function roll() {
   if (selectedSong !== undefined) {
     songlistStore.currentSong = selectedSong;
   } else {
-    alert('我去，Roll 歌炸了！');
-    throw new Error('啥情况，怎么 roll 完了找不到歌？');
+    alert("我去，Roll 歌炸了！");
+    throw new Error("啥情况，怎么 roll 完了找不到歌？");
   }
 
-  console.log('歌曲详情：', songlistStore.currentSong);
+  console.log("歌曲详情：", songlistStore.currentSong);
   songlistStore.currentRank = selectThis!.difficult;
 
   setTimeout(() => {
